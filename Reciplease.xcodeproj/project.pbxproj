@@ -18,7 +18,19 @@
 		143DC3CA22650CEC00F711E8 /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143DC3C922650CEC00F711E8 /* Ingredients.swift */; };
 		1470D6C62267751800882EA8 /* CategoryFavoriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1470D6C52267751800882EA8 /* CategoryFavoriteTableViewController.swift */; };
 		1470D6E722677BE200882EA8 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1470D6E522677BE200882EA8 /* DataModel.xcdatamodeld */; };
+		1473A7D4226908ED00489407 /* RecipleaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1473A7D3226908ED00489407 /* RecipleaseTests.swift */; };
+		1473A7DC2269096500489407 /* IngredientsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1473A7DB2269096500489407 /* IngredientsTest.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1473A7D6226908ED00489407 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1419A52E2263D6AC00704CF0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1419A5352263D6AC00704CF0;
+			remoteInfo = Reciplease;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1419A5362263D6AC00704CF0 /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -34,10 +46,21 @@
 		143DC3C922650CEC00F711E8 /* Ingredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredients.swift; sourceTree = "<group>"; };
 		1470D6C52267751800882EA8 /* CategoryFavoriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFavoriteTableViewController.swift; sourceTree = "<group>"; };
 		1470D6E622677BE200882EA8 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		1473A7D1226908ED00489407 /* RecipleaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1473A7D3226908ED00489407 /* RecipleaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipleaseTests.swift; sourceTree = "<group>"; };
+		1473A7D5226908ED00489407 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1473A7DB2269096500489407 /* IngredientsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1419A5332263D6AC00704CF0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1473A7CE226908ED00489407 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -51,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				1419A5382263D6AC00704CF0 /* Reciplease */,
+				1473A7D2226908ED00489407 /* RecipleaseTests */,
 				1419A5372263D6AC00704CF0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -59,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				1419A5362263D6AC00704CF0 /* Reciplease.app */,
+				1473A7D1226908ED00489407 /* RecipleaseTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -106,6 +131,16 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		1473A7D2226908ED00489407 /* RecipleaseTests */ = {
+			isa = PBXGroup;
+			children = (
+				1473A7D3226908ED00489407 /* RecipleaseTests.swift */,
+				1473A7D5226908ED00489407 /* Info.plist */,
+				1473A7DB2269096500489407 /* IngredientsTest.swift */,
+			);
+			path = RecipleaseTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -126,6 +161,24 @@
 			productReference = 1419A5362263D6AC00704CF0 /* Reciplease.app */;
 			productType = "com.apple.product-type.application";
 		};
+		1473A7D0226908ED00489407 /* RecipleaseTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1473A7DA226908ED00489407 /* Build configuration list for PBXNativeTarget "RecipleaseTests" */;
+			buildPhases = (
+				1473A7CD226908ED00489407 /* Sources */,
+				1473A7CE226908ED00489407 /* Frameworks */,
+				1473A7CF226908ED00489407 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1473A7D7226908ED00489407 /* PBXTargetDependency */,
+			);
+			name = RecipleaseTests;
+			productName = RecipleaseTests;
+			productReference = 1473A7D1226908ED00489407 /* RecipleaseTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -138,6 +191,10 @@
 				TargetAttributes = {
 					1419A5352263D6AC00704CF0 = {
 						CreatedOnToolsVersion = 10.2;
+					};
+					1473A7D0226908ED00489407 = {
+						CreatedOnToolsVersion = 10.2.1;
+						TestTargetID = 1419A5352263D6AC00704CF0;
 					};
 				};
 			};
@@ -155,6 +212,7 @@
 			projectRoot = "";
 			targets = (
 				1419A5352263D6AC00704CF0 /* Reciplease */,
+				1473A7D0226908ED00489407 /* RecipleaseTests */,
 			);
 		};
 /* End PBXProject section */
@@ -167,6 +225,13 @@
 				1419A5442263D6AD00704CF0 /* LaunchScreen.storyboard in Resources */,
 				1419A5412263D6AD00704CF0 /* Assets.xcassets in Resources */,
 				1419A53F2263D6AC00704CF0 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1473A7CF226908ED00489407 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +253,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1473A7CD226908ED00489407 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1473A7DC2269096500489407 /* IngredientsTest.swift in Sources */,
+				1473A7D4226908ED00489407 /* RecipleaseTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1473A7D7226908ED00489407 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1419A5352263D6AC00704CF0 /* Reciplease */;
+			targetProxy = 1473A7D6226908ED00489407 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		1419A53D2263D6AC00704CF0 /* Main.storyboard */ = {
@@ -362,6 +444,46 @@
 			};
 			name = Release;
 		};
+		1473A7D8226908ED00489407 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7XB8K9T4CZ;
+				INFOPLIST_FILE = RecipleaseTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = fr.thomasbouges.RecipleaseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reciplease.app/Reciplease";
+			};
+			name = Debug;
+		};
+		1473A7D9226908ED00489407 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7XB8K9T4CZ;
+				INFOPLIST_FILE = RecipleaseTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = fr.thomasbouges.RecipleaseTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Reciplease.app/Reciplease";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -379,6 +501,15 @@
 			buildConfigurations = (
 				1419A5492263D6AD00704CF0 /* Debug */,
 				1419A54A2263D6AD00704CF0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1473A7DA226908ED00489407 /* Build configuration list for PBXNativeTarget "RecipleaseTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1473A7D8226908ED00489407 /* Debug */,
+				1473A7D9226908ED00489407 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -69,7 +69,7 @@
                                     <constraint firstAttribute="height" constant="80" id="hTR-7Z-apo"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vIO-77-a47">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vIO-77-a47">
                                 <rect key="frame" x="0.0" y="144" width="414" height="483"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -80,7 +80,7 @@
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Fjb-8P-2tO" id="pkF-Tn-tg8">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -92,10 +92,48 @@
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vzh-5L-O1t">
                                 <rect key="frame" x="0.0" y="630" width="414" height="57"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="bAN-W4-x30">
+                                        <rect key="frame" x="20" y="0.0" width="374" height="57"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vR-le-Gll">
+                                                <rect key="frame" x="0.0" y="0.0" width="177" height="57"/>
+                                                <color key="tintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                                <state key="normal" title="Delete">
+                                                    <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                                    <color key="titleShadowColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="deleteCell:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uNt-2V-4HK"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wea-3J-9sM">
+                                                <rect key="frame" x="197" y="0.0" width="177" height="57"/>
+                                                <color key="tintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                                <state key="normal" title="Search Receipe">
+                                                    <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
+                                                    <color key="titleShadowColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="searchReceipe:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tf4-Z9-HK9"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="6vR-le-Gll" firstAttribute="centerY" secondItem="bAN-W4-x30" secondAttribute="centerY" id="D1y-AV-FWl"/>
+                                            <constraint firstItem="wea-3J-9sM" firstAttribute="centerY" secondItem="bAN-W4-x30" secondAttribute="centerY" id="GOE-Zd-4X9"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
                                 <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="57" id="B5c-Ed-nXh"/>
+                                    <constraint firstAttribute="bottom" secondItem="bAN-W4-x30" secondAttribute="bottom" id="Vop-lh-VCL"/>
+                                    <constraint firstItem="bAN-W4-x30" firstAttribute="leading" secondItem="Vzh-5L-O1t" secondAttribute="leading" constant="20" id="cFe-RS-Ip0"/>
+                                    <constraint firstAttribute="trailing" secondItem="bAN-W4-x30" secondAttribute="trailing" constant="20" id="gGz-uv-1jd"/>
+                                    <constraint firstItem="bAN-W4-x30" firstAttribute="top" secondItem="Vzh-5L-O1t" secondAttribute="top" id="rD8-2M-MEv"/>
                                 </constraints>
                             </view>
                         </subviews>
