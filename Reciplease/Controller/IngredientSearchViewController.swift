@@ -12,24 +12,16 @@ class IngredientSearchViewController: UIViewController {
 
     @IBOutlet weak var ingredientsTableView: UITableView!
     @IBOutlet weak var ingredientsTextField: UITextField!
-    var ingredientArray = [Ingredients]()
+    private var ingredientArray = [Ingredients]()
+    private var response : Recipe?
+    
+    private var yummlyService = YummlyService()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         ingredientArray = Ingredients.fetchAll()
         
-//        let newIngredient = Ingredients()
-//        newIngredient.ingredientName = "egg"
-//        itemArray.append(newIngredient)
-//
-//        let newIngredient2 = Ingredients()
-//        newIngredient2.ingredientName = "tomato"
-//        itemArray.append(newIngredient2)
-//
-//        let newIngredient3 = Ingredients()
-//        newIngredient3.ingredientName = "sugar"
-//        itemArray.append(newIngredient3)
     }
     
 
@@ -73,6 +65,20 @@ class IngredientSearchViewController: UIViewController {
     
     
     @IBAction func searchReceipe(_ sender: UIButton) {
+        
+        yummlyService.updateData(table: ingredientArray)
+        
+        yummlyService.getRecipes { (success, recipe) in
+            print(success.description)
+            if success != false {
+            guard let recipeToLoad = recipe else {return}
+            self.response = recipeToLoad
+            self.performSegue(withIdentifier: "goToRecipeSearchResult", sender: self)
+            } else{ print("error")
+                return}
+        }
+        
+        
     }
     
     
@@ -96,6 +102,15 @@ class IngredientSearchViewController: UIViewController {
         self.ingredientArray = Ingredients.fetchAll()
         ingredientsTableView.reloadData()
       }
+    
+    //prepare segue before to perfomr it
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! ResultSearchTableView
+        
+                //we inform where we send data in other viewController
+                    destinationVC.allRecipe = response
+    }
+    
 }
 
 extension IngredientSearchViewController: UITableViewDelegate, UITableViewDataSource {
