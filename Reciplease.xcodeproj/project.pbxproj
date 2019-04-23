@@ -16,12 +16,14 @@
 		1419A5512263D99100704CF0 /* FavoriteTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1419A5502263D99100704CF0 /* FavoriteTableView.swift */; };
 		1419A5532263D9FC00704CF0 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1419A5522263D9FC00704CF0 /* RecipeViewController.swift */; };
 		143DC3CA22650CEC00F711E8 /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143DC3C922650CEC00F711E8 /* Ingredients.swift */; };
+		1442F643226F72BD0094519D /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1442F642226F72BD0094519D /* Categories.swift */; };
 		1470D6C62267751800882EA8 /* CategoryFavoriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1470D6C52267751800882EA8 /* CategoryFavoriteTableViewController.swift */; };
 		1470D6E722677BE200882EA8 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1470D6E522677BE200882EA8 /* DataModel.xcdatamodeld */; };
+		1471D750226CCD760032828D /* CompleteRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1471D74F226CCD760032828D /* CompleteRecipe.swift */; };
 		1473A7DC2269096500489407 /* IngredientsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1473A7DB2269096500489407 /* IngredientsTest.swift */; };
 		1476011F2269172B00C8E612 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1476011E2269172B00C8E612 /* ApiKeys.plist */; };
 		14760121226917BE00C8E612 /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14760120226917BE00C8E612 /* ApiKeys.swift */; };
-		14760123226918E200C8E612 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14760122226918E200C8E612 /* Recipe.swift */; };
+		14760123226918E200C8E612 /* Recipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14760122226918E200C8E612 /* Recipes.swift */; };
 		14760129226919AF00C8E612 /* YummlyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14760128226919AF00C8E612 /* YummlyProtocol.swift */; };
 		1476012B22691A1600C8E612 /* YummlySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1476012A22691A1600C8E612 /* YummlySession.swift */; };
 		1476012D22691A6400C8E612 /* YummlyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1476012C22691A6400C8E612 /* YummlyService.swift */; };
@@ -30,6 +32,8 @@
 		14D8A8AC226A2BF500C16C19 /* Recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 14D8A8AB226A2BF500C16C19 /* Recipes.json */; };
 		14D8A8AE226A2C5500C16C19 /* YummlySessionFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D8A8AD226A2C5500C16C19 /* YummlySessionFake.swift */; };
 		14D8A8B0226A2DB900C16C19 /* YummlyServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D8A8AF226A2DB900C16C19 /* YummlyServiceTest.swift */; };
+		14D8A8B4226A3AA400C16C19 /* RecipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D8A8B2226A3AA400C16C19 /* RecipeTableViewCell.swift */; };
+		14D8A8B5226A3AA400C16C19 /* RecipeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14D8A8B3226A3AA400C16C19 /* RecipeCell.xib */; };
 		35F47BB51DDD0939A7F6346E /* Pods_Reciplease.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59EF813D6CD27F8ED32715B3 /* Pods_Reciplease.framework */; };
 		C46E8929DF3482242B9963EB /* Pods_RecipleaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3CC52A2A2AEFF233188A885 /* Pods_RecipleaseTests.framework */; };
 /* End PBXBuildFile section */
@@ -57,14 +61,16 @@
 		1419A5502263D99100704CF0 /* FavoriteTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableView.swift; sourceTree = "<group>"; };
 		1419A5522263D9FC00704CF0 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		143DC3C922650CEC00F711E8 /* Ingredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredients.swift; sourceTree = "<group>"; };
+		1442F642226F72BD0094519D /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		1470D6C52267751800882EA8 /* CategoryFavoriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFavoriteTableViewController.swift; sourceTree = "<group>"; };
 		1470D6E622677BE200882EA8 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		1471D74F226CCD760032828D /* CompleteRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteRecipe.swift; sourceTree = "<group>"; };
 		1473A7D1226908ED00489407 /* RecipleaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1473A7D5226908ED00489407 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1473A7DB2269096500489407 /* IngredientsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsTest.swift; sourceTree = "<group>"; };
 		1476011E2269172B00C8E612 /* ApiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
 		14760120226917BE00C8E612 /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
-		14760122226918E200C8E612 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		14760122226918E200C8E612 /* Recipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipes.swift; sourceTree = "<group>"; };
 		14760128226919AF00C8E612 /* YummlyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YummlyProtocol.swift; sourceTree = "<group>"; };
 		1476012A22691A1600C8E612 /* YummlySession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YummlySession.swift; sourceTree = "<group>"; };
 		1476012C22691A6400C8E612 /* YummlyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YummlyService.swift; sourceTree = "<group>"; };
@@ -73,6 +79,8 @@
 		14D8A8AB226A2BF500C16C19 /* Recipes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Recipes.json; sourceTree = "<group>"; };
 		14D8A8AD226A2C5500C16C19 /* YummlySessionFake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YummlySessionFake.swift; sourceTree = "<group>"; };
 		14D8A8AF226A2DB900C16C19 /* YummlyServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YummlyServiceTest.swift; sourceTree = "<group>"; };
+		14D8A8B2226A3AA400C16C19 /* RecipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTableViewCell.swift; sourceTree = "<group>"; };
+		14D8A8B3226A3AA400C16C19 /* RecipeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipeCell.xib; sourceTree = "<group>"; };
 		59EF813D6CD27F8ED32715B3 /* Pods_Reciplease.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Reciplease.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD825B613CB48E54BDC20181 /* Pods-RecipleaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipleaseTests.release.xcconfig"; path = "Target Support Files/Pods-RecipleaseTests/Pods-RecipleaseTests.release.xcconfig"; sourceTree = "<group>"; };
 		E323E271F932836DEDCB340C /* Pods-RecipleaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecipleaseTests.debug.xcconfig"; path = "Target Support Files/Pods-RecipleaseTests/Pods-RecipleaseTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -136,8 +144,9 @@
 			isa = PBXGroup;
 			children = (
 				1419A53D2263D6AC00704CF0 /* Main.storyboard */,
-				1419A5402263D6AD00704CF0 /* Assets.xcassets */,
 				1419A5422263D6AD00704CF0 /* LaunchScreen.storyboard */,
+				14D8A8B1226A3A5F00C16C19 /* Custom Cell */,
+				1419A5402263D6AD00704CF0 /* Assets.xcassets */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -179,6 +188,7 @@
 			children = (
 				143DC3C922650CEC00F711E8 /* Ingredients.swift */,
 				1470D6E522677BE200882EA8 /* DataModel.xcdatamodeld */,
+				1442F642226F72BD0094519D /* Categories.swift */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -188,10 +198,11 @@
 			children = (
 				1476011E2269172B00C8E612 /* ApiKeys.plist */,
 				14760120226917BE00C8E612 /* ApiKeys.swift */,
-				14760122226918E200C8E612 /* Recipe.swift */,
+				14760122226918E200C8E612 /* Recipes.swift */,
 				14760128226919AF00C8E612 /* YummlyProtocol.swift */,
 				1476012A22691A1600C8E612 /* YummlySession.swift */,
 				1476012C22691A6400C8E612 /* YummlyService.swift */,
+				1471D74F226CCD760032828D /* CompleteRecipe.swift */,
 			);
 			name = "API Data";
 			sourceTree = "<group>";
@@ -205,6 +216,15 @@
 				14D8A8AD226A2C5500C16C19 /* YummlySessionFake.swift */,
 			);
 			path = AlamoFireTest;
+			sourceTree = "<group>";
+		};
+		14D8A8B1226A3A5F00C16C19 /* Custom Cell */ = {
+			isa = PBXGroup;
+			children = (
+				14D8A8B2226A3AA400C16C19 /* RecipeTableViewCell.swift */,
+				14D8A8B3226A3AA400C16C19 /* RecipeCell.xib */,
+			);
+			path = "Custom Cell";
 			sourceTree = "<group>";
 		};
 		4DCFE11CE7F0F716F9813C41 /* Pods */ = {
@@ -314,6 +334,7 @@
 				1419A5442263D6AD00704CF0 /* LaunchScreen.storyboard in Resources */,
 				1476011F2269172B00C8E612 /* ApiKeys.plist in Resources */,
 				1419A5412263D6AD00704CF0 /* Assets.xcassets in Resources */,
+				14D8A8B5226A3AA400C16C19 /* RecipeCell.xib in Resources */,
 				1419A53F2263D6AC00704CF0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,16 +426,19 @@
 				1419A54F2263D92000704CF0 /* ResultSearchTableView.swift in Sources */,
 				1470D6E722677BE200882EA8 /* DataModel.xcdatamodeld in Sources */,
 				14760121226917BE00C8E612 /* ApiKeys.swift in Sources */,
+				14D8A8B4226A3AA400C16C19 /* RecipeTableViewCell.swift in Sources */,
 				1419A5512263D99100704CF0 /* FavoriteTableView.swift in Sources */,
 				143DC3CA22650CEC00F711E8 /* Ingredients.swift in Sources */,
 				1419A53C2263D6AC00704CF0 /* IngredientSearchViewController.swift in Sources */,
+				1442F643226F72BD0094519D /* Categories.swift in Sources */,
 				1419A5532263D9FC00704CF0 /* RecipeViewController.swift in Sources */,
 				1476012D22691A6400C8E612 /* YummlyService.swift in Sources */,
 				1476012B22691A1600C8E612 /* YummlySession.swift in Sources */,
 				1419A53A2263D6AC00704CF0 /* AppDelegate.swift in Sources */,
 				1470D6C62267751800882EA8 /* CategoryFavoriteTableViewController.swift in Sources */,
 				14760129226919AF00C8E612 /* YummlyProtocol.swift in Sources */,
-				14760123226918E200C8E612 /* Recipe.swift in Sources */,
+				1471D750226CCD760032828D /* CompleteRecipe.swift in Sources */,
+				14760123226918E200C8E612 /* Recipes.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

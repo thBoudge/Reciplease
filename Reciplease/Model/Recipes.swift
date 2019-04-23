@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Recipe: Codable {
+struct Recipes: Codable {
     let matches: [Match]?
 }
 
@@ -20,13 +20,13 @@ struct Match: Codable {
     let smallImageUrls: [String]?
     let recipeName: String?
     let totalTimeInSeconds: Int?
-    let attributes: Attributes?
+//    let attributes: Attributes?
     let rating: Int?
 }
 
-struct Attributes: Codable {
-    let course: [String]?
-}
+//struct Attributes: Codable {
+//    let course: [String]?
+//}
 
 struct ImageUrlsBySize: Codable {
     let the90: String?

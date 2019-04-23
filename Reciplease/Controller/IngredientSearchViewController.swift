@@ -13,7 +13,7 @@ class IngredientSearchViewController: UIViewController {
     @IBOutlet weak var ingredientsTableView: UITableView!
     @IBOutlet weak var ingredientsTextField: UITextField!
     private var ingredientArray = [Ingredients]()
-    private var response : Recipe?
+    private var response : Recipes?
     
     private var yummlyService = YummlyService()
     

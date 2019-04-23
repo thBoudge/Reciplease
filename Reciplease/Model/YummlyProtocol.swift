@@ -18,7 +18,7 @@ protocol YummlyProtocol {
 extension YummlyProtocol {
     
     var urlStringApi: String {
-        let urlString = "http://api.yummly.com/v1/api/recipes"
+        let urlString = "http://api.yummly.com/v1/api/recipe"
         return urlString
     }
 }

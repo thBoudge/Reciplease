@@ -166,18 +166,21 @@
         <scene sceneID="GEe-DX-pGo">
             <objects>
                 <tableViewController id="fjI-x5-5Aa" customClass="ResultSearchTableView" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="NG6-hF-huB">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="NG6-hF-huB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RecipeCell" id="ehV-tG-S2K">
+                            <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="RecipeCell" id="ehV-tG-S2K">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ehV-tG-S2K" id="xEA-aA-Ljb">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="376" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="3CP-Ow-xHb" kind="show" identifier="goToRecipe" trigger="accessoryAction" id="eAg-Ja-ctH"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -187,11 +190,29 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Reciplease" id="mG6-sS-qGH">
                         <barButtonItem key="backBarButtonItem" title="Back" id="c3W-IC-49r"/>
+                        <barButtonItem key="rightBarButtonItem" title="favorite" image="favorite-heart-outline-button" id="hpH-Pp-Oe2">
+                            <inset key="imageInsets" minX="0.0" minY="-1" maxX="-51" maxY="-8"/>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2J1-ZE-eEf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2694" y="138"/>
+        </scene>
+        <!--Recipe View Controller-->
+        <scene sceneID="qIC-Di-aUb">
+            <objects>
+                <viewController id="3CP-Ow-xHb" customClass="RecipeViewController" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6E5-z3-51c">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="8hn-IM-Uev"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LV9-T8-IgK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3765" y="169"/>
         </scene>
         <!--Favorite Categories-->
         <scene sceneID="CzQ-qV-pvs">
@@ -320,4 +341,7 @@
             <point key="canvasLocation" x="1048" y="893"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="favorite-heart-outline-button" width="170.66667175292969" height="170.66667175292969"/>
+    </resources>
 </document>
