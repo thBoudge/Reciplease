@@ -24,5 +24,12 @@ class FakeResponseData {
         return data
     }
     
+    static var correctOneRecipeData: Data {
+        let bundle = Bundle(for: FakeResponseData.self)
+        let url = bundle.url(forResource: "OneRecipe", withExtension: "json")
+        let data = try! Data(contentsOf: url!)
+        return data
+    }
+    
     static let incorrectData = "erreur".data(using: .utf8)!
 }
