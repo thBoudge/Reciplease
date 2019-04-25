@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class ResultSearchTableView: UITableViewController {
     
-    var recipeChecked = [Bool]()
+    private var recipeChecked = [Bool]()
     private var response : CompleteRecipe?
     private var yummlyService = YummlyService()
     // Category? var is optional vecause is going to be nil until we use it
@@ -27,7 +28,71 @@ class ResultSearchTableView: UITableViewController {
 //      TODO: Register your MessageCell.xib file here:
         tableView.register(UINib(nibName: "RecipeCell", bundle: nil), forCellReuseIdentifier: "recipeTableViewCell")
       }
-
+    
+    @IBAction func addToFavorite(_ sender: UIBarButtonItem) {
+        
+        for i in 0..<recipeChecked.count {
+            //We save only 
+            if recipeChecked[i] == false {
+                
+                
+                var notAFavorite = true
+                guard let time = allRecipe?.matches?[i].totalTimeInSeconds else {fatalError("Recipe Time was Nil when optional open")}
+                guard let id = allRecipe?.matches?[i].id else {fatalError("Recipe id was Nil when optional open")}
+                guard let name = allRecipe?.matches?[i].recipeName else {fatalError("Recipe name was Nil when optional open")}
+                guard let rate = allRecipe?.matches?[i].rating else {fatalError("Recipe rate was Nil when optional open")}
+                guard let image90 = allRecipe?.matches?[i].imageUrlsBySize?.the90 else {fatalError("Recipe image90 was Nil when optional open")}
+                
+                // We check if recipe is already in Favorite to do not add twice
+                for i in Recipe.fetchAll() {
+                    if i.id == id {
+                        notAFavorite = false
+                    }
+                }
+                
+                if notAFavorite {
+                    saveData(index: i,time: time, id: id, name: name, rate: rate, image90: image90)
+                }
+             }
+            
+        }
+        tableView.reloadData()
+        
+    }
+    
+    private func saveData(index: Int, time : Int, id: String, name: String, rate: Int, image90 : String){
+        
+        let newCategory = Categories(context: AppDelegate.viewContext)
+        if let categoryName = allRecipe?.matches?[index].attributes?.course?[0]  {
+            newCategory.categoryName = categoryName
+        } else {
+            newCategory.categoryName = "All purpose"
+        }
+        
+        
+        let newRecipe = Recipe(context: AppDelegate.viewContext)
+        
+//        var image360 : String {
+//            return image90.dropLast(4) + "360"
+//        }
+        newRecipe.cookTime = Int16(time)
+        newRecipe.id = id
+        newRecipe.name = name
+        newRecipe.rate = Int16(rate)
+        newRecipe.imageURL = image90
+        
+        newCategory.addToRecipes(newRecipe)
+        
+        ///// method NSCoder \\\\\
+        //we save context on CoreDatabase (persistant container)
+        do {
+            try AppDelegate.viewContext.save()
+        }catch{
+            print("Error saving context \(error)")
+        }
+        
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let numberOfRows = allRecipe?.matches!.count else {return 0}
         return numberOfRows
@@ -39,9 +104,20 @@ class ResultSearchTableView: UITableViewController {
         
         // transfert a cell pour assigner data 
         cell.match = allRecipe?.matches?[indexPath.row]
+        
         //Ternary operator
         // value = condition ? valueIftrue : valueIfFalse
         cell.validateImageView.isHidden = recipeChecked[indexPath.row] == true ? true : false
+        
+        // We check if recipe is already in Favorite to do not add twice
+        for i in Recipe.fetchAll() {
+            guard let id = allRecipe?.matches?[indexPath.row].id else {fatalError("we had a nil when we open id")}
+            if i.id == id {
+                cell.validateImageView.image = #imageLiteral(resourceName: "favorite-heart-outline-button")
+                cell.validateImageView.tintColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+            }
+        }
+        
         cell.recipeButton.tag = indexPath.row
         cell.recipeButton.addTarget(self, action: #selector(openRecipeDescription(sender:)), for: .touchUpInside)
         

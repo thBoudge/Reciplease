@@ -2,13 +2,23 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14490.99" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Categories" representedClassName=".Categories" syncable="YES" codeGenerationType="category">
         <attribute name="categoryName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="recipes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Recipe" inverseName="parentCategory" inverseEntity="Recipe" syncable="YES"/>
     </entity>
     <entity name="Ingredients" representedClassName=".Ingredients" syncable="YES" codeGenerationType="category">
         <attribute name="checked" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="ingredientName" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="Recipe" representedClassName=".Recipe" syncable="YES" codeGenerationType="category">
+        <attribute name="cookTime" optional="YES" attributeType="Integer 16" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rate" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="parentCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Categories" inverseName="recipes" inverseEntity="Categories" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Ingredients" positionX="-54" positionY="-9" width="128" height="75"/>
-        <element name="Categories" positionX="-54" positionY="9" width="128" height="60"/>
+        <element name="Categories" positionX="-1935.88671875" positionY="103.71875" width="128" height="73"/>
+        <element name="Ingredients" positionX="-1906.78515625" positionY="-40.61328125" width="128" height="75"/>
+        <element name="Recipe" positionX="-1718.4140625" positionY="103.984375" width="128" height="133"/>
     </elements>
 </model>

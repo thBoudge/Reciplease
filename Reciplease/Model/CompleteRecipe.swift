@@ -19,14 +19,14 @@ struct CompleteRecipe: Codable {
     let prepTime, id: String?
     let ingredientLines: [String]?
     let numberOfServings, totalTimeInSeconds: Int?
-    let attributes: Attributes?
+//    let attributes: Attributes?
     let flavors: Flavors?
     let rating: Int?
 }
 
-struct Attributes: Codable {
-    let course: [String]?
-}
+//struct Attributes: Codable {
+//    let course: [String]?
+//}
 
 struct Flavors: Codable {
     let piquant, meaty, bitter, sweet: Double?
