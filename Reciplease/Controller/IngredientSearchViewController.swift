@@ -28,19 +28,37 @@ class IngredientSearchViewController: UIViewController {
 
     @IBAction func addIngredients(_ sender: UIButton) {
         
-        if ingredientsTextField.text != "" {
+        guard let ingredients = ingredientsTextField.text else {fatalError("we found Nil when opening ingredientsTextField.text")}
+        print(ingredients)
+        //we delete all space in string
+        let ingredient = ingredients.replacingOccurrences(of: " ", with: "")
+        print(ingredient)
+        if ingredient != "" {
             
-            let newIngredient = Ingredients(context: AppDelegate.viewContext)
-            newIngredient.ingredientName = ingredientsTextField.text!
-            newIngredient.checked = false
-            ingredientArray.append(newIngredient)
+            if ingredient.contains(",") == true{
+                
+                let array = ingredient.components(separatedBy: ",")
+                print(array)
+                for i in array {
+                    let newIngredient = Ingredients(context: AppDelegate.viewContext)
+                    newIngredient.ingredientName = i
+                    newIngredient.checked = false
+                    ingredientArray.append(newIngredient)
+                }
+                
+            }else {
+                let newIngredient = Ingredients(context: AppDelegate.viewContext)
+                newIngredient.ingredientName = ingredient
+                newIngredient.checked = false
+                ingredientArray.append(newIngredient)
+            }
+            
+           
             ingredientsTextField.text = ""
-            
-        }
-        
-        try? AppDelegate.viewContext.save()
-        self.ingredientArray = Ingredients.fetchAll()
-        ingredientsTableView.reloadData()
+            try? AppDelegate.viewContext.save()
+            self.ingredientArray = Ingredients.fetchAll()
+            ingredientsTableView.reloadData()
+        }else {print("nada")}
     }
     
     
