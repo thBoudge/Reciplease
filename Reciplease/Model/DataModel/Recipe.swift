@@ -21,4 +21,81 @@ class Recipe: NSManagedObject {
         Recipe.fetchAll(viewContext: viewContext).forEach({ viewContext.delete($0) })
         try? viewContext.save()
     }
+    
+    //MARK: Method to save Persitent Data of Recipe
+    static func saveData(recipeResponse: CompleteRecipe?, ingredients: String){
+        
+        let newCategory = Category(context: AppDelegate.viewContext)
+        if let categoryName = recipeResponse?.attributes?.course?[0] {
+            newCategory.categoryName = categoryName
+        } else {
+            newCategory.categoryName = "All purpose"
+        }
+        
+        
+        let newRecipe = Recipe(context: AppDelegate.viewContext)
+        
+        newRecipe.cookTime = recipeResponse?.totalTime
+        newRecipe.id = recipeResponse?.id
+        newRecipe.name = recipeResponse?.name
+        guard let rate = recipeResponse?.rating else {return}
+        newRecipe.rate = String(rate)
+        newRecipe.recipe_url = recipeResponse?.source?.sourceRecipeURL
+        //add ingredient for cellLabel in favorite table View
+        newRecipe.ingredientCellLabel = ingredients
+        //add all complete recipe ingredients inone string sparate with ,
+        guard let ingredientsDetail = recipeResponse?.ingredientLines else {return}
+        var ingredientList = ""
+        for i in 0 ..< ingredientsDetail.count {
+            ingredientList += ingredientsDetail[i]
+            if i != ingredientsDetail.count - 1 {
+                ingredientList += ","
+            }
+        }
+        newRecipe.ingredientsCompletRecipe = ingredientList
+        
+        // We save Image in Binary Data
+        guard let imageURL = recipeResponse?.images?[0].hostedLargeURL else {return}
+        let url = URL(string: imageURL) //a deballer
+        let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+        newRecipe.image = data
+        
+        // we link recipe to a category
+        newRecipe.parentCategory = newCategory
+
+        
+        ///// method NSCoder \\\\\
+        //we save context on CoreDatabase (persistant container)
+        do {
+            try AppDelegate.viewContext.save()
+        }catch{
+            print("Error saving context \(error)")
+        }
+    }
+    
+    
+    //MARK: Method to delete value at index
+     static func deleteFavoriteRecipe(name: String){
+        
+        var recipe = Recipe.fetchAll()
+        var index = 0
+        print(recipe.count)
+        for i in 0 ..< recipe.count{
+            print(i)
+            
+            if recipe[i].name == name{
+                index = i
+                print("at\(i)")
+            }
+            
+        }
+        AppDelegate.viewContext.delete(recipe[index])
+        ///// method NSCoder \\\\\
+        //we save context on CoreDatabase (persistant container)
+        do {
+            try AppDelegate.viewContext.save()
+        }catch{
+            print("Error saving context \(error)")
+        }
+    }
 }

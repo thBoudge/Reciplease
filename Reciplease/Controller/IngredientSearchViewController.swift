@@ -12,7 +12,7 @@ class IngredientSearchViewController: UIViewController {
 
     @IBOutlet weak var ingredientsTableView: UITableView!
     @IBOutlet weak var ingredientsTextField: UITextField!
-    private var ingredientArray = [Ingredients]()
+    private var ingredientArray = [Ingredient]()
     private var response : Recipes?
     
     private var yummlyService = YummlyService()
@@ -20,7 +20,7 @@ class IngredientSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ingredientArray = Ingredients.fetchAll()
+        ingredientArray = Ingredient.fetchAll()
         
     }
     
@@ -40,14 +40,14 @@ class IngredientSearchViewController: UIViewController {
                 let array = ingredient.components(separatedBy: ",")
                 print(array)
                 for i in array {
-                    let newIngredient = Ingredients(context: AppDelegate.viewContext)
+                    let newIngredient = Ingredient(context: AppDelegate.viewContext)
                     newIngredient.ingredientName = i
                     newIngredient.checked = false
                     ingredientArray.append(newIngredient)
                 }
                 
             }else {
-                let newIngredient = Ingredients(context: AppDelegate.viewContext)
+                let newIngredient = Ingredient(context: AppDelegate.viewContext)
                 newIngredient.ingredientName = ingredient
                 newIngredient.checked = false
                 ingredientArray.append(newIngredient)
@@ -56,7 +56,7 @@ class IngredientSearchViewController: UIViewController {
            
             ingredientsTextField.text = ""
             try? AppDelegate.viewContext.save()
-            self.ingredientArray = Ingredients.fetchAll()
+            self.ingredientArray = Ingredient.fetchAll()
             ingredientsTableView.reloadData()
         }else {print("nada")}
     }
@@ -117,7 +117,7 @@ class IngredientSearchViewController: UIViewController {
             }
         }
         try? AppDelegate.viewContext.save()
-        self.ingredientArray = Ingredients.fetchAll()
+        self.ingredientArray = Ingredient.fetchAll()
         ingredientsTableView.reloadData()
       }
     
@@ -160,7 +160,7 @@ extension IngredientSearchViewController: UITableViewDelegate, UITableViewDataSo
         ingredientArray[indexPath.row].checked = !ingredientArray[indexPath.row].checked
         
         try? AppDelegate.viewContext.save()
-        self.ingredientArray = Ingredients.fetchAll()
+        self.ingredientArray = Ingredient.fetchAll()
         tableView.reloadData()
         
         
@@ -168,11 +168,7 @@ extension IngredientSearchViewController: UITableViewDelegate, UITableViewDataSo
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
-    //code xib or storyboard ajout header
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//
-//    }
-    
+
     
 }
 

@@ -15,7 +15,6 @@ class RecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var ingredientsLabel: UILabel!
     @IBOutlet weak var recipeQuoteLabel: UILabel!
     @IBOutlet weak var cookTimeLabel: UILabel!
-    @IBOutlet weak var validateImageView: UIImageView!
     @IBOutlet weak var view: UIView!
     @IBOutlet weak var recipeButton: UIButton!
     
@@ -56,33 +55,27 @@ class RecipeTableViewCell: UITableViewCell {
     var recipe : Recipe? {
         didSet {
             recipeNameLabel.text = recipe?.name
-            guard let time = recipe?.cookTime  else {return }
+            guard let timeString = recipe?.cookTime else {return }
+            guard let time = Int(timeString) else {return}
             cookTimeLabel.text = "\(time / 60) minutes"
             guard let rating = recipe?.rate else {return }
             recipeQuoteLabel.text = "\(rating) Stars"
-            guard let image90 = recipe?.imageURL  else {return }
+            guard let image90 = recipe?.image  else {return }
             //Change Image Resolution to 360 pixel
-            //Computed Variable
-            var image360 : String {
-                return image90.dropLast(4) + "360"
-            }
-            
-            let url = URL(string: String(image360)) //a deballer
-            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            recipeImageView.image = UIImage(data: data!)
-            
-//            guard let ingredientsList = match?.ingredients else {return }
-//
-//            var ingredients = ""
-//            for i in 0..<ingredientsList.count   {
-//                guard let ingredient = match?.ingredients?[i] else {return}
-//
-//                ingredients += "\(ingredient), "
+//            //Computed Variable
+//            var image360 : String {
+//                return image90.dropLast(4) + "360"
 //            }
-//            ingredientsLabel.text = "\(ingredients)"
+//
+//            let url = URL(string: String(image360)) //a deballer
+//            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            recipeImageView.image = UIImage(data: image90)
+            
+            ingredientsLabel.text = recipe?.ingredientCellLabel
         }
         
     }
+    
    
    
     

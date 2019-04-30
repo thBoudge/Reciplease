@@ -25,7 +25,7 @@ class IngredientsTest: XCTestCase {
 
     //MARK: - Helper Methods
     func insertIngredient(into managedObjectContext: NSManagedObjectContext) {
-        let ingredient = Ingredients(context: managedObjectContext)
+        let ingredient = Ingredient(context: managedObjectContext)
         ingredient.ingredientName = "chocolate"
         ingredient.checked = true
     }
@@ -41,8 +41,8 @@ class IngredientsTest: XCTestCase {
     func testDeleteAllIngredientInPersistentContainer() {
         insertIngredient(into: mockContainer.viewContext)
         try? mockContainer.viewContext.save()
-        Ingredients.deleteAll(viewContext: mockContainer.viewContext)
-        XCTAssertEqual(Ingredients.fetchAll(viewContext: mockContainer.viewContext), [])
+        Ingredient.deleteAll(viewContext: mockContainer.viewContext)
+        XCTAssertEqual(Ingredient.fetchAll(viewContext: mockContainer.viewContext), [])
     }
     
 }

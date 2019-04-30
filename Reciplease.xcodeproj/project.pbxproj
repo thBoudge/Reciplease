@@ -17,8 +17,8 @@
 		1419A5532263D9FC00704CF0 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1419A5522263D9FC00704CF0 /* RecipeViewController.swift */; };
 		14388DAB2272298D00201E4B /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14388DAA2272298D00201E4B /* Recipe.swift */; };
 		14388DAD22726E5500201E4B /* CategoriesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14388DAC22726E5500201E4B /* CategoriesTest.swift */; };
-		143DC3CA22650CEC00F711E8 /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143DC3C922650CEC00F711E8 /* Ingredients.swift */; };
-		1442F643226F72BD0094519D /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1442F642226F72BD0094519D /* Categories.swift */; };
+		143DC3CA22650CEC00F711E8 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143DC3C922650CEC00F711E8 /* Ingredient.swift */; };
+		1442F643226F72BD0094519D /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1442F642226F72BD0094519D /* Category.swift */; };
 		1442F647226F7ABA0094519D /* OneRecipe.json in Resources */ = {isa = PBXBuildFile; fileRef = 1442F646226F7ABA0094519D /* OneRecipe.json */; };
 		1470D6E722677BE200882EA8 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1470D6E522677BE200882EA8 /* DataModel.xcdatamodeld */; };
 		1471D750226CCD760032828D /* CompleteRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1471D74F226CCD760032828D /* CompleteRecipe.swift */; };
@@ -64,8 +64,8 @@
 		1419A5522263D9FC00704CF0 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		14388DAA2272298D00201E4B /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		14388DAC22726E5500201E4B /* CategoriesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTest.swift; sourceTree = "<group>"; };
-		143DC3C922650CEC00F711E8 /* Ingredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredients.swift; sourceTree = "<group>"; };
-		1442F642226F72BD0094519D /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
+		143DC3C922650CEC00F711E8 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		1442F642226F72BD0094519D /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		1442F646226F7ABA0094519D /* OneRecipe.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = OneRecipe.json; sourceTree = "<group>"; };
 		1470D6E622677BE200882EA8 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		1471D74F226CCD760032828D /* CompleteRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteRecipe.swift; sourceTree = "<group>"; };
@@ -190,9 +190,9 @@
 		1476011C226914EE00C8E612 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				143DC3C922650CEC00F711E8 /* Ingredients.swift */,
+				143DC3C922650CEC00F711E8 /* Ingredient.swift */,
 				1470D6E522677BE200882EA8 /* DataModel.xcdatamodeld */,
-				1442F642226F72BD0094519D /* Categories.swift */,
+				1442F642226F72BD0094519D /* Category.swift */,
 				14388DAA2272298D00201E4B /* Recipe.swift */,
 			);
 			path = DataModel;
@@ -436,9 +436,9 @@
 				14D8A8B4226A3AA400C16C19 /* RecipeTableViewCell.swift in Sources */,
 				1419A5512263D99100704CF0 /* FavoriteTableView.swift in Sources */,
 				14388DAB2272298D00201E4B /* Recipe.swift in Sources */,
-				143DC3CA22650CEC00F711E8 /* Ingredients.swift in Sources */,
+				143DC3CA22650CEC00F711E8 /* Ingredient.swift in Sources */,
 				1419A53C2263D6AC00704CF0 /* IngredientSearchViewController.swift in Sources */,
-				1442F643226F72BD0094519D /* Categories.swift in Sources */,
+				1442F643226F72BD0094519D /* Category.swift in Sources */,
 				1419A5532263D9FC00704CF0 /* RecipeViewController.swift in Sources */,
 				1476012D22691A6400C8E612 /* YummlyService.swift in Sources */,
 				1476012B22691A1600C8E612 /* YummlySession.swift in Sources */,

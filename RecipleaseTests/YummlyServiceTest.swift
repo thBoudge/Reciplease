@@ -25,8 +25,8 @@ class YummlyServiceTest: XCTestCase {
     }()
     
     //MARK: - Helper Methods
-    func insertIngredient(into managedObjectContext: NSManagedObjectContext) -> Ingredients {
-        let ingredient = Ingredients(context: managedObjectContext)
+    func insertIngredient(into managedObjectContext: NSManagedObjectContext) -> Ingredient {
+        let ingredient = Ingredient(context: managedObjectContext)
         ingredient.ingredientName = "chocolate"
         ingredient.checked = true
         return ingredient

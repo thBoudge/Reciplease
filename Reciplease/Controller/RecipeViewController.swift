@@ -18,6 +18,7 @@ class RecipeViewController: UIViewController {
     
     
     var recipe : CompleteRecipe?
+    var Ingredients : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()

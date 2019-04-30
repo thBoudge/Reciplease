@@ -24,7 +24,7 @@ class YummlyService {
     
     //MARK:  Methods
     // Method to build Bundle to build URL for getting all recipes
-    func updateData(table ingredients: [Ingredients]){
+    func updateData(table ingredients: [Ingredient]){
         urlComponent = "\(YummlySession.init().urlStringApi)s?_app_id=\(ID)&_app_key=\(APP_ID)"
         
         for i in 0..<ingredients.count{

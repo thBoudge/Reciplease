@@ -1,5 +1,5 @@
 //
-//  Categories.swift
+//  Category.swift
 //  Reciplease
 //
 //  Created by Thomas Bouges on 2019-04-23.
@@ -9,16 +9,16 @@
 import Foundation
 import CoreData
 
-class Categories: NSManagedObject {
-    static func fetchAll(viewContext: NSManagedObjectContext = AppDelegate.viewContext) -> [Categories] {
-        let request: NSFetchRequest<Categories> = Categories.fetchRequest()
+class Category: NSManagedObject {
+    static func fetchAll(viewContext: NSManagedObjectContext = AppDelegate.viewContext) -> [Category] {
+        let request: NSFetchRequest<Category> = Category.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "categoryName", ascending: true)]
         guard let categories = try? viewContext.fetch(request) else { return [] }
         return categories
     }
     
     static func deleteAll(viewContext: NSManagedObjectContext = AppDelegate.viewContext) {
-        Categories.fetchAll(viewContext: viewContext).forEach({ viewContext.delete($0) })
+        Category.fetchAll(viewContext: viewContext).forEach({ viewContext.delete($0) })
         try? viewContext.save()
     }
 }

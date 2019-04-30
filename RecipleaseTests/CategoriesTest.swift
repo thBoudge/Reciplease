@@ -24,7 +24,7 @@ class CategoriesTest: XCTestCase {
     
     //MARK: - Helper Methods
     private func insertCategory(into managedObjectContext: NSManagedObjectContext) {
-        let category = Categories(context: managedObjectContext)
+        let category = Category(context: managedObjectContext)
         category.categoryName = "Main Course"
     }
     
@@ -39,8 +39,8 @@ class CategoriesTest: XCTestCase {
     func testDeleteAllCategoryInPersistentContainer() {
         insertCategory(into: mockContainer.viewContext)
         try? mockContainer.viewContext.save()
-        Categories.deleteAll(viewContext: mockContainer.viewContext)
-        XCTAssertEqual(Categories.fetchAll(viewContext: mockContainer.viewContext), [])
+        Category.deleteAll(viewContext: mockContainer.viewContext)
+        XCTAssertEqual(Category.fetchAll(viewContext: mockContainer.viewContext), [])
     }
     
     
