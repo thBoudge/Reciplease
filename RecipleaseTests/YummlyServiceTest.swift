@@ -7,11 +7,31 @@
 //
 
 import XCTest
+import CoreData
 @testable import Reciplease
 
 class YummlyServiceTest: XCTestCase {
 
     //MARK: - Test Recipes
+    
+    //MARK: - Properties
+    lazy var mockContainer: NSPersistentContainer = {
+        let container = NSPersistentContainer(name: "DataModel")
+        container.persistentStoreDescriptions[0].url = URL(fileURLWithPath: "/dev/null")
+        container.loadPersistentStores(completionHandler: { (description, error) in
+            XCTAssertNil(error)
+        })
+        return container
+    }()
+    
+    //MARK: - Helper Methods
+    func insertIngredient(into managedObjectContext: NSManagedObjectContext) -> Ingredients {
+        let ingredient = Ingredients(context: managedObjectContext)
+        ingredient.ingredientName = "chocolate"
+        ingredient.checked = true
+        return ingredient
+    }
+    
     ///////////////////////Test for Yummly API Get more recipes\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     func testGetRecipesShouldPostFailedCallback() {
         let fakeResponse = FakeResponse(response: nil, data: nil, error: FakeResponseData.networkError)
@@ -20,10 +40,8 @@ class YummlyServiceTest: XCTestCase {
         
         let expectation = XCTestExpectation(description: "Wait for queue change.")
 
-        var ingredient = Ingredients.fetchAll()
-        ingredient[0].ingredientName = "chocolate"
-        ingredient[0].checked = true
-        yummlyService.updateData(table: ingredient)
+        let ingredient = insertIngredient(into: mockContainer.newBackgroundContext())
+        yummlyService.updateData(table: [ingredient])
         
         yummlyService.getRecipes { success, recipe in
             XCTAssertFalse(success)
@@ -41,10 +59,8 @@ class YummlyServiceTest: XCTestCase {
         
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         
-        var ingredient = Ingredients.fetchAll()
-        ingredient[0].ingredientName = "chocolate"
-        ingredient[0].checked = true
-        yummlyService.updateData(table: ingredient)
+        let ingredient = insertIngredient(into: mockContainer.newBackgroundContext())
+        yummlyService.updateData(table: [ingredient])
         
         yummlyService.getRecipes { success, recipe in
             XCTAssertFalse(success)
@@ -62,10 +78,8 @@ class YummlyServiceTest: XCTestCase {
         
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         
-        var ingredient = Ingredients.fetchAll()
-        ingredient[0].ingredientName = "chocolate"
-        ingredient[0].checked = true
-        yummlyService.updateData(table: ingredient)
+        let ingredient = insertIngredient(into: mockContainer.newBackgroundContext())
+        yummlyService.updateData(table: [ingredient])
         
         yummlyService.getRecipes { success, recipe in
             XCTAssertFalse(success)
@@ -84,10 +98,8 @@ class YummlyServiceTest: XCTestCase {
         
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         
-        var ingredient = Ingredients.fetchAll()
-        ingredient[0].ingredientName = "chocolate"
-        ingredient[0].checked = true
-        yummlyService.updateData(table: ingredient)
+        let ingredient = insertIngredient(into: mockContainer.newBackgroundContext())
+        yummlyService.updateData(table: [ingredient])
         
         yummlyService.getRecipes { success, recipe in
             XCTAssertFalse(success)
@@ -105,10 +117,8 @@ class YummlyServiceTest: XCTestCase {
         
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         
-        var ingredient = Ingredients.fetchAll()
-        ingredient[0].ingredientName = "chocolate"
-        ingredient[0].checked = true
-        yummlyService.updateData(table: ingredient)
+        let ingredient = insertIngredient(into: mockContainer.newBackgroundContext())
+        yummlyService.updateData(table: [ingredient])
         
         yummlyService.getRecipes { success, recipe in
             XCTAssertFalse(success)
@@ -126,10 +136,8 @@ class YummlyServiceTest: XCTestCase {
         
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         
-        var ingredient = Ingredients.fetchAll()
-        ingredient[0].ingredientName = "chocolate"
-        ingredient[0].checked = true
-        yummlyService.updateData(table: ingredient)
+        let ingredient = insertIngredient(into: mockContainer.newBackgroundContext())
+        yummlyService.updateData(table: [ingredient])
         
         yummlyService.getRecipes { success, recipe in
             XCTAssertTrue(success)
@@ -151,10 +159,7 @@ class YummlyServiceTest: XCTestCase {
         
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         
-        var ingredient = Ingredients.fetchAll()
-        ingredient[0].ingredientName = "chocolate"
-        ingredient[0].checked = true
-        yummlyService.updateData(table: ingredient)
+        yummlyService.updateRecipeData(idRecipe: "Simple-Skillet-Green-Beans-2352743")
         
         yummlyService.getRecipe { success, recipe in
             XCTAssertFalse(success)
@@ -172,10 +177,7 @@ class YummlyServiceTest: XCTestCase {
         
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         
-        var ingredient = Ingredients.fetchAll()
-        ingredient[0].ingredientName = "chocolate"
-        ingredient[0].checked = true
-        yummlyService.updateData(table: ingredient)
+        yummlyService.updateRecipeData(idRecipe: "Simple-Skillet-Green-Beans-2352743")
         
         yummlyService.getRecipe { success, recipe in
             XCTAssertFalse(success)
@@ -193,10 +195,8 @@ class YummlyServiceTest: XCTestCase {
         
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         
-        var ingredient = Ingredients.fetchAll()
-        ingredient[0].ingredientName = "chocolate"
-        ingredient[0].checked = true
-        yummlyService.updateData(table: ingredient)
+        
+        yummlyService.updateRecipeData(idRecipe: "Simple-Skillet-Green-Beans-2352743")
         
         yummlyService.getRecipe { success, recipe in
             XCTAssertFalse(success)
@@ -215,10 +215,7 @@ class YummlyServiceTest: XCTestCase {
         
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         
-        var ingredient = Ingredients.fetchAll()
-        ingredient[0].ingredientName = "chocolate"
-        ingredient[0].checked = true
-        yummlyService.updateData(table: ingredient)
+        yummlyService.updateRecipeData(idRecipe: "Simple-Skillet-Green-Beans-2352743")
         
         yummlyService.getRecipe { success, recipe in
             XCTAssertFalse(success)
@@ -236,10 +233,7 @@ class YummlyServiceTest: XCTestCase {
         
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         
-        var ingredient = Ingredients.fetchAll()
-        ingredient[0].ingredientName = "chocolate"
-        ingredient[0].checked = true
-        yummlyService.updateData(table: ingredient)
+        yummlyService.updateRecipeData(idRecipe: "Simple-Skillet-Green-Beans-2352743")
         
         yummlyService.getRecipe { success, recipe in
             XCTAssertFalse(success)
@@ -257,9 +251,6 @@ class YummlyServiceTest: XCTestCase {
         
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         
-        var ingredient = Ingredients.fetchAll()
-        ingredient[0].ingredientName = "chocolate"
-        ingredient[0].checked = true
         yummlyService.updateRecipeData(idRecipe: "Simple-Skillet-Green-Beans-2352743")
         
         yummlyService.getRecipe { success, recipe in

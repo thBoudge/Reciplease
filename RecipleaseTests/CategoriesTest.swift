@@ -1,8 +1,8 @@
 //
-//  IngredientsTest.swift
+//  CategoriesTest.swift
 //  RecipleaseTests
 //
-//  Created by Thomas Bouges on 2019-04-18.
+//  Created by Thomas Bouges on 2019-04-25.
 //  Copyright © 2019 Thomas Bouges. All rights reserved.
 //
 
@@ -10,8 +10,7 @@ import XCTest
 import CoreData
 @testable import Reciplease
 
-
-class IngredientsTest: XCTestCase {
+class CategoriesTest: XCTestCase {
 
     //MARK: - Properties
     lazy var mockContainer: NSPersistentContainer = {
@@ -22,27 +21,27 @@ class IngredientsTest: XCTestCase {
         })
         return container
     }()
-
+    
     //MARK: - Helper Methods
-    func insertIngredient(into managedObjectContext: NSManagedObjectContext) {
-        let ingredient = Ingredients(context: managedObjectContext)
-        ingredient.ingredientName = "chocolate"
-        ingredient.checked = true
+    private func insertCategory(into managedObjectContext: NSManagedObjectContext) {
+        let category = Categories(context: managedObjectContext)
+        category.categoryName = "Main Course"
     }
     
     //MARK: - Unit Tests
-    func testInsertManyIngredientInPersistentContainer() {
+    func testInsertManyCategoryInPersistentContainer() {
         for _ in 0 ..< 100 {
-            insertIngredient(into: mockContainer.newBackgroundContext())
+            insertCategory(into: mockContainer.newBackgroundContext())
         }
         XCTAssertNoThrow(try mockContainer.newBackgroundContext().save())
     }
     
-    func testDeleteAllIngredientInPersistentContainer() {
-        insertIngredient(into: mockContainer.viewContext)
+    func testDeleteAllCategoryInPersistentContainer() {
+        insertCategory(into: mockContainer.viewContext)
         try? mockContainer.viewContext.save()
-        Ingredients.deleteAll(viewContext: mockContainer.viewContext)
-        XCTAssertEqual(Ingredients.fetchAll(viewContext: mockContainer.viewContext), [])
+        Categories.deleteAll(viewContext: mockContainer.viewContext)
+        XCTAssertEqual(Categories.fetchAll(viewContext: mockContainer.viewContext), [])
     }
+    
     
 }

@@ -58,8 +58,8 @@ class RecipeTableViewCell: UITableViewCell {
             recipeNameLabel.text = recipe?.name
             guard let time = recipe?.cookTime  else {return }
             cookTimeLabel.text = "\(time / 60) minutes"
-            guard let rating = recipe?.rate  else {return }
-            recipeQuoteLabel.text = String(rating)
+            guard let rating = recipe?.rate else {return }
+            recipeQuoteLabel.text = "\(rating) Stars"
             guard let image90 = recipe?.imageURL  else {return }
             //Change Image Resolution to 360 pixel
             //Computed Variable

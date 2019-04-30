@@ -37,7 +37,9 @@ class ResultSearchTableView: UITableViewController {
                 
                 
                 var notAFavorite = true
-                guard let time = allRecipe?.matches?[i].totalTimeInSeconds else {fatalError("Recipe Time was Nil when optional open")}
+                
+                //////////////// *****************Pas de Fatal Error car le nil nous bloque \\\\\\\\\\
+                guard let time = allRecipe?.matches?[i].totalTimeInSeconds else {fatalError("Recipe Time was Nil when optional open")} //
                 guard let id = allRecipe?.matches?[i].id else {fatalError("Recipe id was Nil when optional open")}
                 guard let name = allRecipe?.matches?[i].recipeName else {fatalError("Recipe name was Nil when optional open")}
                 guard let rate = allRecipe?.matches?[i].rating else {fatalError("Recipe rate was Nil when optional open")}
@@ -71,7 +73,7 @@ class ResultSearchTableView: UITableViewController {
         
         
         let newRecipe = Recipe(context: AppDelegate.viewContext)
-        
+        newRecipe.parentCategory = newCategory
 //        var image360 : String {
 //            return image90.dropLast(4) + "360"
 //        }
@@ -81,7 +83,9 @@ class ResultSearchTableView: UITableViewController {
         newRecipe.rate = Int16(rate)
         newRecipe.imageURL = image90
         
-        newCategory.addToRecipes(newRecipe)
+        
+        /////inverse recette dans category faux/////
+//        newCategory.addToRecipes(newRecipe)
         
         ///// method NSCoder \\\\\
         //we save context on CoreDatabase (persistant container)

@@ -33,7 +33,7 @@
                                             <stackView opaque="NO" contentMode="scaleAspectFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="hMu-1C-CcM">
                                                 <rect key="frame" x="0.0" y="30" width="335" height="30"/>
                                                 <subviews>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1E3-TF-EMM">
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="chicken, garlic, tomato" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1E3-TF-EMM">
                                                         <rect key="frame" x="0.0" y="0.0" width="278" height="30"/>
                                                         <nil key="textColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -151,7 +151,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ldF-It-8ud"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Ingredient" id="LiM-hE-2Dj"/>
+                    <navigationItem key="navigationItem" title="Ingredient" id="LiM-hE-2Dj">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="PRR-Je-e72"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="ingredientsTableView" destination="vIO-77-a47" id="7cO-j2-6mC"/>
                         <outlet property="ingredientsTextField" destination="1E3-TF-EMM" id="N6R-CW-VwV"/>
@@ -370,7 +372,7 @@
             </objects>
             <point key="canvasLocation" x="1048" y="893"/>
         </scene>
-        <!--Favorite Table View-->
+        <!--Favorite Recipes-->
         <scene sceneID="5F8-pO-Tft">
             <objects>
                 <tableViewController id="i9F-Xn-fJq" customClass="FavoriteTableView" customModule="Reciplease" customModuleProvider="target" sceneMemberID="viewController">
@@ -393,7 +395,9 @@
                             <outlet property="delegate" destination="i9F-Xn-fJq" id="GcV-nl-hQw"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="ggO-eL-izR"/>
+                    <navigationItem key="navigationItem" title="Favorite Recipes" id="ggO-eL-izR">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="fFG-82-e8R"/>
+                    </navigationItem>
                     <connections>
                         <segue destination="3CP-Ow-xHb" kind="show" identifier="goToRecipe" id="V1v-in-U6F"/>
                     </connections>
@@ -407,6 +411,6 @@
         <image name="favorite-heart-outline-button" width="35" height="35"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="V1v-in-U6F"/>
+        <segue reference="LBh-PI-Mf1"/>
     </inferredMetricsTieBreakers>
 </document>

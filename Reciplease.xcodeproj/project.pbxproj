@@ -16,6 +16,7 @@
 		1419A5512263D99100704CF0 /* FavoriteTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1419A5502263D99100704CF0 /* FavoriteTableView.swift */; };
 		1419A5532263D9FC00704CF0 /* RecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1419A5522263D9FC00704CF0 /* RecipeViewController.swift */; };
 		14388DAB2272298D00201E4B /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14388DAA2272298D00201E4B /* Recipe.swift */; };
+		14388DAD22726E5500201E4B /* CategoriesTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14388DAC22726E5500201E4B /* CategoriesTest.swift */; };
 		143DC3CA22650CEC00F711E8 /* Ingredients.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143DC3C922650CEC00F711E8 /* Ingredients.swift */; };
 		1442F643226F72BD0094519D /* Categories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1442F642226F72BD0094519D /* Categories.swift */; };
 		1442F647226F7ABA0094519D /* OneRecipe.json in Resources */ = {isa = PBXBuildFile; fileRef = 1442F646226F7ABA0094519D /* OneRecipe.json */; };
@@ -62,6 +63,7 @@
 		1419A5502263D99100704CF0 /* FavoriteTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTableView.swift; sourceTree = "<group>"; };
 		1419A5522263D9FC00704CF0 /* RecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeViewController.swift; sourceTree = "<group>"; };
 		14388DAA2272298D00201E4B /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		14388DAC22726E5500201E4B /* CategoriesTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTest.swift; sourceTree = "<group>"; };
 		143DC3C922650CEC00F711E8 /* Ingredients.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredients.swift; sourceTree = "<group>"; };
 		1442F642226F72BD0094519D /* Categories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categories.swift; sourceTree = "<group>"; };
 		1442F646226F7ABA0094519D /* OneRecipe.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = OneRecipe.json; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				1473A7DB2269096500489407 /* IngredientsTest.swift */,
+				14388DAC22726E5500201E4B /* CategoriesTest.swift */,
 				14D8A8AF226A2DB900C16C19 /* YummlyServiceTest.swift */,
 				14D8A8A6226A2B4200C16C19 /* AlamoFireTest */,
 				1473A7D5226908ED00489407 /* Info.plist */,
@@ -451,6 +454,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14D8A8A8226A2B7100C16C19 /* FakeResponse.swift in Sources */,
+				14388DAD22726E5500201E4B /* CategoriesTest.swift in Sources */,
 				14D8A8B0226A2DB900C16C19 /* YummlyServiceTest.swift in Sources */,
 				14D8A8AE226A2C5500C16C19 /* YummlySessionFake.swift in Sources */,
 				14D8A8AA226A2B9A00C16C19 /* FakeResponseData.swift in Sources */,
