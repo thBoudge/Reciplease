@@ -9,14 +9,14 @@
 import UIKit
 
 class IngredientSearchViewController: UIViewController {
-
+    //MARK: - Properties
     @IBOutlet weak var ingredientsTableView: UITableView!
     @IBOutlet weak var ingredientsTextField: UITextField!
     private var ingredientArray = [Ingredient]()
     private var response : Recipes?
-    
     private var yummlyService = YummlyService()
     
+    //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,7 +25,7 @@ class IngredientSearchViewController: UIViewController {
     }
     
 
-
+    //MARK: - Action Method
     @IBAction func addIngredients(_ sender: UIButton) {
         
         guard let ingredients = ingredientsTextField.text else {fatalError("we found Nil when opening ingredientsTextField.text")}
@@ -100,6 +100,7 @@ class IngredientSearchViewController: UIViewController {
     }
     
     
+    //MARK: - Methods
     
     private func deleteRow(checked: Bool ) {
         //////Delete Row\\\\\\
@@ -131,6 +132,7 @@ class IngredientSearchViewController: UIViewController {
     
 }
 
+//MARK: - TableView delegate and Datasource methods
 extension IngredientSearchViewController: UITableViewDelegate, UITableViewDataSource {
 
    

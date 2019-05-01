@@ -10,11 +10,12 @@ import UIKit
 
 class FavoriteTableView: UITableViewController {
 
-    
+    //MARK: - Properties
     private var  recipe = Recipe.fetchAll()
     private var yummlyService = YummlyService()
     private var response : CompleteRecipe?
     
+    //MARK: - ViewDidLoad
     override func viewDidLoad() {
         recipe = Recipe.fetchAll()
 
@@ -30,19 +31,30 @@ class FavoriteTableView: UITableViewController {
         tableView.reloadData()
     }
     
-   
+    @objc func deleteFromFavorite(sender: UIButton){
+        print("in")
+        // get IndexPath for Tag Button
+//        let indexPath = IndexPath(index: sender.tag)
+        // get to cell
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "recipeTableViewCell", for: indexPath) as! RecipeTableViewCell
+        
+        guard let name = recipe[sender.tag].name  else {return}
+        Recipe.deleteFavoriteRecipe(name: name)
+        
+        recipe = Recipe.fetchAll()
+        tableView.reloadData()
+        
+    }
+    
+    
+    //MARK: - Methods
+    private func openRecipeDescription(index: Int){
 
-    @objc func openRecipeDescription(sender: UIButton){
-
-        let tag = sender.tag
-        //to know where the user tap
-        ///////A EFFACER\\\\\\\\
-        if let idRecipe = recipe[tag].id {
-
+        if let idRecipe = recipe[index].id {
+            
             yummlyService.updateRecipeData(idRecipe: idRecipe)
-
-            yummlyService.getRecipe { (success, recipe) in
-                print(success.description)
+            
+            yummlyService.getRecipe{ (success, recipe) in
                 if success != false {
                     guard let recipeToLoad = recipe else {return}
                     self.response = recipeToLoad
@@ -69,9 +81,10 @@ class FavoriteTableView: UITableViewController {
     }
     
 }
-
+//MARK: - TableView Delegate and dataRessource
 extension FavoriteTableView {
     
+    //MARK: TableView appearance
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         return recipe.count
@@ -83,10 +96,30 @@ extension FavoriteTableView {
         
             cell.recipe = recipe[indexPath.row]
             cell.recipeButton.tag = indexPath.row
-            cell.recipeButton.addTarget(self, action: #selector(openRecipeDescription(sender:)), for: .touchUpInside)
+            cell.recipeButton.addTarget(self, action: #selector(deleteFromFavorite(sender:)), for: .touchUpInside)
+            cell.recipeButton.setImage(UIImage(named: "favorite-Full-heart-button"), for: .normal)
             
         return cell
     }
     
+    //MARK: TableView management with no data
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = "Go to search and add Favorite recipe "
+        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.textAlignment = .center
+        label.textColor = .white
+        label.backgroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+        return label
+    }
     
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return recipe.isEmpty ? 200 : 0
+    }
+    
+    // everytime we select a cell what do we do
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        openRecipeDescription(index: indexPath.row)
+    }
 }

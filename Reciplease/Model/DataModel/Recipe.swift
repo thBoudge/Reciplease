@@ -56,8 +56,12 @@ class Recipe: NSManagedObject {
         
         // We save Image in Binary Data
         guard let imageURL = recipeResponse?.images?[0].hostedLargeURL else {return}
-        let url = URL(string: imageURL) //a deballer
-        let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+        print(imageURL)
+        guard let url = URL(string: imageURL) else {return} //a deballer
+        print(url)
+        let data = try? Data(contentsOf: url)//make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+        print(data!)
+    
         newRecipe.image = data
         
         // we link recipe to a category
@@ -85,9 +89,7 @@ class Recipe: NSManagedObject {
             
             if recipe[i].name == name{
                 index = i
-                print("at\(i)")
             }
-            
         }
         AppDelegate.viewContext.delete(recipe[index])
         ///// method NSCoder \\\\\
@@ -98,4 +100,19 @@ class Recipe: NSManagedObject {
             print("Error saving context \(error)")
         }
     }
+    
+    //Methods to change button image if favorite or not
+    static func isAFavorite(id: String) ->String{
+        
+        for i in 0 ..< Recipe.fetchAll().count {
+            guard let idData = Recipe.fetchAll()[i].id else {return "favorite-heart-outline-button"}
+            if id == idData {
+                return "favorite-Full-heart-button"
+            }
+        }
+        return "favorite-heart-outline-button"
+    }
+    
+    
+    
 }

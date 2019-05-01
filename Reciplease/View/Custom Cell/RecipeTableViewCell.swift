@@ -9,7 +9,7 @@
 import UIKit
 
 class RecipeTableViewCell: UITableViewCell {
-    //rajouter label
+    
     @IBOutlet weak var recipeNameLabel: UILabel!
     @IBOutlet weak var recipeImageView: UIImageView!
     @IBOutlet weak var ingredientsLabel: UILabel!
@@ -27,8 +27,12 @@ class RecipeTableViewCell: UITableViewCell {
             guard let time = match?.totalTimeInSeconds  else {return }
             cookTimeLabel.text = "\(time / 60) minutes"
             guard let rating = match?.rating  else {return }
-            recipeQuoteLabel.text = String(rating)
+            recipeQuoteLabel.text = "\(rating) Stars"
             guard let image90 = match?.imageUrlsBySize?.the90  else {return }
+            //full or normal heart image on Button
+            guard let id = match?.id  else {return }
+            let imageButton = Recipe.isAFavorite(id: id)
+            recipeButton.setImage(UIImage(named: imageButton), for: .normal)
             //Change Image Resolution to 360 pixel
             //Computed Variable
             var image360 : String {
@@ -61,6 +65,7 @@ class RecipeTableViewCell: UITableViewCell {
             guard let rating = recipe?.rate else {return }
             recipeQuoteLabel.text = "\(rating) Stars"
             guard let image90 = recipe?.image  else {return }
+            
             //Change Image Resolution to 360 pixel
 //            //Computed Variable
 //            var image360 : String {
@@ -69,7 +74,8 @@ class RecipeTableViewCell: UITableViewCell {
 //
 //            let url = URL(string: String(image360)) //a deballer
 //            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            recipeImageView.image = UIImage(data: image90)
+            print(image90)
+            recipeImageView.image =  UIImage(data: image90)
             
             ingredientsLabel.text = recipe?.ingredientCellLabel
         }

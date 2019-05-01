@@ -11,43 +11,37 @@ import CoreData
 
 class ResultSearchTableView: UITableViewController {
     
-//    private var recipeChecked = [Bool]()
+    //MARK: - Properties
     private var response : CompleteRecipe?
     private var ingredientsResponse : String = ""
     private var yummlyService = YummlyService()
     
-    // Category? var is optional vecause is going to be nil until we use it
+    // Category? var is optional vbcause is going to be nil until we use it
     var allRecipe : Recipes?
     
-    
+     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        for _ in (allRecipe?.matches)! {
-//            recipeChecked.append(true)
-//        }
-        
-//      TODO: Register your MessageCell.xib file here:
+        //link with recipeTableViewCell
         tableView.register(UINib(nibName: "RecipeCell", bundle: nil), forCellReuseIdentifier: "recipeTableViewCell")
       }
     
-    @IBAction func addToFavorite(_ sender: UIBarButtonItem) {
-        
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
     }
     
+    //MARK: - Methods
+        //Methods to save Recipe Data and add favorite
     @objc func addToFavorite(sender: UIButton){
-        print("in")
+        
         // get IndexPath for Tag Button
         let indexPath = IndexPath(index: sender.tag)
         // get to cell
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeTableViewCell", for: indexPath) as! RecipeTableViewCell
         
         if sender.currentImage == UIImage(named: "favorite-heart-outline-button") {
-            
             sender.setImage(UIImage(named: "favorite-Full-heart-button"), for: .normal)
-            
-            print("insave")
-            
             // we recuperate IdReceipe
             if let idRecipe = allRecipe?.matches?[sender.tag].id {
                 
@@ -62,33 +56,20 @@ class ResultSearchTableView: UITableViewController {
                         }
                         // We save data
                         Recipe.saveData(recipeResponse: recipe, ingredients: self.ingredientsResponse)
-                        
                     } else { print("error")
                         return}
                 }
             }
-            
         } else if sender.currentImage == UIImage(named: "favorite-Full-heart-button") {
-            print("indelete")
             sender.setImage(UIImage(named: "favorite-heart-outline-button"), for: .normal)
             guard let name = allRecipe?.matches?[sender.tag].recipeName else {return}
-            print()
-            print(indexPath)
-            print(sender.tag)
-            print(name)
             Recipe.deleteFavoriteRecipe(name: name)
         }
-        
-        tableView.reloadData()
-        
-    }
+      }
     
     //Methods to load Recipe Data and to perform segue
     private func openRecipeDescription(index: Int){
         
-        
-        //to know where the user tap
-        ///////A EFFACER\\\\\\\\
         if let idRecipe = allRecipe?.matches?[index].id {
             
             yummlyService.updateRecipeData(idRecipe: idRecipe)
@@ -104,7 +85,6 @@ class ResultSearchTableView: UITableViewController {
                     return}
             }
         }
-        
     }
 
     
@@ -140,36 +120,20 @@ extension ResultSearchTableView {
         
         // transfert a cell pour assigner data
         cell.match = allRecipe?.matches?[indexPath.row]
-        
-        //Ternary operator
-        // value = condition ? valueIftrue : valueIfFalse
-//        cell.validateImageView.isHidden = recipeChecked[indexPath.row] == true ? true : false
-        
-        
-        
         cell.recipeButton.tag = indexPath.row
         cell.recipeButton.addTarget(self, action: #selector(addToFavorite(sender:)), for: .touchUpInside)
-        // We check if recipe is already in Favorite to do not add twice
-        for i in Recipe.fetchAll() {
-            guard let id = allRecipe?.matches?[indexPath.row].id else {fatalError("we had a nil when we open id")}
-            if i.id == id {
-                cell.recipeButton.setImage(UIImage(named: "favorite-Full-heart-button"), for: .normal)
-            }
-        }
         return cell
     }
     
     // everytime we select a cell what do we do
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-    let cell = tableView.dequeueReusableCell(withIdentifier: "recipeTableViewCell", for: indexPath) as! RecipeTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recipeTableViewCell", for: indexPath) as! RecipeTableViewCell
         // we get ingredients for cell
         if let ingredientString = cell.ingredientsLabel.text {
             ingredientsResponse = ingredientString
         }
         openRecipeDescription(index: indexPath.row)
-        
-        
     }
     
 }
