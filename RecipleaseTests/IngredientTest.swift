@@ -11,7 +11,7 @@ import CoreData
 @testable import Reciplease
 
 
-class IngredientsTest: XCTestCase {
+class IngredientTest: XCTestCase {
 
     //MARK: - Properties
     lazy var mockContainer: NSPersistentContainer = {
@@ -25,9 +25,7 @@ class IngredientsTest: XCTestCase {
 
     //MARK: - Helper Methods
     func insertIngredient(into managedObjectContext: NSManagedObjectContext) {
-        let ingredient = Ingredient(context: managedObjectContext)
-        ingredient.ingredientName = "chocolate"
-        ingredient.checked = true
+        Ingredient.addIngredient(ingredientName: "chocolate", context: managedObjectContext)
     }
     
     //MARK: - Unit Tests
@@ -40,9 +38,16 @@ class IngredientsTest: XCTestCase {
     
     func testDeleteAllIngredientInPersistentContainer() {
         insertIngredient(into: mockContainer.viewContext)
-        try? mockContainer.viewContext.save()
         Ingredient.deleteAll(viewContext: mockContainer.viewContext)
         XCTAssertEqual(Ingredient.fetchAll(viewContext: mockContainer.viewContext), [])
+    }
+    
+    func testInsertManyIngredientAtOnceInPersistentContainer() {
+        Ingredient.addIngredient(ingredientName: "chocolate ,cacao , garlic, fish", context: mockContainer.viewContext)
+        XCTAssertEqual(Ingredient.fetchAll(viewContext: mockContainer.viewContext)[0].ingredientName!, "cacao")
+        XCTAssertEqual(Ingredient.fetchAll(viewContext: mockContainer.viewContext)[1].ingredientName!, "chocolate")
+        XCTAssertEqual(Ingredient.fetchAll(viewContext: mockContainer.viewContext)[2].ingredientName!, "fish")
+        XCTAssertEqual(Ingredient.fetchAll(viewContext: mockContainer.viewContext)[3].ingredientName!, "garlic")
     }
     
 }

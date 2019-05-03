@@ -16,24 +16,11 @@ class Recipe: NSManagedObject {
         guard let recipe = try? viewContext.fetch(request) else { return [] }
         return recipe
     }
-    
-    static func deleteAll(viewContext: NSManagedObjectContext = AppDelegate.viewContext) {
-        Recipe.fetchAll(viewContext: viewContext).forEach({ viewContext.delete($0) })
-        try? viewContext.save()
-    }
-    
+
     //MARK: Method to save Persitent Data of Recipe
-    static func saveData(recipeResponse: CompleteRecipe?, ingredients: String){
+    static func saveData(recipeResponse: CompleteRecipe?, ingredients: String, context : NSManagedObjectContext = AppDelegate.viewContext){
         
-        let newCategory = Category(context: AppDelegate.viewContext)
-        if let categoryName = recipeResponse?.attributes?.course?[0] {
-            newCategory.categoryName = categoryName
-        } else {
-            newCategory.categoryName = "All purpose"
-        }
-        
-        
-        let newRecipe = Recipe(context: AppDelegate.viewContext)
+       let newRecipe = Recipe(context: context)
         
         newRecipe.cookTime = recipeResponse?.totalTime
         newRecipe.id = recipeResponse?.id
@@ -56,22 +43,37 @@ class Recipe: NSManagedObject {
         
         // We save Image in Binary Data
         guard let imageURL = recipeResponse?.images?[0].hostedLargeURL else {return}
-        print(imageURL)
         guard let url = URL(string: imageURL) else {return} //a deballer
-        print(url)
-        let data = try? Data(contentsOf: url)//make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-        print(data!)
+        let data = try? Data(contentsOf: url) as Data?//make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
     
         newRecipe.image = data
         
-        // we link recipe to a category
-        newRecipe.parentCategory = newCategory
-
+        // Category add or not
+        let newCategory = Category(context: context)
+        var dataDoesNotExist = true
+        let categoryName : String = recipeResponse?.attributes?.course?[0] ?? "All purpose"
+        print(categoryName)
         
+        
+        for i in Category.fetchAll(viewContext: context) {
+            if i.categoryName == categoryName {
+                dataDoesNotExist = false
+            }
+        }
+        if dataDoesNotExist == true {
+            newCategory.categoryName = categoryName
+            // we link recipe to a category
+            newRecipe.parentCategory = newCategory
+        }else {
+            // we link recipe to a category
+            newRecipe.parentCategory?.categoryName = categoryName
+        }
+      
         ///// method NSCoder \\\\\
         //we save context on CoreDatabase (persistant container)
         do {
-            try AppDelegate.viewContext.save()
+            try context.save()
+//                AppDelegate.viewContext.save()
         }catch{
             print("Error saving context \(error)")
         }
@@ -79,32 +81,22 @@ class Recipe: NSManagedObject {
     
     
     //MARK: Method to delete value at index
-     static func deleteFavoriteRecipe(name: String){
-        
-        var recipe = Recipe.fetchAll()
+    static func deleteFavoriteRecipe(name: String,context : NSManagedObjectContext = AppDelegate.viewContext, recipe : [Recipe] = Recipe.fetchAll()){
         var index = 0
-        print(recipe.count)
         for i in 0 ..< recipe.count{
-            print(i)
-            
             if recipe[i].name == name{
                 index = i
             }
         }
-        AppDelegate.viewContext.delete(recipe[index])
-        ///// method NSCoder \\\\\
-        //we save context on CoreDatabase (persistant container)
-        do {
-            try AppDelegate.viewContext.save()
-        }catch{
-            print("Error saving context \(error)")
-        }
+        context.delete(recipe[index])
+        Category.deleteCategoryWithNoRecipe(context: context)
+        try? context.save()
     }
     
     //Methods to change button image if favorite or not
-    static func isAFavorite(id: String) ->String{
+    static func isAFavorite(id: String , recipe : [Recipe] = Recipe.fetchAll()) ->String{
         
-        for i in 0 ..< Recipe.fetchAll().count {
+        for i in 0 ..< recipe.count {
             guard let idData = Recipe.fetchAll()[i].id else {return "favorite-heart-outline-button"}
             if id == idData {
                 return "favorite-Full-heart-button"

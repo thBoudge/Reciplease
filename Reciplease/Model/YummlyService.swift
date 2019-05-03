@@ -32,22 +32,19 @@ class YummlyService {
             urlComponent += "&allowedIngredient[]=\(ingredient.lowercased() )"
         }
         
-        print(urlComponent)
     }
     
     // Method to build Bundle to build URL for getting all recipes
     func updateRecipeData(idRecipe: String){
         urlComponent = "\(YummlySession.init().urlStringApi)/\(idRecipe)?_app_id=\(ID)&_app_key=\(APP_ID)"
         
-        print(urlComponent)
     }
    
     
     //Method to call and receive response
     func getRecipes(callback: @escaping (Bool, Recipes?) -> Void){
         
-        let url = URL(string: urlComponent)!
-        print(url)
+        guard let url = URL(string: urlComponent) else {return}
         yummlySession.request(url: url) { responseData in
             
                 //Check if data != nil
@@ -64,11 +61,9 @@ class YummlyService {
                 }
                 // MARK: - 5 Translation JSON in String
                 guard let responseJSON = try? JSONDecoder().decode(Recipes.self, from: data) else {
-                    print("pblm resposeJson")
                     callback(false, nil)
                     return
                 }
-            print(responseJSON)
             callback(true,responseJSON)
             }
             
@@ -77,8 +72,7 @@ class YummlyService {
     //Method to call and receive response
     func getRecipe(callback: @escaping (Bool, CompleteRecipe?) -> Void){
         
-        let url = URL(string: urlComponent)!
-        print(url)
+        guard let url = URL(string: urlComponent) else {return}
         yummlySession.request(url: url) { responseData in
             
             //Check if data != nil
@@ -95,11 +89,9 @@ class YummlyService {
             }
             // MARK: - 5 Translation JSON in String
             guard let responseJSON = try? JSONDecoder().decode(CompleteRecipe.self, from: data) else {
-                print("pblm resposeJson")
                 callback(false, nil)
                 return
             }
-            print(responseJSON)
             callback(true,responseJSON)
         }
         

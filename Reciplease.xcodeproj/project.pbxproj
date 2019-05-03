@@ -22,13 +22,14 @@
 		1442F647226F7ABA0094519D /* OneRecipe.json in Resources */ = {isa = PBXBuildFile; fileRef = 1442F646226F7ABA0094519D /* OneRecipe.json */; };
 		1470D6E722677BE200882EA8 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1470D6E522677BE200882EA8 /* DataModel.xcdatamodeld */; };
 		1471D750226CCD760032828D /* CompleteRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1471D74F226CCD760032828D /* CompleteRecipe.swift */; };
-		1473A7DC2269096500489407 /* IngredientsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1473A7DB2269096500489407 /* IngredientsTest.swift */; };
+		1473A7DC2269096500489407 /* IngredientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1473A7DB2269096500489407 /* IngredientTest.swift */; };
 		1476011F2269172B00C8E612 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1476011E2269172B00C8E612 /* ApiKeys.plist */; };
 		14760121226917BE00C8E612 /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14760120226917BE00C8E612 /* ApiKeys.swift */; };
 		14760123226918E200C8E612 /* Recipes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14760122226918E200C8E612 /* Recipes.swift */; };
 		14760129226919AF00C8E612 /* YummlyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14760128226919AF00C8E612 /* YummlyProtocol.swift */; };
 		1476012B22691A1600C8E612 /* YummlySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1476012A22691A1600C8E612 /* YummlySession.swift */; };
 		1476012D22691A6400C8E612 /* YummlyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1476012C22691A6400C8E612 /* YummlyService.swift */; };
+		14BC248B227C9627000EB6A5 /* RecipeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BC248A227C9627000EB6A5 /* RecipeTest.swift */; };
 		14D8A8A8226A2B7100C16C19 /* FakeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D8A8A7226A2B7100C16C19 /* FakeResponse.swift */; };
 		14D8A8AA226A2B9A00C16C19 /* FakeResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D8A8A9226A2B9A00C16C19 /* FakeResponseData.swift */; };
 		14D8A8AC226A2BF500C16C19 /* Recipes.json in Resources */ = {isa = PBXBuildFile; fileRef = 14D8A8AB226A2BF500C16C19 /* Recipes.json */; };
@@ -71,13 +72,14 @@
 		1471D74F226CCD760032828D /* CompleteRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteRecipe.swift; sourceTree = "<group>"; };
 		1473A7D1226908ED00489407 /* RecipleaseTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipleaseTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1473A7D5226908ED00489407 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1473A7DB2269096500489407 /* IngredientsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsTest.swift; sourceTree = "<group>"; };
+		1473A7DB2269096500489407 /* IngredientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientTest.swift; sourceTree = "<group>"; };
 		1476011E2269172B00C8E612 /* ApiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
 		14760120226917BE00C8E612 /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		14760122226918E200C8E612 /* Recipes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipes.swift; sourceTree = "<group>"; };
 		14760128226919AF00C8E612 /* YummlyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YummlyProtocol.swift; sourceTree = "<group>"; };
 		1476012A22691A1600C8E612 /* YummlySession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YummlySession.swift; sourceTree = "<group>"; };
 		1476012C22691A6400C8E612 /* YummlyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YummlyService.swift; sourceTree = "<group>"; };
+		14BC248A227C9627000EB6A5 /* RecipeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTest.swift; sourceTree = "<group>"; };
 		14D8A8A7226A2B7100C16C19 /* FakeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponse.swift; sourceTree = "<group>"; };
 		14D8A8A9226A2B9A00C16C19 /* FakeResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponseData.swift; sourceTree = "<group>"; };
 		14D8A8AB226A2BF500C16C19 /* Recipes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Recipes.json; sourceTree = "<group>"; };
@@ -178,8 +180,9 @@
 		1473A7D2226908ED00489407 /* RecipleaseTests */ = {
 			isa = PBXGroup;
 			children = (
-				1473A7DB2269096500489407 /* IngredientsTest.swift */,
+				1473A7DB2269096500489407 /* IngredientTest.swift */,
 				14388DAC22726E5500201E4B /* CategoriesTest.swift */,
+				14BC248A227C9627000EB6A5 /* RecipeTest.swift */,
 				14D8A8AF226A2DB900C16C19 /* YummlyServiceTest.swift */,
 				14D8A8A6226A2B4200C16C19 /* AlamoFireTest */,
 				1473A7D5226908ED00489407 /* Info.plist */,
@@ -456,9 +459,10 @@
 				14D8A8A8226A2B7100C16C19 /* FakeResponse.swift in Sources */,
 				14388DAD22726E5500201E4B /* CategoriesTest.swift in Sources */,
 				14D8A8B0226A2DB900C16C19 /* YummlyServiceTest.swift in Sources */,
+				14BC248B227C9627000EB6A5 /* RecipeTest.swift in Sources */,
 				14D8A8AE226A2C5500C16C19 /* YummlySessionFake.swift in Sources */,
 				14D8A8AA226A2B9A00C16C19 /* FakeResponseData.swift in Sources */,
-				1473A7DC2269096500489407 /* IngredientsTest.swift in Sources */,
+				1473A7DC2269096500489407 /* IngredientTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

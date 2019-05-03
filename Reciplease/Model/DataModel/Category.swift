@@ -17,8 +17,14 @@ class Category: NSManagedObject {
         return categories
     }
     
-    static func deleteAll(viewContext: NSManagedObjectContext = AppDelegate.viewContext) {
-        Category.fetchAll(viewContext: viewContext).forEach({ viewContext.delete($0) })
-        try? viewContext.save()
+    
+    static func deleteCategoryWithNoRecipe( context : NSManagedObjectContext = AppDelegate.viewContext ){
+        
+        for i in Category.fetchAll(viewContext: context){
+            
+            if i.recipes?.anyObject() == nil {
+                context.delete(i)
+            }
+        }
     }
 }

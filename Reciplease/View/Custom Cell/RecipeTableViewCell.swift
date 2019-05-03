@@ -64,17 +64,8 @@ class RecipeTableViewCell: UITableViewCell {
             cookTimeLabel.text = "\(time / 60) minutes"
             guard let rating = recipe?.rate else {return }
             recipeQuoteLabel.text = "\(rating) Stars"
-            guard let image90 = recipe?.image  else {return }
             
-            //Change Image Resolution to 360 pixel
-//            //Computed Variable
-//            var image360 : String {
-//                return image90.dropLast(4) + "360"
-//            }
-//
-//            let url = URL(string: String(image360)) //a deballer
-//            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            print(image90)
+            guard let image90 = recipe?.image as Data?  else {return }
             recipeImageView.image =  UIImage(data: image90)
             
             ingredientsLabel.text = recipe?.ingredientCellLabel

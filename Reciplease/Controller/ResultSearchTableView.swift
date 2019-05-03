@@ -22,7 +22,6 @@ class ResultSearchTableView: UITableViewController {
      //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //link with recipeTableViewCell
         tableView.register(UINib(nibName: "RecipeCell", bundle: nil), forCellReuseIdentifier: "recipeTableViewCell")
       }
@@ -32,7 +31,7 @@ class ResultSearchTableView: UITableViewController {
     }
     
     //MARK: - Methods
-        //Methods to save Recipe Data and add favorite
+        //Methods to save Recipe Data and add to favorite
     @objc func addToFavorite(sender: UIButton){
         
         // get IndexPath for Tag Button
@@ -48,7 +47,6 @@ class ResultSearchTableView: UITableViewController {
                 yummlyService.updateRecipeData(idRecipe: idRecipe)
                 
                 yummlyService.getRecipe { (success, recipe) in
-                    print(success.description)
                     if success != false {
                         // we get ingredients for cell
                         if let ingredientString = cell.ingredientsLabel.text {
@@ -75,11 +73,9 @@ class ResultSearchTableView: UITableViewController {
             yummlyService.updateRecipeData(idRecipe: idRecipe)
             
             yummlyService.getRecipe { (success, recipe) in
-                print(success.description)
                 if success != false {
                     guard let recipeToLoad = recipe else {return}
                     self.response = recipeToLoad
-                    
                     self.performSegue(withIdentifier: "goToRecipe", sender: self)
                 } else{ print("error")
                     return}
@@ -90,15 +86,13 @@ class ResultSearchTableView: UITableViewController {
     
     //Override func prepare segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //We tel for wich segue we will work here "AddItemSegue"
-
-            if segue.identifier == "goToRecipe"{
+        //We tell for which segue we will work here "AddItemSegue"
+        if segue.identifier == "goToRecipe"{
                 // we check destination
                 if let recipeViewController = segue.destination as? RecipeViewController {
                     recipeViewController.recipe = response
+                    // we transfer ingredient list in order to add to Favorite in case
                     recipeViewController.Ingredients = ingredientsResponse
-                    
-                    print(ingredientsResponse)
                 }
         }
     }
@@ -134,6 +128,21 @@ extension ResultSearchTableView {
             ingredientsResponse = ingredientString
         }
         openRecipeDescription(index: indexPath.row)
+    }
+    
+    //MARK: TableView management with no data
+    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = "Change ingredients or try again"
+        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.textAlignment = .center
+        label.textColor = .white
+        label.backgroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+        return label
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return (allRecipe?.matches!.isEmpty)! ? 200 : 0
     }
     
 }

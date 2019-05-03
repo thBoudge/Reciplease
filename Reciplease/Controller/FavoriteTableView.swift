@@ -17,35 +17,25 @@ class FavoriteTableView: UITableViewController {
     
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
+        super.viewDidLoad()
         recipe = Recipe.fetchAll()
-
         tableView.reloadData()
-        
         //      TODO: Register your MessageCell.xib file here:
         tableView.register(UINib(nibName: "RecipeCell", bundle: nil), forCellReuseIdentifier: "recipeTableViewCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         recipe = Recipe.fetchAll()
-        
         tableView.reloadData()
     }
     
     @objc func deleteFromFavorite(sender: UIButton){
-        print("in")
-        // get IndexPath for Tag Button
-//        let indexPath = IndexPath(index: sender.tag)
-        // get to cell
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "recipeTableViewCell", for: indexPath) as! RecipeTableViewCell
         
         guard let name = recipe[sender.tag].name  else {return}
         Recipe.deleteFavoriteRecipe(name: name)
-        
         recipe = Recipe.fetchAll()
         tableView.reloadData()
-        
     }
-    
     
     //MARK: - Methods
     private func openRecipeDescription(index: Int){
@@ -58,24 +48,19 @@ class FavoriteTableView: UITableViewController {
                 if success != false {
                     guard let recipeToLoad = recipe else {return}
                     self.response = recipeToLoad
-                    
                     self.performSegue(withIdentifier: "goToRecipe", sender: self)
                 } else{ print("error")
                     return}
             }
         }
-
     }
 
     //Override func prepare segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //We tel for wich segue we will work here "AddItemSegue"
-
         if segue.identifier == "goToRecipe"{
             // we check destination
             if let recipeViewController = segue.destination as? RecipeViewController {
                 recipeViewController.recipe = response
-
             }
         }
     }
@@ -86,13 +71,14 @@ extension FavoriteTableView {
     
     //MARK: TableView appearance
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return recipe.count
+        guard let numberOfRow = Category.fetchAll()[section].recipes?.count else {return 0}
+        return numberOfRow
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeTableViewCell", for: indexPath) as! RecipeTableViewCell
+        
         
             cell.recipe = recipe[indexPath.row]
             cell.recipeButton.tag = indexPath.row
@@ -122,4 +108,14 @@ extension FavoriteTableView {
         
         openRecipeDescription(index: indexPath.row)
     }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return Category.fetchAll()[section].categoryName
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return Category.fetchAll().count
+    }
+    
+   
 }

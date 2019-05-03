@@ -24,27 +24,7 @@ class RecipeViewController: UIViewController {
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let rating = recipe?.rating else {return}
-        guard let cookTime = recipe?.totalTime else {return}
-        guard let recipeName = recipe?.name else {return}
-        ratingLabel.text = "\(rating) stars"
-        cookTimeLabel.text = "\(cookTime)"
-        recipeNameLabel.text = recipeName
-        
-        //full or normal heart image on Button
-        guard let id = recipe?.id else {return }
-        let imagename = Recipe.isAFavorite(id: id)
-        favoriteImage.image = UIImage(named: imagename)
-        
-        guard let image = recipe?.images?[0].hostedLargeURL else {return }
-
-        let url = URL(string: image) //a deballer
-        let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-        recipeImageView.image = UIImage(data: data!)
-        
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(addOrDeleteFavorite))
-        recipeImageView.addGestureRecognizer(tapGestureRecognizer)
-        
+        addNewValueToView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,6 +58,30 @@ class RecipeViewController: UIViewController {
             favoriteImage.image = UIImage(named:"favorite-heart-outline-button")
         }
     }
+    
+    private func addNewValueToView(){
+        
+        guard let rating = recipe?.rating else {return}
+        guard let cookTime = recipe?.totalTime else {return}
+        guard let recipeName = recipe?.name else {return}
+        guard let id = recipe?.id else {return }
+        ratingLabel.text = "\(rating) stars"
+        cookTimeLabel.text = "\(cookTime)"
+        recipeNameLabel.text = recipeName
+        
+        //full or normal heart image on Button
+        let imagename = Recipe.isAFavorite(id: id)
+        favoriteImage.image = UIImage(named: imagename)
+        
+        guard let image = recipe?.images?[0].hostedLargeURL else {return }
+        
+        let url = URL(string: image) //a deballer
+        let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+        recipeImageView.image = UIImage(data: data!)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(addOrDeleteFavorite))
+        recipeImageView.addGestureRecognizer(tapGestureRecognizer)
+    }
    
 }
 
@@ -97,12 +101,10 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
         guard let ingredient = recipe?.ingredientLines?[indexPath.row] else {return cell}
         //Change to automatic number of line in order cell is size of text
         cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.text = ingredient
+        cell.textLabel?.text = "- \(ingredient)"
+        cell.textLabel?.textColor = .white
 
         return cell
     }
-    
-    
-    
     
 }

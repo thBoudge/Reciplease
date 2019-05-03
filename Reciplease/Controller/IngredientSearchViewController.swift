@@ -9,9 +9,12 @@
 import UIKit
 
 class IngredientSearchViewController: UIViewController {
-    //MARK: - Properties
+    //MARK: - Outlets
     @IBOutlet weak var ingredientsTableView: UITableView!
     @IBOutlet weak var ingredientsTextField: UITextField!
+    @IBOutlet weak var deleteButton: UIButton!
+    
+    //MARK: - Properties
     private var ingredientArray = [Ingredient]()
     private var response : Recipes?
     private var yummlyService = YummlyService()
@@ -29,36 +32,14 @@ class IngredientSearchViewController: UIViewController {
     @IBAction func addIngredients(_ sender: UIButton) {
         
         guard let ingredients = ingredientsTextField.text else {fatalError("we found Nil when opening ingredientsTextField.text")}
-        print(ingredients)
-        //we delete all space in string
-        let ingredient = ingredients.replacingOccurrences(of: " ", with: "")
-        print(ingredient)
-        if ingredient != "" {
-            
-            if ingredient.contains(",") == true{
-                
-                let array = ingredient.components(separatedBy: ",")
-                print(array)
-                for i in array {
-                    let newIngredient = Ingredient(context: AppDelegate.viewContext)
-                    newIngredient.ingredientName = i
-                    newIngredient.checked = false
-                    ingredientArray.append(newIngredient)
-                }
-                
-            }else {
-                let newIngredient = Ingredient(context: AppDelegate.viewContext)
-                newIngredient.ingredientName = ingredient
-                newIngredient.checked = false
-                ingredientArray.append(newIngredient)
-            }
-            
+        
+        Ingredient.addIngredient(ingredientName: ingredients)
            
-            ingredientsTextField.text = ""
-            try? AppDelegate.viewContext.save()
-            self.ingredientArray = Ingredient.fetchAll()
-            ingredientsTableView.reloadData()
-        }else {print("nada")}
+        ingredientsTextField.text = ""
+        try? AppDelegate.viewContext.save()
+        self.ingredientArray = Ingredient.fetchAll()
+        ingredientsTableView.reloadData()
+       
     }
     
     
@@ -66,9 +47,7 @@ class IngredientSearchViewController: UIViewController {
         
         var checked = 0
         for i in ingredientArray {
-            
             if i.checked == true {
-                
                 checked += 1
             }
          }
@@ -87,7 +66,6 @@ class IngredientSearchViewController: UIViewController {
         yummlyService.updateData(table: ingredientArray)
         
         yummlyService.getRecipes { (success, recipe) in
-            print(success.description)
             if success != false {
             guard let recipeToLoad = recipe else {return}
             self.response = recipeToLoad
@@ -95,8 +73,6 @@ class IngredientSearchViewController: UIViewController {
             } else{ print("error")
                 return}
         }
-        
-        
     }
     
     
@@ -111,11 +87,8 @@ class IngredientSearchViewController: UIViewController {
                         AppDelegate.viewContext.delete(i)
                     }
             }
-        } else {
-            for i in 0..<ingredientArray.count{
-                    //removing our data from our context store
-                    AppDelegate.viewContext.delete(ingredientArray[i])
-            }
+        } else { //We delete all
+            Ingredient.deleteAll()
         }
         try? AppDelegate.viewContext.save()
         self.ingredientArray = Ingredient.fetchAll()
@@ -125,9 +98,8 @@ class IngredientSearchViewController: UIViewController {
     //prepare segue before to perfomr it
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! ResultSearchTableView
-        
-                //we inform where we send data in other viewController
-                    destinationVC.allRecipe = response
+        //we inform where we send data in other viewController
+            destinationVC.allRecipe = response
     }
     
 }
@@ -138,6 +110,7 @@ extension IngredientSearchViewController: UITableViewDelegate, UITableViewDataSo
    
     // Number of row
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     
         return ingredientArray.count
     }
     
@@ -146,7 +119,8 @@ extension IngredientSearchViewController: UITableViewDelegate, UITableViewDataSo
         let cell = tableView.dequeueReusableCell(withIdentifier: "IngredientCell", for: indexPath)
         
         let ingredient = ingredientArray[indexPath.row]
-        cell.textLabel?.text = ingredient.ingredientName
+        cell.textLabel?.text = "-  \(ingredient.ingredientName!)"
+        cell.textLabel?.textColor = .white
         
         //Ternary operator
         // value = condition ? valueIftrue : valueIfFalse
@@ -165,12 +139,23 @@ extension IngredientSearchViewController: UITableViewDelegate, UITableViewDataSo
         self.ingredientArray = Ingredient.fetchAll()
         tableView.reloadData()
         
-        
         //we change selection row brilliance t a fast one
         tableView.deselectRow(at: indexPath, animated: true)
-        
     }
 
+    //MARK: TableView management with no data
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = "Please add an ingredient "
+        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.textAlignment = .center
+        label.textColor = .white
+        label.backgroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+        return label
+    }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return ingredientArray.isEmpty ? 200 : 0
+    }
 }
 
