@@ -20,8 +20,8 @@
         <relationship name="parentCategory" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="recipes" inverseEntity="Category" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Category" positionX="-1935.88671875" positionY="103.71875" width="128" height="73"/>
+        <element name="Category" positionX="-1302.87109375" positionY="120.3515625" width="128" height="73"/>
         <element name="Ingredient" positionX="160" positionY="192" width="128" height="75"/>
-        <element name="Recipe" positionX="-1718.4140625" positionY="103.984375" width="128" height="178"/>
+        <element name="Recipe" positionX="-1563.6015625" positionY="116.8515625" width="128" height="178"/>
     </elements>
 </model>

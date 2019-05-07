@@ -18,6 +18,7 @@ class Recipe: NSManagedObject {
     }
 
     //MARK: Method to save Persitent Data of Recipe
+    // refactorisé par func
     static func saveData(recipeResponse: CompleteRecipe?, ingredients: String, context : NSManagedObjectContext = AppDelegate.viewContext){
         
        let newRecipe = Recipe(context: context)
@@ -30,55 +31,20 @@ class Recipe: NSManagedObject {
         newRecipe.recipe_url = recipeResponse?.source?.sourceRecipeURL
         //add ingredient for cellLabel in favorite table View
         newRecipe.ingredientCellLabel = ingredients
-        //add all complete recipe ingredients inone string sparate with ,
+        //add all complete recipe ingredients in one string separate with ,
         guard let ingredientsDetail = recipeResponse?.ingredientLines else {return}
-        var ingredientList = ""
-        for i in 0 ..< ingredientsDetail.count {
-            ingredientList += ingredientsDetail[i]
-            if i != ingredientsDetail.count - 1 {
-                ingredientList += ","
-            }
-        }
-        newRecipe.ingredientsCompletRecipe = ingredientList
+        newRecipe.ingredientsCompletRecipe = ingredientsString(ingredientsDetail: ingredientsDetail)
         
-        // We save Image in Binary Data
+        // We save ImageUrl in Binary Data
         guard let imageURL = recipeResponse?.images?[0].hostedLargeURL else {return}
-        guard let url = URL(string: imageURL) else {return} //a deballer
-        let data = try? Data(contentsOf: url) as Data?//make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-    
-        newRecipe.image = data
+        newRecipe.image = changeImageUrlInData(urlString: imageURL)
         
-        // Category add or not
-        let newCategory = Category(context: context)
-        var dataDoesNotExist = true
         let categoryName : String = recipeResponse?.attributes?.course?[0] ?? "All purpose"
-        print(categoryName)
-        
-        
-        for i in Category.fetchAll(viewContext: context) {
-            if i.categoryName == categoryName {
-                dataDoesNotExist = false
-            }
-        }
-        if dataDoesNotExist == true {
-            newCategory.categoryName = categoryName
-            // we link recipe to a category
-            newRecipe.parentCategory = newCategory
-        }else {
-            // we link recipe to a category
-            newRecipe.parentCategory?.categoryName = categoryName
-        }
-      
-        ///// method NSCoder \\\\\
-        //we save context on CoreDatabase (persistant container)
-        do {
-            try context.save()
-//                AppDelegate.viewContext.save()
-        }catch{
-            print("Error saving context \(error)")
-        }
+        // CategoryExist check if data exist or not and add it or not and return Object
+        newRecipe.parentCategory = Category.categoryExist(name: categoryName, context: context)
+        try? context.save()
+
     }
-    
     
     //MARK: Method to delete value at index
     static func deleteFavoriteRecipe(name: String,context : NSManagedObjectContext = AppDelegate.viewContext, recipe : [Recipe] = Recipe.fetchAll()){
@@ -105,6 +71,22 @@ class Recipe: NSManagedObject {
         return "favorite-heart-outline-button"
     }
     
-    
-    
+    //Method to change [String] in String
+    private static func ingredientsString(ingredientsDetail : [String])->String{
+        var ingredientList = ""
+        for i in 0 ..< ingredientsDetail.count {
+            ingredientList += ingredientsDetail[i]
+            if i != ingredientsDetail.count - 1 {
+                ingredientList += ","
+            }
+        }
+        return ingredientList
+    }
+
+    //Method to change [String] in String
+    private static func changeImageUrlInData(urlString: String)->Data?{
+        guard let url = URL(string: urlString) else {return nil}
+        let data = try? Data(contentsOf: url) as Data?
+        return data
+    }
 }

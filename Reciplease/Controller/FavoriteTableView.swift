@@ -79,11 +79,10 @@ extension FavoriteTableView {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeTableViewCell", for: indexPath) as! RecipeTableViewCell
         
-        
-            cell.recipe = recipe[indexPath.row]
-            cell.recipeButton.tag = indexPath.row
-            cell.recipeButton.addTarget(self, action: #selector(deleteFromFavorite(sender:)), for: .touchUpInside)
-            cell.recipeButton.setImage(UIImage(named: "favorite-Full-heart-button"), for: .normal)
+        cell.recipe = Category.fetchAll()[indexPath.section].recipes?.allObjects[indexPath.row] as! Recipe?
+        cell.recipeButton.tag = indexPath.row
+        cell.recipeButton.addTarget(self, action: #selector(deleteFromFavorite(sender:)), for: .touchUpInside)
+        cell.recipeButton.setImage(UIImage(named: "favorite-Full-heart-button"), for: .normal)
             
         return cell
     }

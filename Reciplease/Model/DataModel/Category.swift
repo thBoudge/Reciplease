@@ -27,4 +27,15 @@ class Category: NSManagedObject {
             }
         }
     }
+    
+    static func categoryExist(name: String, context: NSManagedObjectContext) ->Category {
+        let newCategory = Category(context: context)
+        for i in Category.fetchAll(viewContext: context) {
+            if i.categoryName == name {
+                return i
+            }
+        }
+        newCategory.categoryName = name
+        return newCategory
+    }
 }

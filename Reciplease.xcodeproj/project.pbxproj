@@ -220,8 +220,8 @@
 			children = (
 				14D8A8A7226A2B7100C16C19 /* FakeResponse.swift */,
 				14D8A8A9226A2B9A00C16C19 /* FakeResponseData.swift */,
-				14D8A8AB226A2BF500C16C19 /* Recipes.json */,
 				14D8A8AD226A2C5500C16C19 /* YummlySessionFake.swift */,
+				14D8A8AB226A2BF500C16C19 /* Recipes.json */,
 				1442F646226F7ABA0094519D /* OneRecipe.json */,
 			);
 			path = AlamoFireTest;

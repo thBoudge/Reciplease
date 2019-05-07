@@ -60,15 +60,13 @@ class RecipeTableViewCell: UITableViewCell {
         didSet {
             recipeNameLabel.text = recipe?.name
             guard let timeString = recipe?.cookTime else {return }
-            guard let time = Int(timeString) else {return}
-            cookTimeLabel.text = "\(time / 60) minutes"
+            cookTimeLabel.text = "\(timeString)"
             guard let rating = recipe?.rate else {return }
             recipeQuoteLabel.text = "\(rating) Stars"
-            
-            guard let image90 = recipe?.image as Data?  else {return }
-            recipeImageView.image =  UIImage(data: image90)
-            
-            ingredientsLabel.text = recipe?.ingredientCellLabel
+            guard let imageData = recipe?.image as Data?  else {return }
+            recipeImageView.image =  UIImage(data: imageData)
+            guard let ingredients = recipe?.ingredientCellLabel else {return}
+            ingredientsLabel.text = ingredients
         }
         
     }
