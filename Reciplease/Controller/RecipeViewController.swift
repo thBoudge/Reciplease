@@ -102,6 +102,7 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
         //Change to automatic number of line in order cell is size of text
         cell.textLabel?.numberOfLines = 0
         cell.textLabel?.text = "- \(ingredient)"
+        cell.textLabel?.font = UIFont(name:"IndieFlower", size:22)
         cell.textLabel?.textColor = .white
 
         return cell

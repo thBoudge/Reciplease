@@ -9,6 +9,14 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="JustAnotherHand-Regular.ttf">
+            <string>JustAnotherHand-Regular</string>
+        </array>
+        <array key="Modak-Regular.ttf">
+            <string>Modak</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Ingredient-->
         <scene sceneID="tne-QT-ifu">
@@ -99,6 +107,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vR-le-Gll">
                                                 <rect key="frame" x="0.0" y="0.0" width="157.66666666666666" height="57"/>
+                                                <fontDescription key="fontDescription" name="Modak" family="Modak" pointSize="22"/>
                                                 <color key="tintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                                                 <state key="normal" title="Delete">
                                                     <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
@@ -110,6 +119,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wea-3J-9sM">
                                                 <rect key="frame" x="177.66666666666663" y="0.0" width="157.33333333333337" height="57"/>
+                                                <fontDescription key="fontDescription" name="Modak" family="Modak" pointSize="22"/>
                                                 <color key="tintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                                                 <state key="normal" title="Search Receipe">
                                                     <color key="titleColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
@@ -216,26 +226,26 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="203"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="recipeName" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cpn-oi-scc">
-                                        <rect key="frame" x="20" y="140" width="335" height="43"/>
+                                        <rect key="frame" x="20" y="123" width="335" height="60"/>
                                         <color key="backgroundColor" red="0.45715549846829884" green="1" blue="0.95400709597068833" alpha="0.14000000000000001" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                        <fontDescription key="fontDescription" name="JustAnotherHand-Regular" family="Just Another Hand" pointSize="60"/>
                                         <color key="textColor" red="0.25849921419999999" green="0.0" blue="0.2979362861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" alignment="bottom" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="324-0p-69a">
-                                        <rect key="frame" x="242.33333333333334" y="10" width="122.66666666666666" height="78.333333333333329"/>
+                                        <rect key="frame" x="281.33333333333331" y="10" width="83.666666666666686" height="91"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stars" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e72-Kc-a4L">
-                                                <rect key="frame" x="60.333333333333343" y="0.0" width="62.333333333333343" height="33.666666666666664"/>
+                                                <rect key="frame" x="35.666666666666686" y="0.0" width="48" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                <fontDescription key="fontDescription" name="JustAnotherHand-Regular" family="Just Another Hand" pointSize="40"/>
                                                 <color key="textColor" red="0.25849921419999999" green="0.0" blue="0.2979362861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CookTime" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXG-aX-lSB">
-                                                <rect key="frame" x="0.0" y="44.666666666666657" width="122.66666666666667" height="33.666666666666657"/>
+                                                <rect key="frame" x="0.0" y="51" width="83.666666666666671" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                <fontDescription key="fontDescription" name="JustAnotherHand-Regular" family="Just Another Hand" pointSize="40"/>
                                                 <color key="textColor" red="0.25849921419999999" green="0.0" blue="0.2979362861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -277,7 +287,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="386" height="60"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                    <fontDescription key="fontDescription" name="Modak" family="Modak" pointSize="23"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -306,8 +316,8 @@
                                 <rect key="frame" x="0.0" y="685" width="375" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdp-wN-gE1">
-                                        <rect key="frame" x="118.66666666666669" y="-0.33333333333337123" width="138" height="45"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
+                                        <rect key="frame" x="108.66666666666669" y="-7.3333333333333712" width="158" height="59"/>
+                                        <fontDescription key="fontDescription" name="Modak" family="Modak" pointSize="31"/>
                                         <state key="normal" title="Full Recipe">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -375,11 +385,11 @@
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="137.94642857142856"/>
         </scene>
-        <!--Search-->
+        <!--Navigation Controller-->
         <scene sceneID="u5T-xB-CFs">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7Ga-0r-cdK" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" id="mJQ-Xu-GpU"/>
+                    <tabBarItem key="tabBarItem" title="" systemItem="search" id="mJQ-Xu-GpU"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Hlt-Vu-333">
@@ -389,9 +399,11 @@
                         <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Modak" family="Modak" pointSize="25"/>
                             <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">
+                            <fontDescription key="fontDescription" name="Modak" family="Modak" pointSize="17"/>
                             <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </textAttributes>
                     </navigationBar>
@@ -404,11 +416,11 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="137.94642857142856"/>
         </scene>
-        <!--Favorite-->
+        <!--Navigation Controller-->
         <scene sceneID="IWj-ny-H5g">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kJG-4d-aMg" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favorite" id="j0X-qY-oTE"/>
+                    <tabBarItem key="tabBarItem" title="" systemItem="favorites" id="j0X-qY-oTE"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="MTd-q7-rcz">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -417,6 +429,7 @@
                         <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="barTintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="Modak" family="Modak" pointSize="25"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </textAttributes>
                         <textAttributes key="largeTitleTextAttributes">

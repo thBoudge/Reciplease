@@ -23,6 +23,8 @@ class Recipe: NSManagedObject {
         
        let newRecipe = Recipe(context: context)
         
+//        let number = String(Recipe.fetchAll(viewContext: context).count - 1)
+//        newRecipe.number = number
         newRecipe.cookTime = recipeResponse?.totalTime
         newRecipe.id = recipeResponse?.id
         newRecipe.name = recipeResponse?.name

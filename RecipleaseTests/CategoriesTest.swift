@@ -36,12 +36,6 @@ class CategoriesTest: XCTestCase {
         XCTAssertNoThrow(try mockContainer.newBackgroundContext().save())
     }
     
-//    func testDeleteAllCategoryInPersistentContainer() {
-//        insertCategory(into: mockContainer.viewContext)
-//        try? mockContainer.viewContext.save()
-//        Category.deleteAll(viewContext: mockContainer.viewContext)
-//        XCTAssertEqual(Category.fetchAll(viewContext: mockContainer.viewContext), [])
-//    }
     
     
 }

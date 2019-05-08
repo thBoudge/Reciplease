@@ -29,6 +29,9 @@
 		14760129226919AF00C8E612 /* YummlyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14760128226919AF00C8E612 /* YummlyProtocol.swift */; };
 		1476012B22691A1600C8E612 /* YummlySession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1476012A22691A1600C8E612 /* YummlySession.swift */; };
 		1476012D22691A6400C8E612 /* YummlyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1476012C22691A6400C8E612 /* YummlyService.swift */; };
+		14B90D672283204E0048793C /* Modak-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14B90D662283204E0048793C /* Modak-Regular.ttf */; };
+		14B90D69228320640048793C /* JustAnotherHand-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14B90D68228320640048793C /* JustAnotherHand-Regular.ttf */; };
+		14B90D6B228324CC0048793C /* IndieFlower.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14B90D6A228324CC0048793C /* IndieFlower.ttf */; };
 		14BC248B227C9627000EB6A5 /* RecipeTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BC248A227C9627000EB6A5 /* RecipeTest.swift */; };
 		14D8A8A8226A2B7100C16C19 /* FakeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D8A8A7226A2B7100C16C19 /* FakeResponse.swift */; };
 		14D8A8AA226A2B9A00C16C19 /* FakeResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D8A8A9226A2B9A00C16C19 /* FakeResponseData.swift */; };
@@ -79,6 +82,9 @@
 		14760128226919AF00C8E612 /* YummlyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YummlyProtocol.swift; sourceTree = "<group>"; };
 		1476012A22691A1600C8E612 /* YummlySession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YummlySession.swift; sourceTree = "<group>"; };
 		1476012C22691A6400C8E612 /* YummlyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YummlyService.swift; sourceTree = "<group>"; };
+		14B90D662283204E0048793C /* Modak-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Modak-Regular.ttf"; sourceTree = "<group>"; };
+		14B90D68228320640048793C /* JustAnotherHand-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "JustAnotherHand-Regular.ttf"; sourceTree = "<group>"; };
+		14B90D6A228324CC0048793C /* IndieFlower.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = IndieFlower.ttf; sourceTree = "<group>"; };
 		14BC248A227C9627000EB6A5 /* RecipeTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeTest.swift; sourceTree = "<group>"; };
 		14D8A8A7226A2B7100C16C19 /* FakeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponse.swift; sourceTree = "<group>"; };
 		14D8A8A9226A2B9A00C16C19 /* FakeResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponseData.swift; sourceTree = "<group>"; };
@@ -141,6 +147,9 @@
 				1419A54C2263D6CA00704CF0 /* Controller */,
 				1419A54B2263D6BB00704CF0 /* View */,
 				1419A5392263D6AC00704CF0 /* AppDelegate.swift */,
+				14B90D68228320640048793C /* JustAnotherHand-Regular.ttf */,
+				14B90D662283204E0048793C /* Modak-Regular.ttf */,
+				14B90D6A228324CC0048793C /* IndieFlower.ttf */,
 				1419A5452263D6AD00704CF0 /* Info.plist */,
 			);
 			path = Reciplease;
@@ -341,9 +350,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1419A5442263D6AD00704CF0 /* LaunchScreen.storyboard in Resources */,
+				14B90D69228320640048793C /* JustAnotherHand-Regular.ttf in Resources */,
 				1476011F2269172B00C8E612 /* ApiKeys.plist in Resources */,
+				14B90D6B228324CC0048793C /* IndieFlower.ttf in Resources */,
 				1419A5412263D6AD00704CF0 /* Assets.xcassets in Resources */,
 				14D8A8B5226A3AA400C16C19 /* RecipeCell.xib in Resources */,
+				14B90D672283204E0048793C /* Modak-Regular.ttf in Resources */,
 				1419A53F2263D6AC00704CF0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

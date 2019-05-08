@@ -9,6 +9,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="JustAnotherHand-Regular.ttf">
+            <string>JustAnotherHand-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -25,71 +30,71 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ANA-qh-tuv">
                                 <rect key="frame" x="5" y="5" width="310" height="110.5"/>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RecipeName" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="260-hZ-AHV">
+                                <rect key="frame" x="5" y="78.5" width="248" height="37"/>
+                                <color key="backgroundColor" red="0.94477751428133083" green="0.62130964870925509" blue="1" alpha="0.48769263698630139" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="260-hZ-AHV" secondAttribute="height" multiplier="229:21" constant="-155.47619047619048" id="IfY-cd-Cc6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="JustAnotherHand-Regular" family="Just Another Hand" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jlm-sJ-4tH">
+                                <rect key="frame" x="261" y="63" width="54" height="53"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="53" id="4yu-eb-qUR"/>
+                                    <constraint firstAttribute="width" constant="54" id="EwG-Ac-OgL"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" image="favorite-heart-outline-button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ingredients" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Dy-2j-B9f">
+                                <rect key="frame" x="15" y="15" width="203" height="48.5"/>
+                                <fontDescription key="fontDescription" name="JustAnotherHand-Regular" family="Just Another Hand" pointSize="21"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AzY-Cr-nNh">
-                                <rect key="frame" x="275" y="5" width="40" height="41"/>
+                                <rect key="frame" x="278" y="8" width="34" height="56"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stars" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qcf-SM-VEK">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="34" height="28"/>
                                         <color key="backgroundColor" red="0.50047886371612549" green="0.37546664476394653" blue="0.51354986429214478" alpha="0.49323095034246578" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="JustAnotherHand-Regular" family="Just Another Hand" pointSize="28"/>
                                         <color key="textColor" cocoaTouchSystemColor="tableCellGroupedBackgroundColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XUo-Jw-NG0">
-                                        <rect key="frame" x="0.0" y="20.5" width="40" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="34" height="28"/>
                                         <color key="backgroundColor" red="0.50047886371612549" green="0.37546664476394653" blue="0.51354986429214478" alpha="0.48862906678082191" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="JustAnotherHand-Regular" family="Just Another Hand" pointSize="28"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RecipeName" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="260-hZ-AHV">
-                                <rect key="frame" x="5" y="93" width="248" height="22.5"/>
-                                <color key="backgroundColor" red="0.94477751428133083" green="0.62130964870925509" blue="1" alpha="0.48769263698630139" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="260-hZ-AHV" secondAttribute="height" multiplier="229:21" id="IfY-cd-Cc6"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jlm-sJ-4tH">
-                                <rect key="frame" x="258" y="54" width="54" height="53"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="53" id="4yu-eb-qUR"/>
-                                    <constraint firstAttribute="width" constant="54" id="EwG-Ac-OgL"/>
-                                </constraints>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" image="favorite-heart-outline-button">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ingredients" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Dy-2j-B9f">
-                                <rect key="frame" x="15" y="15" width="203" height="48"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="AzY-Cr-nNh" firstAttribute="top" secondItem="QaL-4i-PlZ" secondAttribute="top" constant="5" id="2ID-cF-Nuw"/>
+                            <constraint firstItem="AzY-Cr-nNh" firstAttribute="top" secondItem="QaL-4i-PlZ" secondAttribute="top" constant="8" id="2ID-cF-Nuw"/>
                             <constraint firstAttribute="bottom" secondItem="260-hZ-AHV" secondAttribute="bottom" constant="5" id="2xv-ok-U8t"/>
-                            <constraint firstItem="jlm-sJ-4tH" firstAttribute="leading" secondItem="260-hZ-AHV" secondAttribute="trailing" constant="5" id="5iX-sR-Um1"/>
+                            <constraint firstItem="jlm-sJ-4tH" firstAttribute="leading" secondItem="260-hZ-AHV" secondAttribute="trailing" constant="8" id="5iX-sR-Um1"/>
                             <constraint firstItem="ANA-qh-tuv" firstAttribute="top" secondItem="QaL-4i-PlZ" secondAttribute="top" constant="5" id="EGN-z7-3ET"/>
                             <constraint firstItem="260-hZ-AHV" firstAttribute="leading" secondItem="QaL-4i-PlZ" secondAttribute="leading" constant="5" id="FqB-Yi-b10"/>
-                            <constraint firstAttribute="bottom" secondItem="jlm-sJ-4tH" secondAttribute="bottom" constant="13.5" id="Jlk-10-lpY"/>
+                            <constraint firstAttribute="bottom" secondItem="jlm-sJ-4tH" secondAttribute="bottom" constant="4.5" id="Jlk-10-lpY"/>
                             <constraint firstAttribute="bottom" secondItem="ANA-qh-tuv" secondAttribute="bottom" constant="5" id="P4g-jh-F16"/>
                             <constraint firstItem="ANA-qh-tuv" firstAttribute="leading" secondItem="QaL-4i-PlZ" secondAttribute="leading" constant="5" id="SrR-yt-tQM"/>
                             <constraint firstAttribute="height" constant="120.5" id="XfI-fb-o7v"/>
                             <constraint firstAttribute="trailing" secondItem="ANA-qh-tuv" secondAttribute="trailing" constant="5" id="cfm-xL-SLa"/>
-                            <constraint firstItem="260-hZ-AHV" firstAttribute="top" secondItem="5Dy-2j-B9f" secondAttribute="bottom" constant="30" id="fFh-W8-zLV"/>
+                            <constraint firstItem="260-hZ-AHV" firstAttribute="top" secondItem="5Dy-2j-B9f" secondAttribute="bottom" constant="15" id="fFh-W8-zLV"/>
                             <constraint firstItem="5Dy-2j-B9f" firstAttribute="top" secondItem="QaL-4i-PlZ" secondAttribute="top" constant="15" id="jgg-tb-zte"/>
                             <constraint firstItem="5Dy-2j-B9f" firstAttribute="leading" secondItem="QaL-4i-PlZ" secondAttribute="leading" constant="15" id="kPP-y5-iQa"/>
-                            <constraint firstAttribute="trailing" secondItem="AzY-Cr-nNh" secondAttribute="trailing" constant="5" id="mP4-IG-D59"/>
-                            <constraint firstItem="jlm-sJ-4tH" firstAttribute="leading" secondItem="5Dy-2j-B9f" secondAttribute="trailing" constant="40" id="puY-0Q-xTI"/>
-                            <constraint firstAttribute="trailing" secondItem="jlm-sJ-4tH" secondAttribute="trailing" constant="8" id="yNI-my-9fA"/>
+                            <constraint firstAttribute="trailing" secondItem="AzY-Cr-nNh" secondAttribute="trailing" constant="8" id="mP4-IG-D59"/>
+                            <constraint firstItem="jlm-sJ-4tH" firstAttribute="leading" secondItem="5Dy-2j-B9f" secondAttribute="trailing" constant="43" id="puY-0Q-xTI"/>
+                            <constraint firstAttribute="trailing" secondItem="jlm-sJ-4tH" secondAttribute="trailing" constant="5" id="yNI-my-9fA"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -115,6 +120,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="favorite-heart-outline-button" width="35" height="35"/>
+        <image name="favorite-heart-outline-button" width="31" height="31"/>
     </resources>
 </document>

@@ -22,6 +22,6 @@
     <elements>
         <element name="Category" positionX="-1302.87109375" positionY="120.3515625" width="128" height="73"/>
         <element name="Ingredient" positionX="160" positionY="192" width="128" height="75"/>
-        <element name="Recipe" positionX="-1563.6015625" positionY="116.8515625" width="128" height="178"/>
+        <element name="Recipe" positionX="-1563.6015625" positionY="116.8515625" width="128" height="180"/>
     </elements>
 </model>

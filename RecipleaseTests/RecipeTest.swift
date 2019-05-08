@@ -40,13 +40,7 @@ class RecipeTest: XCTestCase {
             }
             XCTAssertNoThrow(try mockContainer.newBackgroundContext().save())
         }
-        
-//        func testDeleteAllRecipeInPersistentContainer() {
-//            insertRecipe(into: mockContainer.viewContext)
-//            Recipe.deleteAll(viewContext: mockContainer.viewContext)
-//            XCTAssertEqual(Recipe.fetchAll(viewContext: mockContainer.viewContext), [])
-//        }
-    
+
         func testDeleteOneRecipeInPersistentContainer() {
             insertRecipe(into: mockContainer.viewContext)
             Recipe.deleteFavoriteRecipe(name: "Simple Skillet Green Beans", context: mockContainer.viewContext, recipe: Recipe.fetchAll(viewContext: mockContainer.viewContext))
@@ -60,8 +54,7 @@ class RecipeTest: XCTestCase {
         insertRecipe(into: mockContainer.viewContext)
         
         XCTAssertEqual(Recipe.isAFavorite(id: "Simple-Skillet-Green-Beans-2352743", recipe: Recipe.fetchAll(viewContext: mockContainer.viewContext)), "favorite-heart-outline-button")
-//        Recipe.deleteFavoriteRecipe(name: "Simple Skillet Green Beans", context: mockContainer.viewContext, recipe: Recipe.fetchAll(viewContext: mockContainer.viewContext))
-//        XCTAssertEqual(Recipe.isAFavorite(id: "Simple-Skillet-Green-Beans-2352743", recipe: Recipe.fetchAll(viewContext: mockContainer.viewContext)), "favorite-heart-outline-button")
+
     }
     
 }

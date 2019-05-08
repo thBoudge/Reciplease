@@ -19,7 +19,7 @@ class RecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var recipeButton: UIButton!
     
 //    let resultSearchTableView = ResultSearchTableView()
-    
+    private var tagNumber = 0
     
     var match : Match? {
         didSet {
@@ -58,6 +58,7 @@ class RecipeTableViewCell: UITableViewCell {
     
     var recipe : Recipe? {
         didSet {
+            
             recipeNameLabel.text = recipe?.name
             guard let timeString = recipe?.cookTime else {return }
             cookTimeLabel.text = "\(timeString)"
@@ -67,6 +68,9 @@ class RecipeTableViewCell: UITableViewCell {
             recipeImageView.image =  UIImage(data: imageData)
             guard let ingredients = recipe?.ingredientCellLabel else {return}
             ingredientsLabel.text = ingredients
+//            recipeButton.tag = tagNumber
+//            tagNumber += 1
+           
         }
         
     }

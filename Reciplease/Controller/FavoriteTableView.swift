@@ -14,6 +14,7 @@ class FavoriteTableView: UITableViewController {
     private var  recipe = Recipe.fetchAll()
     private var yummlyService = YummlyService()
     private var response : CompleteRecipe?
+    private var tagNumber = 0
     
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
@@ -31,16 +32,25 @@ class FavoriteTableView: UITableViewController {
     
     @objc func deleteFromFavorite(sender: UIButton){
         
-        guard let name = recipe[sender.tag].name  else {return}
+        guard let cell = sender.superview?.superview?.superview as? RecipeTableViewCell else {
+            return // or fatalError() or whatever
+        }
+        let indexPath = tableView.indexPath(for: cell)
+        print(indexPath!)
+        guard let recip = Category.fetchAll()[(indexPath?.section)!].recipes?.allObjects[(indexPath?.row)!] as! Recipe? else {return}
+        print(recip)
+        guard let name = recip.name else {return}
         Recipe.deleteFavoriteRecipe(name: name)
         recipe = Recipe.fetchAll()
         tableView.reloadData()
     }
     
     //MARK: - Methods
-    private func openRecipeDescription(index: Int){
-
-        if let idRecipe = recipe[index].id {
+    private func openRecipeDescription(section: Int, row: Int){
+        
+        guard let recipeSelected = Category.fetchAll()[section].recipes?.allObjects[row] as! Recipe? else {return}
+        
+        if let idRecipe = recipeSelected.id {
             
             yummlyService.updateRecipeData(idRecipe: idRecipe)
             
@@ -80,7 +90,8 @@ extension FavoriteTableView {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeTableViewCell", for: indexPath) as! RecipeTableViewCell
         
         cell.recipe = Category.fetchAll()[indexPath.section].recipes?.allObjects[indexPath.row] as! Recipe?
-        cell.recipeButton.tag = indexPath.row
+//        cell.recipeButton.tag = indexPath.row
+        
         cell.recipeButton.addTarget(self, action: #selector(deleteFromFavorite(sender:)), for: .touchUpInside)
         cell.recipeButton.setImage(UIImage(named: "favorite-Full-heart-button"), for: .normal)
             
@@ -105,11 +116,23 @@ extension FavoriteTableView {
     // everytime we select a cell what do we do
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        openRecipeDescription(index: indexPath.row)
+        openRecipeDescription(section: indexPath.section, row: indexPath.row)
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return Category.fetchAll()[section].categoryName
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//
+//        return Category.fetchAll()[section].categoryName
+//    }
+//
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        let label = UILabel()
+        label.text = Category.fetchAll()[section].categoryName
+        label.font = UIFont(name:"IndieFlower", size:25)
+        label.textColor = .white
+        label.frame = CGRect(x: 5, y: 0, width: 200, height: 35)
+        view.addSubview(label)
+        return view
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
