@@ -18,6 +18,8 @@ class RecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var view: UIView!
     @IBOutlet weak var recipeButton: UIButton!
     
+    
+    
 //    let resultSearchTableView = ResultSearchTableView()
     private var tagNumber = 0
     
@@ -31,8 +33,9 @@ class RecipeTableViewCell: UITableViewCell {
             guard let image90 = match?.imageUrlsBySize?.the90  else {return }
             //full or normal heart image on Button
             guard let id = match?.id  else {return }
+            
             let imageButton = Recipe.isAFavorite(id: id)
-            recipeButton.setImage(UIImage(named: imageButton), for: .normal)
+            loadFavoriteImage(id: id)
             //Change Image Resolution to 360 pixel
             //Computed Variable
             var image360 : String {
@@ -42,6 +45,8 @@ class RecipeTableViewCell: UITableViewCell {
            let url = URL(string: String(image360)) //a deballer
             let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
             recipeImageView.image = UIImage(data: data!)
+            // Make image borders rounded
+            roundedVioletBorder()
             
             guard let ingredientsList = match?.ingredients else {return }
             
@@ -66,16 +71,31 @@ class RecipeTableViewCell: UITableViewCell {
             recipeQuoteLabel.text = "\(rating) Stars"
             guard let imageData = recipe?.image as Data?  else {return }
             recipeImageView.image =  UIImage(data: imageData)
+            // Make image borders rounded
+            roundedVioletBorder()
             guard let ingredients = recipe?.ingredientCellLabel else {return}
             ingredientsLabel.text = ingredients
-//            recipeButton.tag = tagNumber
-//            tagNumber += 1
            
         }
         
     }
     
+    private func roundedVioletBorder(){
+        // Make image borders rounded
+        recipeImageView.layer.cornerRadius = 10
+        recipeImageView.clipsToBounds = true
+        recipeImageView.layer.borderWidth = 3
+        recipeImageView.layer.borderColor = #colorLiteral(red: 0.2662596107, green: 0.1814376712, blue: 0.355894357, alpha: 1)
+        
+    }
    
-   
-    
+    private func loadFavoriteImage(id: String){
+        
+        let isAFavorite = Recipe.isAFavorite(id: id)
+        if !isAFavorite {
+            recipeButton.setImage(UIImage(named: "favorite-heart-outline-button"), for: .normal)
+        } else {
+            recipeButton.setImage(UIImage(named: "favorite-Full-heart-button"), for: .normal)
+        }
+    }
 }

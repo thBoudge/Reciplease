@@ -28,10 +28,10 @@ class RecipeViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         //full or normal heart image on Button
         guard let id = recipe?.id else {return }
-        let imagename = Recipe.isAFavorite(id: id)
-        favoriteImage.image = UIImage(named: imagename)
+        loadFavoriteImage(id: id)
     }
     
     @IBAction func goToFullRecipe(_ sender: Any) {
@@ -70,8 +70,7 @@ class RecipeViewController: UIViewController {
         recipeNameLabel.text = recipeName
         
         //full or normal heart image on Button
-        let imagename = Recipe.isAFavorite(id: id)
-        favoriteImage.image = UIImage(named: imagename)
+        loadFavoriteImage(id: id)
         
         guard let image = recipe?.images?[0].hostedLargeURL else {return }
         
@@ -83,6 +82,16 @@ class RecipeViewController: UIViewController {
         recipeImageView.addGestureRecognizer(tapGestureRecognizer)
     }
    
+    private func loadFavoriteImage(id: String){
+        
+        let isAFavorite = Recipe.isAFavorite(id: id)
+        if !isAFavorite {
+            favoriteImage.image = UIImage(named: "favorite-heart-outline-button")
+        } else {
+            favoriteImage.image = UIImage(named: "favorite-Full-heart-button")
+        }
+    }
+    
 }
 
 extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {

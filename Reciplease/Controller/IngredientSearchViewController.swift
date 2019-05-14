@@ -24,14 +24,24 @@ class IngredientSearchViewController: UIViewController {
         super.viewDidLoad()
         
         ingredientArray = Ingredient.fetchAll()
-        
     }
     
-
     //MARK: - Action Method
+    
+//    @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+//
+//        ingredientsTextField.resignFirstResponder()
+//    }
+    
+    //on utilise si on a d'autre tapgesture pour eviter les conflit
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        print("marche")
+    }
+    
     @IBAction func addIngredients(_ sender: UIButton) {
         
-        guard let ingredients = ingredientsTextField.text else {fatalError("we found Nil when opening ingredientsTextField.text")}
+        guard let ingredients = ingredientsTextField.text else {return}
         
         Ingredient.addIngredient(ingredientName: ingredients)
            
@@ -53,11 +63,13 @@ class IngredientSearchViewController: UIViewController {
          }
         
         if checked == 0 {
-            deleteRow(checked: false)
+            Ingredient.deleteRow(checked: false)
         } else {
-            deleteRow(checked: true)
+            Ingredient.deleteRow(checked: true)
         }
         
+        ingredientArray = Ingredient.fetchAll()
+        ingredientsTableView.reloadData()
     }
     
     
@@ -77,23 +89,6 @@ class IngredientSearchViewController: UIViewController {
     
     
     //MARK: - Methods
-    
-    private func deleteRow(checked: Bool ) {
-        //////Delete Row\\\\\\
-        if checked == true {
-            for i in ingredientArray {
-                    if i.checked == true {
-                        //removing our data from our context store
-                        AppDelegate.viewContext.delete(i)
-                    }
-            }
-        } else { //We delete all
-            Ingredient.deleteAll()
-        }
-        try? AppDelegate.viewContext.save()
-        self.ingredientArray = Ingredient.fetchAll()
-        ingredientsTableView.reloadData()
-      }
     
     //prepare segue before to perfomr it
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -121,6 +116,7 @@ extension IngredientSearchViewController: UITableViewDelegate, UITableViewDataSo
         let ingredient = ingredientArray[indexPath.row]
         cell.textLabel?.text = "-  \(ingredient.ingredientName!)"
         cell.textLabel?.textColor = .white
+        cell.textLabel?.font = UIFont(name:"IndieFlower", size:25)
         
         //Ternary operator
         // value = condition ? valueIftrue : valueIfFalse
@@ -132,7 +128,7 @@ extension IngredientSearchViewController: UITableViewDelegate, UITableViewDataSo
     // everytime we select a cell what do we do
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        // add or not a chekmark when row selectec
+        // add or not a chekmark when row selected
         ingredientArray[indexPath.row].checked = !ingredientArray[indexPath.row].checked
         
         try? AppDelegate.viewContext.save()
@@ -147,7 +143,7 @@ extension IngredientSearchViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let label = UILabel()
         label.text = "Please add an ingredient "
-        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        label.font = UIFont(name:"IndieFlower", size:25)
         label.textAlignment = .center
         label.textColor = .white
         label.backgroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)

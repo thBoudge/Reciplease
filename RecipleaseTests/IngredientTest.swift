@@ -36,11 +36,19 @@ class IngredientTest: XCTestCase {
         XCTAssertNoThrow(try mockContainer.newBackgroundContext().save())
     }
     
-    func testDeleteAllIngredientInPersistentContainer() {
+    func testDeleteAllIngredientIfNoOneCheckedInPersistentContainer() {
         insertIngredient(into: mockContainer.viewContext)
-        Ingredient.deleteAll(viewContext: mockContainer.viewContext)
+        Ingredient.deleteRow(checked: false, viewContext: mockContainer.viewContext)
         XCTAssertEqual(Ingredient.fetchAll(viewContext: mockContainer.viewContext), [])
     }
+    
+    func testDeleteCheckedIngredientInPersistentContainer() {
+        insertIngredient(into: mockContainer.viewContext)
+        Ingredient.fetchAll(viewContext: mockContainer.viewContext)[0].checked = true
+        Ingredient.deleteRow(checked: true, viewContext: mockContainer.viewContext)
+        XCTAssertEqual(Ingredient.fetchAll(viewContext: mockContainer.viewContext), [])
+    }
+    
     
     func testInsertManyIngredientAtOnceInPersistentContainer() {
         Ingredient.addIngredient(ingredientName: "chocolate ,cacao , garlic, fish", context: mockContainer.viewContext)

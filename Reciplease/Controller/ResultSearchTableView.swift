@@ -24,9 +24,11 @@ class ResultSearchTableView: UITableViewController {
         super.viewDidLoad()
         //link with recipeTableViewCell
         tableView.register(UINib(nibName: "RecipeCell", bundle: nil), forCellReuseIdentifier: "recipeTableViewCell")
+        
       }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         tableView.reloadData()
     }
     
@@ -143,6 +145,16 @@ extension ResultSearchTableView {
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return (allRecipe?.matches!.isEmpty)! ? 200 : 0
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let translationMovement = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
+        cell.layer.transform = translationMovement
+        cell.alpha = 0
+        UIView.animate(withDuration: 0.75) {
+            cell.layer.transform = CATransform3DIdentity
+            cell.alpha = 1
+        }
     }
     
 }

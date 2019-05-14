@@ -46,7 +46,24 @@ class Ingredient: NSManagedObject {
         
         }
     }
+    
+    
+    static func deleteRow(checked: Bool, viewContext: NSManagedObjectContext = AppDelegate.viewContext ) {
+        let ingredientArray = fetchAll(viewContext: viewContext)
+        //////Delete Row\\\\\\
+        if checked == true {
+            for i in ingredientArray {
+                if i.checked == true {
+                    //removing our data from our context store
+                   viewContext.delete(i)
+                }
+            }
+        } else { //We delete all
+            deleteAll(viewContext: viewContext)
+        }
+        try? viewContext.save()
         
+    }
 }
 
 

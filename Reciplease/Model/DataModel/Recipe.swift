@@ -23,8 +23,6 @@ class Recipe: NSManagedObject {
         
        let newRecipe = Recipe(context: context)
         
-//        let number = String(Recipe.fetchAll(viewContext: context).count - 1)
-//        newRecipe.number = number
         newRecipe.cookTime = recipeResponse?.totalTime
         newRecipe.id = recipeResponse?.id
         newRecipe.name = recipeResponse?.name
@@ -62,15 +60,16 @@ class Recipe: NSManagedObject {
     }
     
     //Methods to change button image if favorite or not
-    static func isAFavorite(id: String , recipe : [Recipe] = Recipe.fetchAll()) ->String{
-        
-        for i in 0 ..< recipe.count {
-            guard let idData = Recipe.fetchAll()[i].id else {return "favorite-heart-outline-button"}
-            if id == idData {
-                return "favorite-Full-heart-button"
-            }
+    static func isAFavorite(id: String , context : NSManagedObjectContext = AppDelegate.viewContext) ->Bool{
+        let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()
+        //we filter data with id
+        request.predicate = NSPredicate(format: "id = %@", id)
+        guard let recipeEntites = try? context.fetch(request) else {return false}
+        if recipeEntites.isEmpty{
+            return false
         }
-        return "favorite-heart-outline-button"
+        
+        return true
     }
     
     //Method to change [String] in String

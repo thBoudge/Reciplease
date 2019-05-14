@@ -32,7 +32,8 @@ class RecipeTest: XCTestCase {
             Recipe.saveData(recipeResponse: responseJSON, ingredients: "beans", context: mockContainer.viewContext)
 
         }
-        
+    
+    
         //MARK: - Unit Tests
         func testInsertManyRecipeInPersistentContainer() {
             for _ in 0 ..< 100 {
@@ -49,11 +50,13 @@ class RecipeTest: XCTestCase {
     
     
     func testIsRecipeAFavoriteAndInPersistentContainer() {
-        XCTAssertEqual(Recipe.isAFavorite(id: "Simple-Skillet-Green-Beans-2352743", recipe: Recipe.fetchAll(viewContext: mockContainer.viewContext)), "favorite-heart-outline-button")
         
         insertRecipe(into: mockContainer.viewContext)
         
-        XCTAssertEqual(Recipe.isAFavorite(id: "Simple-Skillet-Green-Beans-2352743", recipe: Recipe.fetchAll(viewContext: mockContainer.viewContext)), "favorite-heart-outline-button")
+        XCTAssertEqual(Recipe.isAFavorite(id: "Simple-Skillet-Green-Beans-2352743", context: mockContainer.viewContext), true)
+        
+        
+        XCTAssertEqual(Recipe.isAFavorite(id: "Simple-Skillet-Green", context: mockContainer.viewContext), false)
 
     }
     

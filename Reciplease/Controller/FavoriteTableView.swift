@@ -11,7 +11,8 @@ import UIKit
 class FavoriteTableView: UITableViewController {
 
     //MARK: - Properties
-    private var  recipe = Recipe.fetchAll()
+//    private var  recipe = Recipe.fetchAll()
+    private var category = Category.fetchAll()
     private var yummlyService = YummlyService()
     private var response : CompleteRecipe?
     private var tagNumber = 0
@@ -19,14 +20,15 @@ class FavoriteTableView: UITableViewController {
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        recipe = Recipe.fetchAll()
+        category = Category.fetchAll()
         tableView.reloadData()
         //      TODO: Register your MessageCell.xib file here:
         tableView.register(UINib(nibName: "RecipeCell", bundle: nil), forCellReuseIdentifier: "recipeTableViewCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        recipe = Recipe.fetchAll()
+        super.viewWillAppear(true)
+        category = Category.fetchAll()
         tableView.reloadData()
     }
     
@@ -36,19 +38,32 @@ class FavoriteTableView: UITableViewController {
             return // or fatalError() or whatever
         }
         let indexPath = tableView.indexPath(for: cell)
+        
+//        dissapearAnimation(cell: cell)
         print(indexPath!)
         guard let recip = Category.fetchAll()[(indexPath?.section)!].recipes?.allObjects[(indexPath?.row)!] as! Recipe? else {return}
         print(recip)
         guard let name = recip.name else {return}
         Recipe.deleteFavoriteRecipe(name: name)
-        recipe = Recipe.fetchAll()
+        category = Category.fetchAll()
         tableView.reloadData()
     }
+    
+//    private func dissapearAnimation(cell: RecipeTableViewCell){
+//
+//        // set initial vstate of the cell
+//
+//
+//        UIView.animate(withDuration: 10, delay: 0.1, animations: {
+//            cell.layer.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+//        })
+//
+//    }
     
     //MARK: - Methods
     private func openRecipeDescription(section: Int, row: Int){
         
-        guard let recipeSelected = Category.fetchAll()[section].recipes?.allObjects[row] as! Recipe? else {return}
+        guard let recipeSelected = category[section].recipes?.allObjects[row] as! Recipe? else {return}
         
         if let idRecipe = recipeSelected.id {
             
@@ -81,7 +96,7 @@ extension FavoriteTableView {
     
     //MARK: TableView appearance
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let numberOfRow = Category.fetchAll()[section].recipes?.count else {return 0}
+        guard let numberOfRow = category[section].recipes?.count else {return 0}
         return numberOfRow
     }
     
@@ -89,7 +104,7 @@ extension FavoriteTableView {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeTableViewCell", for: indexPath) as! RecipeTableViewCell
         
-        cell.recipe = Category.fetchAll()[indexPath.section].recipes?.allObjects[indexPath.row] as! Recipe?
+        cell.recipe = category[indexPath.section].recipes?.allObjects[indexPath.row] as! Recipe?
 //        cell.recipeButton.tag = indexPath.row
         
         cell.recipeButton.addTarget(self, action: #selector(deleteFromFavorite(sender:)), for: .touchUpInside)
@@ -106,11 +121,13 @@ extension FavoriteTableView {
         label.textAlignment = .center
         label.textColor = .white
         label.backgroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
+        print("sectionLabel")
         return label
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return recipe.isEmpty ? 200 : 0
+        print("sectionif")
+        return category.isEmpty ? 200 : 0
     }
     
     // everytime we select a cell what do we do
@@ -119,25 +136,33 @@ extension FavoriteTableView {
         openRecipeDescription(section: indexPath.section, row: indexPath.row)
     }
     
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//
-//        return Category.fetchAll()[section].categoryName
-//    }
-//
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView()
-        let label = UILabel()
-        label.text = Category.fetchAll()[section].categoryName
-        label.font = UIFont(name:"IndieFlower", size:25)
-        label.textColor = .white
-        label.frame = CGRect(x: 5, y: 0, width: 200, height: 35)
-        view.addSubview(label)
-        return view
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        guard let categoryName = category[section].categoryName else {return ""}
+        guard let number = category[section].recipes?.allObjects.count else {return ""}
+        let numberString = String(number)
+        let header = "\(categoryName)            \(numberString)"
+        return header
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        header.textLabel?.textColor = .white
+        header.textLabel?.font = UIFont(name:"IndieFlower", size:25)
+        header.textLabel?.frame = CGRect(x: 5, y: 0, width: 200, height: 35)
+        header.backgroundView?.backgroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return Category.fetchAll().count
+        return category.count
     }
     
-   
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let translationMovement = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
+        cell.layer.transform = translationMovement
+        cell.alpha = 0
+        UIView.animate(withDuration: 0.75) {
+            cell.layer.transform = CATransform3DIdentity
+            cell.alpha = 1
+        }
+    }
 }
