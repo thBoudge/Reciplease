@@ -98,4 +98,5 @@ class RecipeTableViewCell: UITableViewCell {
             recipeButton.setImage(UIImage(named: "favorite-Full-heart-button"), for: .normal)
         }
     }
+    
 }

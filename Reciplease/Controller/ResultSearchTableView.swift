@@ -24,7 +24,6 @@ class ResultSearchTableView: UITableViewController {
         super.viewDidLoad()
         //link with recipeTableViewCell
         tableView.register(UINib(nibName: "RecipeCell", bundle: nil), forCellReuseIdentifier: "recipeTableViewCell")
-        
       }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,7 +34,6 @@ class ResultSearchTableView: UITableViewController {
     //MARK: - Methods
         //Methods to save Recipe Data and add to favorite
     @objc func addToFavorite(sender: UIButton){
-        
         // get IndexPath for Tag Button
         let indexPath = IndexPath(index: sender.tag)
         // get to cell
@@ -43,29 +41,35 @@ class ResultSearchTableView: UITableViewController {
         
         if sender.currentImage == UIImage(named: "favorite-heart-outline-button") {
             sender.setImage(UIImage(named: "favorite-Full-heart-button"), for: .normal)
-            // we recuperate IdReceipe
-            if let idRecipe = allRecipe?.matches?[sender.tag].id {
-                
-                yummlyService.updateRecipeData(idRecipe: idRecipe)
-                
-                yummlyService.getRecipe { (success, recipe) in
-                    if success != false {
-                        // we get ingredients for cell
-                        if let ingredientString = cell.ingredientsLabel.text {
-                            self.ingredientsResponse = ingredientString
-                        }
-                        // We save data
-                        Recipe.saveData(recipeResponse: recipe, ingredients: self.ingredientsResponse)
-                    } else { print("error")
-                        return}
-                }
-            }
+            addToDataBase(sender: sender, cell: cell)
+            
         } else if sender.currentImage == UIImage(named: "favorite-Full-heart-button") {
             sender.setImage(UIImage(named: "favorite-heart-outline-button"), for: .normal)
             guard let name = allRecipe?.matches?[sender.tag].recipeName else {return}
             Recipe.deleteFavoriteRecipe(name: name)
         }
       }
+    
+    private func addToDataBase(sender: UIButton, cell: RecipeTableViewCell){
+        // we recuperate IdReceipe
+        if let idRecipe = allRecipe?.matches?[sender.tag].id {
+            
+            yummlyService.updateRecipeData(idRecipe: idRecipe)
+            
+            yummlyService.getRecipe { (success, recipe) in
+                if success != false {
+                    // we get ingredients for cell
+                    if let ingredientString = cell.ingredientsLabel.text {
+                        self.ingredientsResponse = ingredientString
+                    }
+                    // We save data
+                    Recipe.saveData(recipeResponse: recipe, ingredients: self.ingredientsResponse)
+                } else { print("error")
+                    return}
+            }
+        }
+    }
+    
     
     //Methods to load Recipe Data and to perform segue
     private func openRecipeDescription(index: Int){
@@ -80,7 +84,8 @@ class ResultSearchTableView: UITableViewController {
                     self.response = recipeToLoad
                     self.performSegue(withIdentifier: "goToRecipe", sender: self)
                 } else{ print("error")
-                    return}
+                        return
+                }
             }
         }
     }
@@ -94,7 +99,7 @@ class ResultSearchTableView: UITableViewController {
                 if let recipeViewController = segue.destination as? RecipeViewController {
                     recipeViewController.recipe = response
                     // we transfer ingredient list in order to add to Favorite in case
-                    recipeViewController.Ingredients = ingredientsResponse
+                    recipeViewController.ingredients = ingredientsResponse
                 }
         }
     }

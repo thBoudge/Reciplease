@@ -19,7 +19,7 @@ class Recipe: NSManagedObject {
 
     //MARK: Method to save Persitent Data of Recipe
     // refactorisé par func
-    static func saveData(recipeResponse: CompleteRecipe?, ingredients: String, context : NSManagedObjectContext = AppDelegate.viewContext){
+    static func saveData(recipeResponse: CompleteRecipe? , ingredients: String, context : NSManagedObjectContext = AppDelegate.viewContext){
         
        let newRecipe = Recipe(context: context)
         
@@ -45,6 +45,19 @@ class Recipe: NSManagedObject {
         try? context.save()
 
     }
+    
+//    static func saveData(recipeResponse: Recipe?, categoryName : String , ingredients: String, context : NSManagedObjectContext = AppDelegate.viewContext){
+//        
+////        var newRecipe = Recipe(context: context)
+////        newRecipe = recipeResponse!
+////
+////
+//        // CategoryExist check if data exist or not and add it or not and return Object
+//        recipeResponse?.parentCategory = Category.categoryExist(name: categoryName, context: context)
+//        try? context.save()
+//        
+//    }
+    
     
     //MARK: Method to delete value at index
     static func deleteFavoriteRecipe(name: String,context : NSManagedObjectContext = AppDelegate.viewContext, recipe : [Recipe] = Recipe.fetchAll()){

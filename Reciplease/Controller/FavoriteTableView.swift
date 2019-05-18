@@ -11,73 +11,48 @@ import UIKit
 class FavoriteTableView: UITableViewController {
 
     //MARK: - Properties
-//    private var  recipe = Recipe.fetchAll()
     private var category = Category.fetchAll()
     private var yummlyService = YummlyService()
-    private var response : CompleteRecipe?
+//    private var response : CompleteRecipe?
     private var tagNumber = 0
+    private var idRecipe = [Int]()
     
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        category = Category.fetchAll()
-        tableView.reloadData()
+        reloadDataCategory()
         //      TODO: Register your MessageCell.xib file here:
         tableView.register(UINib(nibName: "RecipeCell", bundle: nil), forCellReuseIdentifier: "recipeTableViewCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        category = Category.fetchAll()
-        tableView.reloadData()
+        reloadDataCategory()
     }
     
     @objc func deleteFromFavorite(sender: UIButton){
         
-        guard let cell = sender.superview?.superview?.superview as? RecipeTableViewCell else {
-            return // or fatalError() or whatever
-        }
+        guard let cell = sender.superview?.superview?.superview as? RecipeTableViewCell else { return}
         let indexPath = tableView.indexPath(for: cell)
         
-//        dissapearAnimation(cell: cell)
-        print(indexPath!)
         guard let recip = Category.fetchAll()[(indexPath?.section)!].recipes?.allObjects[(indexPath?.row)!] as! Recipe? else {return}
-        print(recip)
         guard let name = recip.name else {return}
         Recipe.deleteFavoriteRecipe(name: name)
+        reloadDataCategory()
+    }
+   
+    
+    //MARK: - Methods
+    private func reloadDataCategory(){
         category = Category.fetchAll()
         tableView.reloadData()
     }
     
-//    private func dissapearAnimation(cell: RecipeTableViewCell){
-//
-//        // set initial vstate of the cell
-//
-//
-//        UIView.animate(withDuration: 10, delay: 0.1, animations: {
-//            cell.layer.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
-//        })
-//
-//    }
-    
-    //MARK: - Methods
     private func openRecipeDescription(section: Int, row: Int){
-        
-        guard let recipeSelected = category[section].recipes?.allObjects[row] as! Recipe? else {return}
-        
-        if let idRecipe = recipeSelected.id {
-            
-            yummlyService.updateRecipeData(idRecipe: idRecipe)
-            
-            yummlyService.getRecipe{ (success, recipe) in
-                if success != false {
-                    guard let recipeToLoad = recipe else {return}
-                    self.response = recipeToLoad
-                    self.performSegue(withIdentifier: "goToRecipe", sender: self)
-                } else{ print("error")
-                    return}
-            }
-        }
+        idRecipe.removeAll()
+        idRecipe.append(section)
+        idRecipe.append(row)
+        self.performSegue(withIdentifier: "goToRecipe", sender: self)
     }
 
     //Override func prepare segue
@@ -85,12 +60,12 @@ class FavoriteTableView: UITableViewController {
         if segue.identifier == "goToRecipe"{
             // we check destination
             if let recipeViewController = segue.destination as? RecipeViewController {
-                recipeViewController.recipe = response
+                recipeViewController.favorite = idRecipe
             }
         }
     }
-    
 }
+
 //MARK: - TableView Delegate and dataRessource
 extension FavoriteTableView {
     
@@ -105,8 +80,6 @@ extension FavoriteTableView {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeTableViewCell", for: indexPath) as! RecipeTableViewCell
         
         cell.recipe = category[indexPath.section].recipes?.allObjects[indexPath.row] as! Recipe?
-//        cell.recipeButton.tag = indexPath.row
-        
         cell.recipeButton.addTarget(self, action: #selector(deleteFromFavorite(sender:)), for: .touchUpInside)
         cell.recipeButton.setImage(UIImage(named: "favorite-Full-heart-button"), for: .normal)
             
@@ -121,12 +94,10 @@ extension FavoriteTableView {
         label.textAlignment = .center
         label.textColor = .white
         label.backgroundColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
-        print("sectionLabel")
         return label
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        print("sectionif")
         return category.isEmpty ? 200 : 0
     }
     
@@ -165,4 +136,31 @@ extension FavoriteTableView {
             cell.alpha = 1
         }
     }
+}
+
+//MARK: - Extension SearchBARDelegate
+extension FavoriteTableView: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        guard let searchString = searchBar.text else {return}
+        category = Category.researchResultIs(searchText: searchString)
+        
+        tableView.reloadData()
+        DispatchQueue.main.async {
+            searchBar.resignFirstResponder()
+        }
+    }
+    
+    // How app's is going to react if we change text in research bar or if have ""
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            
+            reloadDataCategory()
+            DispatchQueue.main.async {
+            searchBar.resignFirstResponder()
+            }
+        }
+    }
+        
 }

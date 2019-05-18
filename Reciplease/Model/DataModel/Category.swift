@@ -38,4 +38,27 @@ class Category: NSManagedObject {
         newCategory.categoryName = name
         return newCategory
     }
+    
+    static func researchResultIs (searchText : String, context : NSManagedObjectContext = AppDelegate.viewContext) -> [Category] {
+        
+        var categoryArray = [Category]()
+        let request : NSFetchRequest<Category> = Category.fetchRequest()
+        
+        
+        //nsPredicate
+        //title CONTAINS %@ is a query langage from objective C
+        let predicate = NSPredicate(format: "categoryName CONTAINS[cd] %@", searchText)
+        
+        request.predicate = predicate
+        // we want to sort response
+        request.sortDescriptors = [NSSortDescriptor(key: "categoryName", ascending: true)]
+        
+        do {
+            categoryArray = try context.fetch(request)
+        } catch  {
+            print("Error fetching data from context \(error)")
+        }
+        
+        return categoryArray
+    }
 }

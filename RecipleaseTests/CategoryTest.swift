@@ -1,5 +1,5 @@
 //
-//  CategoriesTest.swift
+//  CategoryTest.swift
 //  RecipleaseTests
 //
 //  Created by Thomas Bouges on 2019-04-25.
@@ -10,7 +10,7 @@ import XCTest
 import CoreData
 @testable import Reciplease
 
-class CategoriesTest: XCTestCase {
+class CategoryTest: XCTestCase {
 
     //MARK: - Properties
     lazy var mockContainer: NSPersistentContainer = {
@@ -36,6 +36,25 @@ class CategoriesTest: XCTestCase {
         XCTAssertNoThrow(try mockContainer.newBackgroundContext().save())
     }
     
-    
+    func testresearchResultIsreturnArrayOfCategoryCorrectly() {
+
+        let category = Category(context: mockContainer.newBackgroundContext())
+        category.categoryName = "Main Course"
+        do {
+            try mockContainer.newBackgroundContext().save()
+        } catch  {
+            print("catch context .save")
+        }
+        
+        
+        var categoryResearch = Category.researchResultIs(searchText: "Main Course", context: mockContainer.newBackgroundContext())
+
+//        XCTAssertEqual(categoryResearch[0].categoryName, "Main Course")
+        
+//        category = Reciplease.Category.researchResultIs(searchText: "lou", context: mockContainer.newBackgroundContext())
+//
+//        XCTAssertEqual(category, [])
+        
+    }
     
 }

@@ -19,7 +19,14 @@ class RecipeViewController: UIViewController {
     
     //MARK: - Properties
     var recipe : CompleteRecipe?
-    var Ingredients : String = ""
+    var favoriteRecipe : Recipe?
+    var categoryName : String = ""
+    var ingredients : String = ""
+    var favorite = [Int]()
+    var ingredientListString = ""
+    var ingredientTableView : Array = [String]()
+    var urlRecipe : String = ""
+    var idFavoriteRecipe : String = ""
     
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
@@ -29,16 +36,11 @@ class RecipeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        //full or normal heart image on Button
-        guard let id = recipe?.id else {return }
-        loadFavoriteImage(id: id)
+        getFavoriteImage()
     }
     
     @IBAction func goToFullRecipe(_ sender: Any) {
-        
-        guard let url = recipe?.source?.sourceRecipeURL else {return}
-        
-        if let url = URL(string: url) {
+        if let url = URL(string: urlRecipe) {
             UIApplication.shared.open(url)
         }
     }
@@ -47,41 +49,153 @@ class RecipeViewController: UIViewController {
     @objc func addOrDeleteFavorite(){
         
         if favoriteImage.image == UIImage(named: "favorite-heart-outline-button") {
-            
-            Recipe.saveData(recipeResponse: recipe, ingredients: self.Ingredients)
-            
-            favoriteImage.image = UIImage(named:"favorite-Full-heart-button")
+            saveData()
         } else if favoriteImage.image == UIImage(named: "favorite-Full-heart-button") {
+           deleteData()
+        }
+    }
+    
+    private func saveData(){
+        if !favorite.isEmpty {
+            let newRecipe = Recipe(context: AppDelegate.viewContext)
+            newRecipe.cookTime = cookTimeLabel.text
+            newRecipe.id = idFavoriteRecipe
+            guard let img = recipeImageView?.image else {return}
+            newRecipe.image = img.pngData() as Data?
+                
+            newRecipe.ingredientCellLabel = ingredients
+            var completeIngredients = ""
+            for i in ingredientTableView{
+                
+                completeIngredients += "\(i),"
+            }
+            newRecipe.ingredientsCompletRecipe = ingredientListString
+            newRecipe.name = recipeNameLabel.text
+            newRecipe.rate = ratingLabel.text
+            newRecipe.recipe_url = urlRecipe
             
+            newRecipe.parentCategory?.categoryName = categoryName
+            try? AppDelegate.viewContext.save()
+           
+        
+        }else {
+        Recipe.saveData(recipeResponse: recipe, ingredients: ingredients)
+        }
+        favoriteImage.image = UIImage(named:"favorite-Full-heart-button")
+    }
+    
+    private func deleteData(){
+        if !favorite.isEmpty {
+            guard let name = favoriteRecipe?.name else {return}
+            Recipe.deleteFavoriteRecipe(name: name)
+        }else {
             guard let name = recipe?.name else {return}
             Recipe.deleteFavoriteRecipe(name: name)
-            favoriteImage.image = UIImage(named:"favorite-heart-outline-button")
         }
+        favoriteImage.image = UIImage(named:"favorite-heart-outline-button")
     }
     
     private func addNewValueToView(){
         
-        guard let rating = recipe?.rating else {return}
-        guard let cookTime = recipe?.totalTime else {return}
-        guard let recipeName = recipe?.name else {return}
-        guard let id = recipe?.id else {return }
+        if !favorite.isEmpty {
+            let section = favorite[0]
+            let row = favorite[1]
+            print("section : \(section) & row : \(row)")
+            guard let favoriteCategoryName = Category.fetchAll()[section].categoryName else {return}
+            categoryName = favoriteCategoryName
+            guard let favoriteRecipeData = Category.fetchAll()[section].recipes?.allObjects[row] as! Recipe? else {return}
+            self.favoriteRecipe = favoriteRecipeData
+            guard let ingredientsLabel = favoriteRecipe?.ingredientCellLabel else {return}
+            ingredients = ingredientsLabel
+            guard let idRecipe = favoriteRecipe?.id else {return}
+            idFavoriteRecipe = idRecipe
+            
+        }
+        
+        getRatingCookTimeName()
+        getMainImage()
+        getFavoriteImage()
+        getUrlDirection()
+        getListOfIngredients()
+    }
+    
+    private func getFavoriteImage(){
+        //full or normal heart image on Button
+        if !favorite.isEmpty {
+            guard let id = favoriteRecipe?.id else {return }
+            loadFavoriteImage(id: id)
+        }else {
+            //full or normal heart image on Button
+            guard let id = recipe?.id else {return }
+            loadFavoriteImage(id: id)
+        }
+        addTapGestureToHeartButton()
+    }
+    
+    private func getRatingCookTimeName (){
+    
+        if !favorite.isEmpty {
+            guard let rating = favoriteRecipe?.rate else {return}
+            guard let cookTime = favoriteRecipe?.cookTime else {return}
+            guard let recipeName = favoriteRecipe?.name else {return}
+            addRatingCookTimeName(rating: rating, cookTime: cookTime, recipeName: recipeName)
+        }else {
+            guard let rating = recipe?.rating else {return}
+            guard let cookTime = recipe?.totalTime else {return}
+            guard let recipeName = recipe?.name else {return}
+            addRatingCookTimeName(rating: String(rating), cookTime: cookTime, recipeName: recipeName)
+        }
+    }
+    
+    private func addRatingCookTimeName(rating:String,cookTime:String,recipeName:String){
         ratingLabel.text = "\(rating) stars"
         cookTimeLabel.text = "\(cookTime)"
         recipeNameLabel.text = recipeName
+    }
+    
+    private func getMainImage (){
         
-        //full or normal heart image on Button
-        loadFavoriteImage(id: id)
+        if !favorite.isEmpty {
+            guard let imageData = favoriteRecipe?.image as Data?  else {return }
+            recipeImageView.image =  UIImage(data: imageData)
+        }else {
+            guard let image = recipe?.images?[0].hostedLargeURL else {return }
+            
+            let urlImage = URL(string: image) //a deballer
+            let data = try? Data(contentsOf: urlImage!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            recipeImageView.image = UIImage(data: data!)
+        }
+    }
+    
+    private func getListOfIngredients (){
         
-        guard let image = recipe?.images?[0].hostedLargeURL else {return }
+        if !favorite.isEmpty {
+            guard let ingredientRecipeData = favoriteRecipe?.ingredientsCompletRecipe  else {return }
+            ingredientListString = ingredientRecipeData
+            ingredientTableView = ingredientRecipeData.components(separatedBy: ",")
+        }else {
+            guard let ingredientRecipeURL = recipe?.ingredientLines else {return}
+            ingredientTableView = ingredientRecipeURL
+            
+        }
+    }
+    
+    private func getUrlDirection (){
         
-        let url = URL(string: image) //a deballer
-        let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-        recipeImageView.image = UIImage(data: data!)
-        
+        if !favorite.isEmpty {
+            guard let urlDirection = favoriteRecipe?.recipe_url else {return}
+            urlRecipe = urlDirection
+        }else {
+            guard let urlDirection = recipe?.source?.sourceRecipeURL else {return}
+            urlRecipe = urlDirection
+        }
+    }
+   
+    private func addTapGestureToHeartButton(){
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(addOrDeleteFavorite))
         recipeImageView.addGestureRecognizer(tapGestureRecognizer)
     }
-   
+    
     private func loadFavoriteImage(id: String){
         
         let isAFavorite = Recipe.isAFavorite(id: id)
@@ -99,18 +213,16 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
     
     // Number of row
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let numberOfRow = recipe?.ingredientLines?.count else {return 0}
-        return numberOfRow
+        return ingredientTableView.count
     }
     
     // What is on the cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeIngredientCell", for: indexPath)
-        
-        guard let ingredient = recipe?.ingredientLines?[indexPath.row] else {return cell}
+
         //Change to automatic number of line in order cell is size of text
         cell.textLabel?.numberOfLines = 0
-        cell.textLabel?.text = "- \(ingredient)"
+        cell.textLabel?.text = "- \(ingredientTableView[indexPath.row])"
         cell.textLabel?.font = UIFont(name:"IndieFlower", size:22)
         cell.textLabel?.textColor = .white
 
