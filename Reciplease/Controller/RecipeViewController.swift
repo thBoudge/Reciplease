@@ -51,7 +51,7 @@ class RecipeViewController: UIViewController {
         if favoriteImage.image == UIImage(named: "favorite-heart-outline-button") {
             saveData()
         } else if favoriteImage.image == UIImage(named: "favorite-Full-heart-button") {
-           deleteData()
+            deleteData()
         }
     }
     
@@ -62,13 +62,7 @@ class RecipeViewController: UIViewController {
             newRecipe.id = idFavoriteRecipe
             guard let img = recipeImageView?.image else {return}
             newRecipe.image = img.pngData() as Data?
-                
             newRecipe.ingredientCellLabel = ingredients
-            var completeIngredients = ""
-            for i in ingredientTableView{
-                
-                completeIngredients += "\(i),"
-            }
             newRecipe.ingredientsCompletRecipe = ingredientListString
             newRecipe.name = recipeNameLabel.text
             newRecipe.rate = ratingLabel.text
@@ -77,10 +71,10 @@ class RecipeViewController: UIViewController {
             newRecipe.parentCategory?.categoryName = categoryName
             try? AppDelegate.viewContext.save()
            
-        
         }else {
         Recipe.saveData(recipeResponse: recipe, ingredients: ingredients)
         }
+        
         favoriteImage.image = UIImage(named:"favorite-Full-heart-button")
     }
     
@@ -101,8 +95,10 @@ class RecipeViewController: UIViewController {
             let section = favorite[0]
             let row = favorite[1]
             print("section : \(section) & row : \(row)")
+            // keep category in case we delete and save again in favory
             guard let favoriteCategoryName = Category.fetchAll()[section].categoryName else {return}
             categoryName = favoriteCategoryName
+            // save all recipe in global
             guard let favoriteRecipeData = Category.fetchAll()[section].recipes?.allObjects[row] as! Recipe? else {return}
             self.favoriteRecipe = favoriteRecipeData
             guard let ingredientsLabel = favoriteRecipe?.ingredientCellLabel else {return}
@@ -160,10 +156,10 @@ class RecipeViewController: UIViewController {
             recipeImageView.image =  UIImage(data: imageData)
         }else {
             guard let image = recipe?.images?[0].hostedLargeURL else {return }
-            
-            let urlImage = URL(string: image) //a deballer
-            let data = try? Data(contentsOf: urlImage!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            recipeImageView.image = UIImage(data: data!)
+            let urlImage = URL(string: image) 
+            guard let urlImagedata = urlImage else {return}
+            guard let data = try? Data(contentsOf: urlImagedata) else {return}
+            recipeImageView.image = UIImage(data: data)
         }
     }
     

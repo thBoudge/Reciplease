@@ -13,9 +13,9 @@ class FavoriteTableView: UITableViewController {
     //MARK: - Properties
     private var category = Category.fetchAll()
     private var yummlyService = YummlyService()
-//    private var response : CompleteRecipe?
     private var tagNumber = 0
     private var idRecipe = [Int]()
+    @IBOutlet weak var searchBar: UISearchBar!
     
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
@@ -28,6 +28,7 @@ class FavoriteTableView: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         reloadDataCategory()
+        searchBar.barTintColor = #colorLiteral(red: 0.3333333433, green: 0.3333333433, blue: 0.3333333433, alpha: 1)
     }
     
     @objc func deleteFromFavorite(sender: UIButton){
@@ -97,7 +98,9 @@ extension FavoriteTableView {
         return label
     }
     
+    
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        print("plouf")
         return category.isEmpty ? 200 : 0
     }
     
@@ -136,6 +139,10 @@ extension FavoriteTableView {
             cell.alpha = 1
         }
     }
+    
+    //a voir pour supprimer cell func
+    //voir ambroise aller plus loin cour tableView nsfecthed resultcontroller a voir
+    
 }
 
 //MARK: - Extension SearchBARDelegate

@@ -28,6 +28,17 @@ class CategoryTest: XCTestCase {
         category.categoryName = "Main Course"
     }
     
+    //MARK: - Helper Methods
+    private func insertOneCategory(into managedObjectContext: NSManagedObjectContext) {
+        
+        let bundle = Bundle(for: FakeResponseData.self)
+        let url = bundle.url(forResource: "OneRecipe", withExtension: "json")
+        let data = try! Data(contentsOf: url!)
+        guard let responseJSON = try? JSONDecoder().decode(CompleteRecipe.self, from: data) else {return}
+        Recipe.saveData(recipeResponse: responseJSON, ingredients: "beans", context: mockContainer.viewContext)
+        
+    }
+    
     //MARK: - Unit Tests
     func testInsertManyCategoryInPersistentContainer() {
         for _ in 0 ..< 100 {
@@ -38,22 +49,30 @@ class CategoryTest: XCTestCase {
     
     func testresearchResultIsreturnArrayOfCategoryCorrectly() {
 
-        let category = Category(context: mockContainer.newBackgroundContext())
-        category.categoryName = "Main Course"
-        do {
-            try mockContainer.newBackgroundContext().save()
-        } catch  {
-            print("catch context .save")
-        }
+        
+//        category.categoryName = "Main Course"
+//        do {
+//            try mockContainer.newBackgroundContext().save()
+//        } catch  {
+//            print("catch context .save")
+//        }
+        
+        insertOneCategory(into: mockContainer.newBackgroundContext())
+        print(Reciplease.Category.fetchAll(viewContext: mockContainer.newBackgroundContext())[0].categoryName!)
+        insertOneCategory(into: mockContainer.newBackgroundContext())
+        print(Reciplease.Category.fetchAll(viewContext: mockContainer.newBackgroundContext())[1].categoryName!)
+        insertOneCategory(into: mockContainer.newBackgroundContext())
         
         
-        var categoryResearch = Category.researchResultIs(searchText: "Main Course", context: mockContainer.newBackgroundContext())
+//        let category = Reciplease.Category.fetchAll(viewContext: mockContainer.newBackgroundContext())
 
-//        XCTAssertEqual(categoryResearch[0].categoryName, "Main Course")
-        
-//        category = Reciplease.Category.researchResultIs(searchText: "lou", context: mockContainer.newBackgroundContext())
 //
-//        XCTAssertEqual(category, [])
+//        var categoryResearch = Reciplease.Category.researchResultIs(searchText: "Side Dishes", context: mockContainer.newBackgroundContext())
+//        XCTAssertEqual(categoryResearch[0].categoryName, "Side Dishes")
+//
+        let categoryNill = Reciplease.Category.researchResultIs(searchText: "lou", context: mockContainer.newBackgroundContext())
+
+        XCTAssertEqual(categoryNill, [])
         
     }
     

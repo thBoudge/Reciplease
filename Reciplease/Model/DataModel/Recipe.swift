@@ -46,17 +46,6 @@ class Recipe: NSManagedObject {
 
     }
     
-//    static func saveData(recipeResponse: Recipe?, categoryName : String , ingredients: String, context : NSManagedObjectContext = AppDelegate.viewContext){
-//        
-////        var newRecipe = Recipe(context: context)
-////        newRecipe = recipeResponse!
-////
-////
-//        // CategoryExist check if data exist or not and add it or not and return Object
-//        recipeResponse?.parentCategory = Category.categoryExist(name: categoryName, context: context)
-//        try? context.save()
-//        
-//    }
     
     
     //MARK: Method to delete value at index

@@ -61,4 +61,6 @@ class Category: NSManagedObject {
         
         return categoryArray
     }
+    
+    
 }

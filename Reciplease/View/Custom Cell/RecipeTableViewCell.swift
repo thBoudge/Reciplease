@@ -88,6 +88,7 @@ class RecipeTableViewCell: UITableViewCell {
         recipeImageView.layer.borderColor = #colorLiteral(red: 0.2662596107, green: 0.1814376712, blue: 0.355894357, alpha: 1)
         
     }
+    
    
     private func loadFavoriteImage(id: String){
         

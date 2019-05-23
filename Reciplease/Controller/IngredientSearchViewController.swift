@@ -19,24 +19,20 @@ class IngredientSearchViewController: UIViewController {
     private var response : Recipes?
     private var yummlyService = YummlyService()
     
+    
     //MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        // add delegate on textfiled in order to use htextfieldShourld return keyboard dismiss
+        self.ingredientsTextField.delegate = self
         ingredientArray = Ingredient.fetchAll()
     }
 
-    //Use to avoid tapgesture conflict
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-    }
-    
+
+    //MARK: - Action Method
     @IBAction func addIngredients(_ sender: UIButton) {
         
-        guard let ingredients = ingredientsTextField.text else {return}
-        Ingredient.addIngredient(ingredientName: ingredients)
-        ingredientsTextField.text = ""
-        try? AppDelegate.viewContext.save()
-        reloadData()
+        addIngredientToData()
     }
     
     @IBAction func deleteCell(_ sender: UIButton) {
@@ -70,6 +66,16 @@ class IngredientSearchViewController: UIViewController {
     }
     
     //MARK: - Methods
+    private func addIngredientToData(){
+        
+        guard let ingredients = ingredientsTextField.text else {return}
+        Ingredient.addIngredient(ingredientName: ingredients)
+        ingredientsTextField.text = ""
+        try? AppDelegate.viewContext.save()
+        reloadData()
+        
+    }
+    
     private func reloadData(){
         ingredientArray = Ingredient.fetchAll()
         ingredientsTableView.reloadData()
@@ -136,3 +142,19 @@ extension IngredientSearchViewController: UITableViewDelegate, UITableViewDataSo
     }
 }
 
+//MARK: - UITEXTFieldDelegate
+extension IngredientSearchViewController: UITextFieldDelegate{
+
+    //Use to avoid tapgesture conflict
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        addIngredientToData()
+        textField.resignFirstResponder()
+        return true
+    }
+    
+}

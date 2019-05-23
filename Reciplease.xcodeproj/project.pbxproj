@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		140A5328229744F200AA1A90 /* StyleUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A5327229744F200AA1A90 /* StyleUIButton.swift */; };
 		1419A53A2263D6AC00704CF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1419A5392263D6AC00704CF0 /* AppDelegate.swift */; };
 		1419A53C2263D6AC00704CF0 /* IngredientSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1419A53B2263D6AC00704CF0 /* IngredientSearchViewController.swift */; };
 		1419A53F2263D6AC00704CF0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1419A53D2263D6AC00704CF0 /* Main.storyboard */; };
@@ -55,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		140A5327229744F200AA1A90 /* StyleUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StyleUIButton.swift; sourceTree = "<group>"; };
 		1411B1E4EF9E758B7EE02AA7 /* Pods-Reciplease.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Reciplease.release.xcconfig"; path = "Target Support Files/Pods-Reciplease/Pods-Reciplease.release.xcconfig"; sourceTree = "<group>"; };
 		1419A5362263D6AC00704CF0 /* Reciplease.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Reciplease.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1419A5392263D6AC00704CF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -120,6 +122,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		140A5326229744A200AA1A90 /* Custom Button */ = {
+			isa = PBXGroup;
+			children = (
+				140A5327229744F200AA1A90 /* StyleUIButton.swift */,
+			);
+			path = "Custom Button";
+			sourceTree = "<group>";
+		};
 		1419A52D2263D6AC00704CF0 = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +170,7 @@
 			children = (
 				1419A53D2263D6AC00704CF0 /* Main.storyboard */,
 				1419A5422263D6AD00704CF0 /* LaunchScreen.storyboard */,
+				140A5326229744A200AA1A90 /* Custom Button */,
 				14D8A8B1226A3A5F00C16C19 /* Custom Cell */,
 				1419A5402263D6AD00704CF0 /* Assets.xcassets */,
 			);
@@ -455,6 +466,7 @@
 				1419A53C2263D6AC00704CF0 /* IngredientSearchViewController.swift in Sources */,
 				1442F643226F72BD0094519D /* Category.swift in Sources */,
 				1419A5532263D9FC00704CF0 /* RecipeViewController.swift in Sources */,
+				140A5328229744F200AA1A90 /* StyleUIButton.swift in Sources */,
 				1476012D22691A6400C8E612 /* YummlyService.swift in Sources */,
 				1476012B22691A1600C8E612 /* YummlySession.swift in Sources */,
 				1419A53A2263D6AC00704CF0 /* AppDelegate.swift in Sources */,
