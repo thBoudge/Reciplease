@@ -18,7 +18,6 @@ class Recipe: NSManagedObject {
     }
 
     //MARK: Method to save Persitent Data of Recipe
-    // refactorisé par func
     static func saveData(recipeResponse: CompleteRecipe? , ingredients: String, context : NSManagedObjectContext = AppDelegate.viewContext){
         
        let newRecipe = Recipe(context: context)

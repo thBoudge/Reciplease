@@ -25,25 +25,19 @@ class Ingredient: NSManagedObject {
     static func addIngredient(ingredientName: String, context : NSManagedObjectContext = AppDelegate.viewContext){
         
         let ingredient = ingredientName.replacingOccurrences(of: " ", with: "")
-        print(ingredient)
         if ingredient != "" {
-            
             if ingredient.contains(",") == true{
-                
                 let array = ingredient.components(separatedBy: ",")
-                print(array)
                 for i in array {
                     let newIngredient = Ingredient(context: context)
                     newIngredient.ingredientName = i
                     newIngredient.checked = false
                 }
-                
             }else {
                 let newIngredient = Ingredient(context: context )
                 newIngredient.ingredientName = ingredient
                 newIngredient.checked = false
             }
-        
         }
     }
     

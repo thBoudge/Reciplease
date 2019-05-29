@@ -19,9 +19,7 @@ class Category: NSManagedObject {
     
     
     static func deleteCategoryWithNoRecipe( context : NSManagedObjectContext = AppDelegate.viewContext ){
-        
         for i in Category.fetchAll(viewContext: context){
-            
             if i.recipes?.anyObject() == nil {
                 context.delete(i)
             }
@@ -41,14 +39,11 @@ class Category: NSManagedObject {
     
     static func researchResultIs (searchText : String, context : NSManagedObjectContext = AppDelegate.viewContext) -> [Category] {
         
-        var categoryArray = [Category]()
+        var categoryArray = [Category(context: context)]
         let request : NSFetchRequest<Category> = Category.fetchRequest()
-        
-        
         //nsPredicate
         //title CONTAINS %@ is a query langage from objective C
         let predicate = NSPredicate(format: "categoryName CONTAINS[cd] %@", searchText)
-        
         request.predicate = predicate
         // we want to sort response
         request.sortDescriptors = [NSSortDescriptor(key: "categoryName", ascending: true)]

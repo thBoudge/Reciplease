@@ -130,11 +130,14 @@ extension ResultSearchTableView {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeTableViewCell", for: indexPath) as! RecipeTableViewCell
+        cell.cellActivityIndicatorView.isHidden = false
         // we get ingredients for cell
         if let ingredientString = cell.ingredientsLabel.text {
             ingredientsResponse = ingredientString
         }
+        
         openRecipeDescription(index: indexPath.row)
+        cell.cellActivityIndicatorView.isHidden = true
     }
     
     //MARK: TableView management with no data

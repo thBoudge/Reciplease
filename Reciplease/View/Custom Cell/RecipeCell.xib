@@ -76,6 +76,10 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Ktc-Gd-F5R">
+                                <rect key="frame" x="141.5" y="42" width="37" height="37"/>
+                                <color key="color" red="0.25354196540000001" green="0.18493164170000001" blue="0.34533623479999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -85,9 +89,11 @@
                             <constraint firstItem="ANA-qh-tuv" firstAttribute="top" secondItem="QaL-4i-PlZ" secondAttribute="top" constant="5" id="EGN-z7-3ET"/>
                             <constraint firstItem="260-hZ-AHV" firstAttribute="leading" secondItem="QaL-4i-PlZ" secondAttribute="leading" constant="15" id="FqB-Yi-b10"/>
                             <constraint firstAttribute="bottom" secondItem="jlm-sJ-4tH" secondAttribute="bottom" constant="4.5" id="Jlk-10-lpY"/>
+                            <constraint firstItem="Ktc-Gd-F5R" firstAttribute="centerY" secondItem="QaL-4i-PlZ" secondAttribute="centerY" id="NXP-1s-2GZ"/>
                             <constraint firstAttribute="bottom" secondItem="ANA-qh-tuv" secondAttribute="bottom" constant="5" id="P4g-jh-F16"/>
                             <constraint firstItem="ANA-qh-tuv" firstAttribute="leading" secondItem="QaL-4i-PlZ" secondAttribute="leading" constant="5" id="SrR-yt-tQM"/>
                             <constraint firstAttribute="height" constant="120.5" id="XfI-fb-o7v"/>
+                            <constraint firstItem="Ktc-Gd-F5R" firstAttribute="centerX" secondItem="QaL-4i-PlZ" secondAttribute="centerX" id="aP8-gI-Gyg"/>
                             <constraint firstAttribute="trailing" secondItem="ANA-qh-tuv" secondAttribute="trailing" constant="5" id="cfm-xL-SLa"/>
                             <constraint firstItem="260-hZ-AHV" firstAttribute="top" secondItem="5Dy-2j-B9f" secondAttribute="bottom" constant="7.5" id="fFh-W8-zLV"/>
                             <constraint firstItem="5Dy-2j-B9f" firstAttribute="top" secondItem="QaL-4i-PlZ" secondAttribute="top" constant="15" id="jgg-tb-zte"/>
@@ -108,6 +114,7 @@
             <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="cellActivityIndicatorView" destination="Ktc-Gd-F5R" id="FgQ-n5-l2I"/>
                 <outlet property="cookTimeLabel" destination="XUo-Jw-NG0" id="boC-az-joS"/>
                 <outlet property="ingredientsLabel" destination="5Dy-2j-B9f" id="NyX-rW-fy0"/>
                 <outlet property="recipeButton" destination="jlm-sJ-4tH" id="yvP-oN-Cyl"/>

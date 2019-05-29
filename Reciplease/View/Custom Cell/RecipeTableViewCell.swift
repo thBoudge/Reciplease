@@ -18,10 +18,8 @@ class RecipeTableViewCell: UITableViewCell {
     @IBOutlet weak var view: UIView!
     @IBOutlet weak var recipeButton: UIButton!
     
+    @IBOutlet weak var cellActivityIndicatorView: UIActivityIndicatorView!
     
-    
-//    let resultSearchTableView = ResultSearchTableView()
-    private var tagNumber = 0
     
     var match : Match? {
         didSet {
@@ -42,9 +40,9 @@ class RecipeTableViewCell: UITableViewCell {
                 return image90.dropLast(4) + "360"
             }
             
-           let url = URL(string: String(image360)) //a deballer
-            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            recipeImageView.image = UIImage(data: data!)
+            guard let url = URL(string: String(image360)) else {return}
+            guard let data = try? Data(contentsOf: url) else {return} //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            recipeImageView.image = UIImage(data: data)
             // Make image borders rounded
             roundedVioletBorder()
             
@@ -58,6 +56,7 @@ class RecipeTableViewCell: UITableViewCell {
             }
             ingredientsLabel.text = "\(ingredients)"
         }
+            
         
     }
     

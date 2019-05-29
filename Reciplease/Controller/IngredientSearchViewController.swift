@@ -13,6 +13,7 @@ class IngredientSearchViewController: UIViewController {
     @IBOutlet weak var ingredientsTableView: UITableView!
     @IBOutlet weak var ingredientsTextField: UITextField!
     @IBOutlet weak var deleteButton: UIButton!
+    @IBOutlet weak var ingredientActivityIndicatorview: UIActivityIndicatorView!
     
     //MARK: - Properties
     private var ingredientArray = [Ingredient]()
@@ -43,19 +44,18 @@ class IngredientSearchViewController: UIViewController {
                 checked += 1
             }
          }
-        if checked == 0 {
-            Ingredient.deleteRow(checked: false)
-        } else {
-            Ingredient.deleteRow(checked: true)
-        }
+        // value = condition ? valueIftrue : valueIfFalse
+        checked == 0 ? Ingredient.deleteRow(checked: false) : Ingredient.deleteRow(checked: true)
+        
         reloadData()
     }
     
     @IBAction func searchReceipe(_ sender: UIButton) {
-        
+        showHideTraductorActivityButton(shown: false)
         yummlyService.updateData(table: ingredientArray)
         
         yummlyService.getRecipes { (success, recipe) in
+            self.showHideTraductorActivityButton(shown: true)
             if success != false {
             guard let recipeToLoad = recipe else {return}
             self.response = recipeToLoad
@@ -74,6 +74,11 @@ class IngredientSearchViewController: UIViewController {
         try? AppDelegate.viewContext.save()
         reloadData()
         
+    }
+    
+    //Method to show or hide activity indicator
+    private func showHideTraductorActivityButton(shown: Bool) {
+        ingredientActivityIndicatorview.isHidden = shown
     }
     
     private func reloadData(){
@@ -114,7 +119,7 @@ extension IngredientSearchViewController: UITableViewDelegate, UITableViewDataSo
         return cell
     }
     
-    // everytime we select a cell what do we do
+    // Everytime we select a cell what do we do
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         // add or not a chekmark when row selected

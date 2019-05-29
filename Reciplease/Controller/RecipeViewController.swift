@@ -94,7 +94,6 @@ class RecipeViewController: UIViewController {
         if !favorite.isEmpty {
             let section = favorite[0]
             let row = favorite[1]
-            print("section : \(section) & row : \(row)")
             // keep category in case we delete and save again in favory
             guard let favoriteCategoryName = Category.fetchAll()[section].categoryName else {return}
             categoryName = favoriteCategoryName
@@ -221,7 +220,6 @@ extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.text = "- \(ingredientTableView[indexPath.row])"
         cell.textLabel?.font = UIFont(name:"IndieFlower", size:22)
         cell.textLabel?.textColor = .white
-
         return cell
     }
     

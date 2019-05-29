@@ -79,11 +79,9 @@ extension FavoriteTableView {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeTableViewCell", for: indexPath) as! RecipeTableViewCell
-        
         cell.recipe = category[indexPath.section].recipes?.allObjects[indexPath.row] as! Recipe?
         cell.recipeButton.addTarget(self, action: #selector(deleteFromFavorite(sender:)), for: .touchUpInside)
         cell.recipeButton.setImage(UIImage(named: "favorite-Full-heart-button"), for: .normal)
-            
         return cell
     }
     
@@ -100,13 +98,11 @@ extension FavoriteTableView {
     
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        print("plouf")
         return category.isEmpty ? 200 : 0
     }
     
     // everytime we select a cell what do we do
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         openRecipeDescription(section: indexPath.section, row: indexPath.row)
     }
     

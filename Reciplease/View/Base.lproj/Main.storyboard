@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="z3g-T1-45o">
-    <device id="retina6_1" orientation="portrait">
+    <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -36,7 +36,7 @@
                                         <rect key="frame" x="20" y="10" width="374" height="60"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's in your fridge ?" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZL-Fe-a0N">
-                                                <rect key="frame" x="96" y="0.0" width="182.5" height="28"/>
+                                                <rect key="frame" x="95.666666666666671" y="0.0" width="182.66666666666663" height="28"/>
                                                 <fontDescription key="fontDescription" name="IndieFlower" family="Indie Flower" pointSize="20"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -122,7 +122,7 @@
                                                 <rect key="frame" x="197" y="0.0" width="177" height="47"/>
                                                 <fontDescription key="fontDescription" name="Modak" family="Modak" pointSize="22"/>
                                                 <color key="tintColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
-                                                <state key="normal" title="Search Receipe">
+                                                <state key="normal" title="Search ">
                                                     <color key="titleColor" red="0.25354196540000001" green="0.18493164170000001" blue="0.34533623479999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <color key="titleShadowColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                                                 </state>
@@ -144,15 +144,20 @@
                                     <constraint firstItem="bAN-W4-x30" firstAttribute="top" secondItem="Vzh-5L-O1t" secondAttribute="top" constant="5" id="rD8-2M-MEv"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="6Cr-s6-63o">
+                                <rect key="frame" x="188.66666666666666" y="429.66666666666669" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="Vzh-5L-O1t" firstAttribute="bottom" secondItem="ldF-It-8ud" secondAttribute="bottom" id="5uH-Ih-dmV"/>
                             <constraint firstItem="vIO-77-a47" firstAttribute="top" secondItem="zx9-Pr-Mab" secondAttribute="bottom" id="7sm-QO-Bsb"/>
+                            <constraint firstItem="6Cr-s6-63o" firstAttribute="centerY" secondItem="rYo-yq-qHd" secondAttribute="centerY" id="8RH-MJ-px9"/>
                             <constraint firstItem="Vzh-5L-O1t" firstAttribute="top" secondItem="vIO-77-a47" secondAttribute="bottom" id="BWd-mE-TUR"/>
                             <constraint firstItem="Vzh-5L-O1t" firstAttribute="trailing" secondItem="ldF-It-8ud" secondAttribute="trailing" id="K7d-Ch-TDx"/>
                             <constraint firstItem="vIO-77-a47" firstAttribute="leading" secondItem="ldF-It-8ud" secondAttribute="leading" id="U5W-1p-AdE"/>
+                            <constraint firstItem="6Cr-s6-63o" firstAttribute="centerX" secondItem="rYo-yq-qHd" secondAttribute="centerX" id="Zjt-bv-NDb"/>
                             <constraint firstItem="zx9-Pr-Mab" firstAttribute="leading" secondItem="ldF-It-8ud" secondAttribute="leading" id="b5z-pj-RZn"/>
                             <constraint firstItem="vIO-77-a47" firstAttribute="trailing" secondItem="ldF-It-8ud" secondAttribute="trailing" id="gQc-xr-hMs"/>
                             <constraint firstItem="Vzh-5L-O1t" firstAttribute="leading" secondItem="ldF-It-8ud" secondAttribute="leading" id="q5C-OH-SxP"/>
@@ -166,6 +171,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="deleteButton" destination="6vR-le-Gll" id="1ds-QA-bSy"/>
+                        <outlet property="ingredientActivityIndicatorview" destination="6Cr-s6-63o" id="5Ag-gV-qTo"/>
                         <outlet property="ingredientsTableView" destination="vIO-77-a47" id="7cO-j2-6mC"/>
                         <outlet property="ingredientsTextField" destination="1E3-TF-EMM" id="N6R-CW-VwV"/>
                         <segue destination="fjI-x5-5Aa" kind="show" identifier="goToRecipeSearchResult" id="Q6b-Ey-FsO"/>
@@ -238,17 +244,17 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" alignment="bottom" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="324-0p-69a">
-                                        <rect key="frame" x="281.5" y="10" width="122.5" height="89"/>
+                                        <rect key="frame" x="281.33333333333331" y="10" width="122.66666666666669" height="89"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stars" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e72-Kc-a4L">
-                                                <rect key="frame" x="74.5" y="0.0" width="48" height="40"/>
+                                                <rect key="frame" x="74.666666666666686" y="0.0" width="48" height="40"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="JustAnotherHand-Regular" family="Just Another Hand" pointSize="40"/>
                                                 <color key="textColor" red="0.25849921419999999" green="0.0" blue="0.2979362861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CookTime" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mXG-aX-lSB">
-                                                <rect key="frame" x="38.5" y="51" width="84" height="38"/>
+                                                <rect key="frame" x="39.000000000000007" y="51" width="83.666666666666686" height="38"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="38" id="Vje-JA-xmL"/>
@@ -461,7 +467,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <searchBar key="tableHeaderView" contentMode="redraw" id="9aO-dJ-sB8">
-                            <rect key="frame" x="0.0" y="0.0" width="453" height="44"/>
+                            <rect key="frame" x="0.0" y="0.0" width="508" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>

@@ -48,28 +48,15 @@ class CategoryTest: XCTestCase {
     }
     
     func testresearchResultIsreturnArrayOfCategoryCorrectly() {
+        
+        insertOneCategory(into: mockContainer.newBackgroundContext())
+        insertOneCategory(into: mockContainer.newBackgroundContext())
+        insertOneCategory(into: mockContainer.newBackgroundContext())
+        
+        var categoryResearch = Reciplease.Category.researchResultIs(searchText: "Side Dishes", context: mockContainer.newBackgroundContext())
+        XCTAssertEqual(categoryResearch[0].categoryName, "Side Dishes")
 
-        
-//        category.categoryName = "Main Course"
-//        do {
-//            try mockContainer.newBackgroundContext().save()
-//        } catch  {
-//            print("catch context .save")
-//        }
-        
-        insertOneCategory(into: mockContainer.newBackgroundContext())
-        print(Reciplease.Category.fetchAll(viewContext: mockContainer.newBackgroundContext())[0].categoryName!)
-        insertOneCategory(into: mockContainer.newBackgroundContext())
-        print(Reciplease.Category.fetchAll(viewContext: mockContainer.newBackgroundContext())[1].categoryName!)
-        insertOneCategory(into: mockContainer.newBackgroundContext())
-        
-        
-//        let category = Reciplease.Category.fetchAll(viewContext: mockContainer.newBackgroundContext())
 
-//
-//        var categoryResearch = Reciplease.Category.researchResultIs(searchText: "Side Dishes", context: mockContainer.newBackgroundContext())
-//        XCTAssertEqual(categoryResearch[0].categoryName, "Side Dishes")
-//
         let categoryNill = Reciplease.Category.researchResultIs(searchText: "lou", context: mockContainer.newBackgroundContext())
 
         XCTAssertEqual(categoryNill, [])

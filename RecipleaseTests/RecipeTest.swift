@@ -54,10 +54,7 @@ class RecipeTest: XCTestCase {
         insertRecipe(into: mockContainer.viewContext)
         
         XCTAssertEqual(Recipe.isAFavorite(id: "Simple-Skillet-Green-Beans-2352743", context: mockContainer.viewContext), true)
-        
-        
         XCTAssertEqual(Recipe.isAFavorite(id: "Simple-Skillet-Green", context: mockContainer.viewContext), false)
-
     }
     
 }
