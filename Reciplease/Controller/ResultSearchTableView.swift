@@ -65,7 +65,10 @@ class ResultSearchTableView: UITableViewController {
                     // We save data
                     Recipe.saveData(recipeResponse: recipe, ingredients: self.ingredientsResponse)
                 } else { print("error")
-                    return}
+                        let alertVC = UIAlertController(title: "Error", message: "Problem to connect, Please try again", preferredStyle: .alert)
+                        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                        self.present(alertVC, animated: true, completion: nil)
+                }
             }
         }
     }

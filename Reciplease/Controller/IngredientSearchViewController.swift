@@ -46,7 +46,6 @@ class IngredientSearchViewController: UIViewController {
          }
         // value = condition ? valueIftrue : valueIfFalse
         checked == 0 ? Ingredient.deleteRow(checked: false) : Ingredient.deleteRow(checked: true)
-        
         reloadData()
     }
     
@@ -71,7 +70,6 @@ class IngredientSearchViewController: UIViewController {
         guard let ingredients = ingredientsTextField.text else {return}
         Ingredient.addIngredient(ingredientName: ingredients)
         ingredientsTextField.text = ""
-        try? AppDelegate.viewContext.save()
         reloadData()
         
     }

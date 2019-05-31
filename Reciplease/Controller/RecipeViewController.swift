@@ -18,8 +18,8 @@ class RecipeViewController: UIViewController {
     @IBOutlet weak var favoriteImage: UIImageView!
     
     //MARK: - Properties
-    var recipe : CompleteRecipe?
-    var favoriteRecipe : Recipe?
+    var recipe : CompleteRecipe? // connected
+    var favoriteRecipe : Recipe? // not connected
     var categoryName : String = ""
     var ingredients : String = ""
     var favorite = [Int]()
@@ -39,6 +39,7 @@ class RecipeViewController: UIViewController {
         getFavoriteImage()
     }
     
+    
     @IBAction func goToFullRecipe(_ sender: Any) {
         if let url = URL(string: urlRecipe) {
             UIApplication.shared.open(url)
@@ -56,20 +57,21 @@ class RecipeViewController: UIViewController {
     }
     
     private func saveData(){
-        if !favorite.isEmpty {
-            let newRecipe = Recipe(context: AppDelegate.viewContext)
-            newRecipe.cookTime = cookTimeLabel.text
-            newRecipe.id = idFavoriteRecipe
-            guard let img = recipeImageView?.image else {return}
-            newRecipe.image = img.pngData() as Data?
-            newRecipe.ingredientCellLabel = ingredients
-            newRecipe.ingredientsCompletRecipe = ingredientListString
-            newRecipe.name = recipeNameLabel.text
-            newRecipe.rate = ratingLabel.text
-            newRecipe.recipe_url = urlRecipe
-            
-            newRecipe.parentCategory?.categoryName = categoryName
-            try? AppDelegate.viewContext.save()
+        
+      if !favorite.isEmpty {
+                let newRecipe = Recipe(context: AppDelegate.viewContext)
+                newRecipe.cookTime = cookTimeLabel.text
+                newRecipe.id = idFavoriteRecipe
+                guard let img = recipeImageView?.image else {return}
+                newRecipe.image = img.pngData() as Data?
+                newRecipe.ingredientCellLabel = ingredients
+                newRecipe.ingredientsCompletRecipe = ingredientListString
+                newRecipe.name = recipeNameLabel.text
+                newRecipe.rate = ratingLabel.text
+                newRecipe.recipe_url = urlRecipe
+        
+                newRecipe.parentCategory = Category.categoryExist(name: categoryName)
+                try? AppDelegate.viewContext.save()
            
         }else {
         Recipe.saveData(recipeResponse: recipe, ingredients: ingredients)
@@ -80,7 +82,7 @@ class RecipeViewController: UIViewController {
     
     private func deleteData(){
         if !favorite.isEmpty {
-            guard let name = favoriteRecipe?.name else {return}
+            guard let name = recipeNameLabel.text else {return}
             Recipe.deleteFavoriteRecipe(name: name)
         }else {
             guard let name = recipe?.name else {return}
@@ -115,6 +117,7 @@ class RecipeViewController: UIViewController {
     }
     
     private func getFavoriteImage(){
+        
         //full or normal heart image on Button
         if !favorite.isEmpty {
             guard let id = favoriteRecipe?.id else {return }
@@ -203,6 +206,7 @@ class RecipeViewController: UIViewController {
     
 }
 
+//MARK: TableView
 extension RecipeViewController: UITableViewDelegate, UITableViewDataSource {
     
     

@@ -28,23 +28,11 @@ class RecipeTableViewCell: UITableViewCell {
             cookTimeLabel.text = "\(time / 60) minutes"
             guard let rating = match?.rating  else {return }
             recipeQuoteLabel.text = "\(rating) Stars"
-            guard let image90 = match?.imageUrlsBySize?.the90  else {return }
-            //full or normal heart image on Button
+           //full or normal heart image on Button
             guard let id = match?.id  else {return }
             
             let imageButton = Recipe.isAFavorite(id: id)
             loadFavoriteImage(id: id)
-            //Change Image Resolution to 360 pixel
-            //Computed Variable
-            var image360 : String {
-                return image90.dropLast(4) + "360"
-            }
-            
-            guard let url = URL(string: String(image360)) else {return}
-            guard let data = try? Data(contentsOf: url) else {return} //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            recipeImageView.image = UIImage(data: data)
-            // Make image borders rounded
-            roundedVioletBorder()
             
             guard let ingredientsList = match?.ingredients else {return }
             
@@ -55,6 +43,22 @@ class RecipeTableViewCell: UITableViewCell {
                 ingredients += "\(ingredient), "
             }
             ingredientsLabel.text = "\(ingredients)"
+            print(recipeNameLabel.text!)
+            
+            guard let image90 = match?.imageUrlsBySize?.the90  else {return print("image90")}
+            //Change Image Resolution to 360 pixel
+            //Computed Variable
+            var image360 : String {
+                return image90.dropLast(4) + "360"
+            }
+            guard let url = URL(string: String(image360)) else {return print("image360")}
+            guard let data = try? Data(contentsOf: url) else {return print("Data")}
+            if data.count == 0 {
+                recipeImageView.image = UIImage(named: "empty-plate" )
+            }else { recipeImageView.image = UIImage(data: data) }
+            
+            // Make image borders rounded
+            roundedVioletBorder()
         }
             
         
@@ -69,7 +73,10 @@ class RecipeTableViewCell: UITableViewCell {
             guard let rating = recipe?.rate else {return }
             recipeQuoteLabel.text = "\(rating) Stars"
             guard let imageData = recipe?.image as Data?  else {return }
-            recipeImageView.image =  UIImage(data: imageData)
+            if imageData.count == 0 {
+                recipeImageView.image = UIImage(named: "empty-plate" )
+            }else { recipeImageView.image =  UIImage(data: imageData) }
+            
             // Make image borders rounded
             roundedVioletBorder()
             guard let ingredients = recipe?.ingredientCellLabel else {return}

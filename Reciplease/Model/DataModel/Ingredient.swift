@@ -38,6 +38,7 @@ class Ingredient: NSManagedObject {
                 newIngredient.ingredientName = ingredient
                 newIngredient.checked = false
             }
+            try? context.save()
         }
     }
     

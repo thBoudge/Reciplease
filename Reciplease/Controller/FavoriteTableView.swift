@@ -11,10 +11,8 @@ import UIKit
 class FavoriteTableView: UITableViewController {
 
     //MARK: - Properties
-    private var category = Category.fetchAll()
-    private var yummlyService = YummlyService()
-    private var tagNumber = 0
-    private var idRecipe = [Int]()
+    var category = Category.fetchAll()
+    private var idRecipe = [Int]() // send Section and row of cell in oreder to open one Recipe
     @IBOutlet weak var searchBar: UISearchBar!
     
     //MARK: - ViewDidLoad
@@ -35,7 +33,6 @@ class FavoriteTableView: UITableViewController {
         
         guard let cell = sender.superview?.superview?.superview as? RecipeTableViewCell else { return}
         let indexPath = tableView.indexPath(for: cell)
-        
         guard let recip = Category.fetchAll()[(indexPath?.section)!].recipes?.allObjects[(indexPath?.row)!] as! Recipe? else {return}
         guard let name = recip.name else {return}
         Recipe.deleteFavoriteRecipe(name: name)
@@ -135,9 +132,6 @@ extension FavoriteTableView {
             cell.alpha = 1
         }
     }
-    
-    //a voir pour supprimer cell func
-    //voir ambroise aller plus loin cour tableView nsfecthed resultcontroller a voir
     
 }
 
