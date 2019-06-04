@@ -50,12 +50,12 @@ class FavoriteTableView: UITableViewController {
         idRecipe.removeAll()
         idRecipe.append(section)
         idRecipe.append(row)
-        self.performSegue(withIdentifier: "goToRecipe", sender: self)
+        self.performSegue(withIdentifier: "goToFavoriteRecipe", sender: self)
     }
 
     //Override func prepare segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "goToRecipe"{
+        if segue.identifier == "goToFavoriteRecipe"{
             // we check destination
             if let recipeViewController = segue.destination as? RecipeViewController {
                 recipeViewController.favorite = idRecipe

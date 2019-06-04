@@ -34,7 +34,7 @@ class YummlyService {
         
     }
     
-    // Method to build Bundle to build URL for getting all recipes
+    // Method to build Bundle to build URL for getting one recipe
     func updateRecipeData(idRecipe: String){
         urlComponent = "\(YummlySession.init().urlStringApi)/\(idRecipe)?_app_id=\(ID)&_app_key=\(APP_ID)"
         

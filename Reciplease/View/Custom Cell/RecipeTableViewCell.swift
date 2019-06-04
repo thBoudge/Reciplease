@@ -52,10 +52,10 @@ class RecipeTableViewCell: UITableViewCell {
                 return image90.dropLast(4) + "360"
             }
             guard let url = URL(string: String(image360)) else {return print("image360")}
-            guard let data = try? Data(contentsOf: url) else {return print("Data")}
-            if data.count == 0 {
-                recipeImageView.image = UIImage(named: "empty-plate" )
-            }else { recipeImageView.image = UIImage(data: data) }
+//            guard let data = try? Data(contentsOf: url) else {return print("Data")}
+            if let data = try? Data(contentsOf: url) {
+                recipeImageView.image = UIImage(data: data)
+            } else { recipeImageView.image = UIImage(named: "empty-plate" )}
             
             // Make image borders rounded
             roundedVioletBorder()
@@ -72,10 +72,9 @@ class RecipeTableViewCell: UITableViewCell {
             cookTimeLabel.text = "\(timeString)"
             guard let rating = recipe?.rate else {return }
             recipeQuoteLabel.text = "\(rating) Stars"
-            guard let imageData = recipe?.image as Data?  else {return }
-            if imageData.count == 0 {
-                recipeImageView.image = UIImage(named: "empty-plate" )
-            }else { recipeImageView.image =  UIImage(data: imageData) }
+            if let data  = recipe?.image as Data?  {
+                recipeImageView.image = UIImage(data: data)
+            } else { recipeImageView.image = UIImage(named: "empty-plate" )}
             
             // Make image borders rounded
             roundedVioletBorder()

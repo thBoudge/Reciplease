@@ -16,7 +16,7 @@ class ResultSearchTableView: UITableViewController {
     private var ingredientsResponse : String = ""
     private var yummlyService = YummlyService()
     
-    // Category? var is optional vbcause is going to be nil until we use it
+    
     var allRecipe : Recipes?
     
      //MARK: - ViewDidLoad
@@ -122,7 +122,7 @@ extension ResultSearchTableView {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeTableViewCell", for: indexPath) as! RecipeTableViewCell
         
-        // transfert a cell pour assigner data
+        // transfert a cell to assign data
         cell.match = allRecipe?.matches?[indexPath.row]
         cell.recipeButton.tag = indexPath.row
         cell.recipeButton.addTarget(self, action: #selector(addToFavorite(sender:)), for: .touchUpInside)

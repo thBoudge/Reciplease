@@ -60,7 +60,9 @@ class IngredientSearchViewController: UIViewController {
             self.response = recipeToLoad
             self.performSegue(withIdentifier: "goToRecipeSearchResult", sender: self)
             } else{ print("error")
-                return}
+                let alertVC = UIAlertController(title: "Error", message: "Problem to connect, Please try again", preferredStyle: .alert)
+                alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                self.present(alertVC, animated: true, completion: nil)}
         }
     }
     
